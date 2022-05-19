@@ -1,6 +1,6 @@
 (function (back) {
   const storage = require('Storage');
-  const SETTINGS_FILE = "ffcniftyb.json";
+  const SETTINGS_FILE = "pebbleclock.json";
 
   const colors = {
     65535: 'White',

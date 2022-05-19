@@ -3,7 +3,7 @@
   "name": "RebbleClock",
   "shortName": "RebbleClock",
   "version": "0.01",
-  "description": "A Pebble style clock, with configurable background, three sidebars including steps, day, date, sunrise, sunset, long live the rebellion",
+  "description": "A Pebble style clock, derived from Rebble Clock",
   "readme": "README.md",
   "icon": "rebble.png",
   "dependencies": {"mylocation":"app", "widpedom":"app"},

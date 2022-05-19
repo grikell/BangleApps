@@ -4,6 +4,7 @@ require("Font7x11Numeric7Seg").add(Graphics);
 var R = Bangle.appRect;
 
 var MEDIANLENGTH = 30;
+var INTERVAL=10000;
 var avr = [], median;
 
 var ascent=0, descent=0;
@@ -267,13 +268,12 @@ function draw() {
 
 // draw immediately at first
 draw();
-var mInterval = setInterval(draw, MEDIANLENGTH/2*1000);
+var mInterval = setInterval(draw, INTERVAL);
 // Stop updates when LCD is off, restart when on
 Bangle.on('lcdPower',on=>{
-  if (mInterval) clearInterval(mInterval);
-  mInterval = undefined;
   if (on) {
-    mInterval = setInterval(draw, MEDIANLENGTH/2*1000);
+    if (mInterval) clearInterval(mInterval);
+    mInterval = setInterval(draw, INTERVAL);
     draw(); // draw immediately
   }
 });
@@ -281,7 +281,7 @@ Bangle.on('lcdPower',on=>{
 Bangle.on('lock', function(isLocked) {
   if (!isLocked) {
     if (mInterval) clearInterval(mInterval);
-    mInterval = setInterval(draw, MEDIANLENGTH/2*1000);
+    mInterval = setInterval(draw, INTERVAL);
     draw();
   }
   

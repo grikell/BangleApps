@@ -207,15 +207,17 @@ function getAlt(e) {
 //  console.log(alt+' '+altitude);
 }
 
-function drawalt(flg) {
+function drawalt(f) {
+  var flg=f;
   var v1=0;
   
-  if (avr.length>1) {
+  if (!f && avr.length>1) {
     v1=Math.round(E.sum(avr)/avr.length);
     if (oldv!=-999) {
-      if (Math.abs(v1-oldv)>delta) {
-        if (v1>oldv) ascent += v1-oldv;
-        else if (v1<oldv) descent += oldv-v1;
+      var d=Math.abs(v1-oldv);
+      if (d>delta) {
+        if (v1>oldv) ascent += d;
+        else descent += d;
         oldv=v1;
         flg=true;
       }

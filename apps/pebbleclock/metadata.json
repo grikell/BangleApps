@@ -1,7 +1,7 @@
 {
-  "id": "ffcniftyb",
-  "name": "New Clock (Nifty-B)",
-  "version": "0.06",
+  "id": "pebbleclock",
+  "name": "PebbleClock",
+  "version": "0.1",
   "description": "A new clock based on nifty clock (series B)",
   "icon": "app.png",
   "screenshots": [{"url":"screenshot.png"}],
@@ -11,9 +11,9 @@
   "readme": "README.md",
   "allow_emulator": true,
   "storage": [
-    {"name":"ffcniftyb.app.js","url":"app.js"},
-    {"name":"ffcniftyb.img","url":"app-icon.js","evaluate":true},
-    {"name":"ffcniftyb.settings.js","url":"settings.js"}
+    {"name":"pebbleclock.app.js","url":"app.js"},
+    {"name":"pebbleclock.img","url":"app-icon.js","evaluate":true},
+    {"name":"pebbleclock.settings.js","url":"settings.js"}
   ],
-  "data": [{"name":"ffcniftyb.json"}]
+  "data": [{"name":"pebbleclock.json"}]
 }

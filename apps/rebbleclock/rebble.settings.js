@@ -1,5 +1,5 @@
 (function(back) {
-  const SETTINGS_FILE = "rebble.json";
+  const SETTINGS_FILE = "rebbleclock.json";
 
   // initialize with default settings...
   let s = {'bg': '#0f0', 'color': 'Green', 'cycle': true };

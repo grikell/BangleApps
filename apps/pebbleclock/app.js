@@ -3,7 +3,7 @@ const storage = require('Storage');
 
 const is12Hour = (storage.readJSON("setting.json", 1) || {})["12hour"];
 
-var c = storage.readJSON("ffcniftyb.json", 1);
+var c = storage.readJSON("pebbleclock.json", 1);
 if (c == undefined) {
   color=g.theme.fg;
 }

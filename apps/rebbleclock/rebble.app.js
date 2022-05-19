@@ -1,5 +1,5 @@
 var SunCalc = require("https://raw.githubusercontent.com/mourner/suncalc/master/suncalc.js");
-const SETTINGS_FILE = "rebble.json";
+const SETTINGS_FILE = "rebbleclock.json";
 const LOCATION_FILE = "mylocation.json";
 var settings = {'bg': '#0f0', 'color': 'Green', 'cycle': false};
 let location;

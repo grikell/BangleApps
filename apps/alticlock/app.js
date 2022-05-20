@@ -221,7 +221,8 @@ function drawalt(f) {
   var flg=f;
   var v1=0;
   
-  if (!f && avr.length>=avrlen) {
+  if (f) v1=oldv;
+  else if (avr.length>=avrlen) {
     var avg=avr.slice(0,avrlen);
 
     v1=Math.round(E.sum(avg)/avg.length);
@@ -239,6 +240,7 @@ function drawalt(f) {
       flg=true;
     }
   }
+  else v1=avr[0];
 
 //  console.log(v1);
 //  console.log(flg);
@@ -310,7 +312,8 @@ setWatch(function() {
 //Bangle.drawWidgets();
 
 Bangle.setUI("clockupdown", btn=> {
+  console.log(zero);
   if (btn<0) zero -= 5;
-  if (btn>0) zero +=5 ;
+  if (btn>0) zero +=5;
   drawalt(true);
 });

@@ -13,7 +13,7 @@
 
   function save() {
     storage.write(SETTINGS_FILE, s1);
-    console.log(s1);
+ //   console.log(s1);
   }
 
   var color_options = ['Green','Orange','Cyan','Purple','Red','Blue'];

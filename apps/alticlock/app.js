@@ -208,21 +208,21 @@ function getAlt2(e) {
   if (filt) altitude=altFilter.filter(alt);
   else altitude=alt;
   avr.unshift(altitude);
-//  console.log(alt+' '+altitude);
+//  console.log(altitude);
 }
 
 function getAlt() {
   if (aInterval) clearInterval(aInterval);
   Bangle.getPressure().then(getAlt2);
-  aInterval = setInterval(getAlt,timeint);
+  aInterval = setInterval(getAlt,timeint*1000);
 }
 
 function drawalt(f) {
   var flg=f;
   var v1=0;
   
-  if (!f && avr.length>=avrlength) {
-    var avg=avr.slice(0,avrlength);
+  if (!f && avr.length>=avrlen) {
+    var avg=avr.slice(0,avrlen);
 
     v1=Math.round(E.sum(avg)/avg.length);
     if (oldv!=-999) {
@@ -282,7 +282,7 @@ function draw() {
 // draw immediately at first
 draw();
 var mInterval = setInterval(draw, INTERVAL);
-var aInterval = setInterval(getAlt,timeint);
+var aInterval = setInterval(getAlt,timeint*1000);
 // Stop updates when LCD is off, restart when on
 Bangle.on('lcdPower',on=>{
   if (on) {

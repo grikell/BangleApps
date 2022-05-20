@@ -4,8 +4,8 @@ require("Font7x11Numeric7Seg").add(Graphics);
 var R = Bangle.appRect;
 
 var MEDIANLENGTH = 30;
-var INTERVAL=10000;
-var avr = [], median;
+var INTERVAL=30000;
+var avr = [];
 
 var ascent=0, descent=0;
 var oldv=-999;
@@ -20,10 +20,14 @@ let settings = require('Storage').readJSON('alticlock.json',1)||{};
 var zero = 0;
 var filt=true;
 var delta=1;
+var timeint=10;
+var avrlen=3;
 
 if (typeof settings.offset == "number") zero = -settings.offset;
 if (typeof settings.filt == "boolean") filt=settings.filt;
 if (typeof settings.delta == "number") delta=settings.delta;
+if (typeof settings.timeint == "number") timeint=settings.timeint;
+if (typeof settings.avrlen == "number") avrlen=settings.avrlen;
 
 
 /*kalmanjs, Wouter Bulten, MIT, https://github.com/wouterbulten/kalmanjs */
@@ -198,7 +202,7 @@ g.clear(1);
 var altFilter = new KalmanFilter({R: 0.01, Q: 2 });
 var altitude;
 
-function getAlt(e) {
+function getAlt2(e) {
   var alt=e.altitude;
   while (avr.length>MEDIANLENGTH) avr.pop();
   if (filt) altitude=altFilter.filter(alt);
@@ -207,12 +211,20 @@ function getAlt(e) {
 //  console.log(alt+' '+altitude);
 }
 
+function getAlt() {
+  if (aInterval) clearInterval(aInterval);
+  Bangle.getPressure().then(getAlt2);
+  aInterval = setInterval(getAlt,timeint);
+}
+
 function drawalt(f) {
   var flg=f;
   var v1=0;
   
-  if (!f && avr.length>1) {
-    v1=Math.round(E.sum(avr)/avr.length);
+  if (!f && avr.length>=avrlength) {
+    var avg=avr.slice(0,avrlength);
+
+    v1=Math.round(E.sum(avg)/avg.length);
     if (oldv!=-999) {
       var d=Math.abs(v1-oldv);
       if (d>delta) {
@@ -242,7 +254,6 @@ g.setFont("6x8").setFontAlign(0,0,3).drawString(/*LANG*/"ZERO", g.getWidth()-5, 
 function draw() {
   // work out how to display the current time
   var d = new Date();
-  Bangle.getPressure().then(getAlt);
 
   //  const base=100;
   //  const randv=20;
@@ -271,6 +282,7 @@ function draw() {
 // draw immediately at first
 draw();
 var mInterval = setInterval(draw, INTERVAL);
+var aInterval = setInterval(getAlt,timeint);
 // Stop updates when LCD is off, restart when on
 Bangle.on('lcdPower',on=>{
   if (on) {

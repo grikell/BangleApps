@@ -212,9 +212,9 @@ function getAlt2(e) {
 }
 
 function getAlt() {
-  if (aInterval) clearInterval(aInterval);
+//  if (aInterval) clearInterval(aInterval);
   Bangle.getPressure().then(getAlt2);
-  aInterval = setInterval(getAlt,timeint*1000);
+//  aInterval = setInterval(getAlt,timeint*1000);
 }
 
 function drawalt(f) {

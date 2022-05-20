@@ -38,7 +38,7 @@ function loadSettings() {
   s= require("Storage").readJSON(SETTINGS_FILE,1)||{};
   if  (s.bg != undefined) settings.bg=s.bg;
   if  (s.color != undefined) settings.color=s.color;
-  if  (s.cycle != undefined) settings.cycleb=s.cycle;
+  if  (s.cycle != undefined) settings.cycle=s.cycle;
 }
 
 function extractTime(d){
@@ -288,7 +288,7 @@ function queueDraw() {
   if (drawTimeout) clearTimeout(drawTimeout);
   drawTimeout = setTimeout(function() {
     drawTimeout = undefined;
-    if (cycle) nextSidebar();
+    if (settings.cycle) nextSidebar();
     draw();
   }, 60000 - (Date.now() % 60000));
 }

@@ -2,20 +2,17 @@
   const SETTINGS_FILE = "rebbleclock.json";
 
   // initialize with default settings...
-  let s = {'bg': '#0f0', 'color': 'Green', 'cycle': true };
+  var s = {'bg': '#0f0', 'color': 'Green', 'cycle': true };
 
-  // ...and overwrite them with any saved values
-  // This way saved values are preserved if a new version adds more settings
   const storage = require('Storage');
-  let settings = storage.readJSON(SETTINGS_FILE, 1) || s;
-  const saved = settings || {};
-  for (const key in saved) {
-    s[key] = saved[key];
-  }
+  var settings = storage.readJSON(SETTINGS_FILE, 1) || {};
+
+  if  (settings.bg != undefined) s.bg=settings.bg;
+  if  (settings.color != undefined) s.color=settings.color;
+  if  (settings.cycle != undefined) s.cycle=settings.cycle;
 
   function save() {
-    settings = s;
-    storage.write(SETTINGS_FILE, settings);
+    storage.write(SETTINGS_FILE, s);
   }
 
   var color_options = ['Green','Orange','Cyan','Purple','Red','Blue'];

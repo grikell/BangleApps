@@ -2,17 +2,18 @@
   const SETTINGS_FILE = "rebbleclock.json";
 
   // initialize with default settings...
-  var s = {'bg': '#0f0', 'color': 'Green', 'cycle': true };
+  var s1 = {'bg': '#0f0', 'color': 'Green', 'cycle': true };
 
   const storage = require('Storage');
   var settings = storage.readJSON(SETTINGS_FILE, 1) || {};
 
-  if  (settings.bg != undefined) s.bg=settings.bg;
-  if  (settings.color != undefined) s.color=settings.color;
-  if  (settings.cycle != undefined) s.cycle=settings.cycle;
+  if  (settings.bg != undefined) s1.bg=settings.bg;
+  if  (settings.color != undefined) s1.color=settings.color;
+  if  (settings.cycle != undefined) s1.cycle=settings.cycle;
 
   function save() {
     storage.write(SETTINGS_FILE, s);
+    console.log(s1);
   }
 
   var color_options = ['Green','Orange','Cyan','Purple','Red','Blue'];
@@ -22,20 +23,20 @@
     '': { 'title': 'Rebble Clock' },
     '< Back': back,
     'Colour': {
-      value: 0 | color_options.indexOf(s.color),
+      value: 0 | color_options.indexOf(s1.color),
       min: 0, max: 5,
       format: v => color_options[v],
       onchange: v => {
-        s.color = color_options[v];
-        s.bg = bg_code[v];
+        s1.color = color_options[v];
+        s1.bg = bg_code[v];
         save();
       }
     },
     'Cycle Sidebar': {
-      value : s.cycle,
-      format: () => (s.cycle ? 'Yes' : 'No'),
+      value : s1.cycle,
+      format: () => (s1.cycle ? 'Yes' : 'No'),
       onchange : () => { 
-        s.cycle = !s.cycle;
+        s1.cycle = !s1.cycle;
 	save(); 
       }
     }

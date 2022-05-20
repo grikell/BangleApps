@@ -36,8 +36,11 @@
     },
     'Cycle Sidebar': {
       value : s.cycle,
-      format : v => v?"On":"Off",
-      onchange : (v) => { s.cycle=v?true:false; save(); }
+      format: () => (s.cycle ? 'Yes' : 'No'),
+      onchange : () => { 
+        s.cycle = !s.cycle;
+	save(); 
+      }
     }
   });
 })

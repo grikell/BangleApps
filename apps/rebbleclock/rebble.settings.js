@@ -12,7 +12,7 @@
   if  (settings.cycle != undefined) s1.cycle=settings.cycle;
 
   function save() {
-    storage.write(SETTINGS_FILE, s);
+    storage.write(SETTINGS_FILE, s1);
     console.log(s1);
   }
 

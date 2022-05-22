@@ -240,7 +240,10 @@ function drawalt(f) {
       flg=true;
     }
   }
-  else v1=avr[0];
+  else {
+    v1=avr[0];
+    flg=true;
+  }
 
 //  console.log(v1);
 //  console.log(flg);

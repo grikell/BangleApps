@@ -125,7 +125,7 @@ function draw() {
   queueDraw();
 }
 
-var MEDIANLENGTH = 10;
+var MEDIANLENGTH = 20;
 var avr = [];
 
 function avgBattery() {

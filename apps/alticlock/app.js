@@ -241,8 +241,8 @@ function drawalt(f) {
     }
   }
   else {
-    v1=avr[0];
-    flg=true;
+    v1=Math.round(avr[0]);
+    flg=(avr.length>0);
   }
 
 //  console.log(v1);

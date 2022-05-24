@@ -1,44 +1,77 @@
 (function(back) {
-  const SETTINGS_FILE = "rebbleclock.json";
+  const SETTINGS_FILE = "rebble.json";
 
   // initialize with default settings...
-  var s1 = {'bg': '#0f0', 'color': 'Green', 'cycle': true };
+  let localSettings = {'bg': '#0f0', 'color': 'Green', 'autoCycle': true, 'sideTap':0};
+  //sideTap 0 = on| 1= sideBar1 | 2 = ...
 
-  const storage = require('Storage');
-  var settings = storage.readJSON(SETTINGS_FILE, 1) || {};
+  // ...and overwrite them with any saved values
+  // This way saved values are preserved if a new version adds more settings
+  const storage = require('Storage')
+  let settings = storage.readJSON(SETTINGS_FILE, 1) || localSettings;
 
-  if  (settings.bg != undefined) s1.bg=settings.bg;
-  if  (settings.color != undefined) s1.color=settings.color;
-  if  (settings.cycle != undefined) s1.cycle=settings.cycle;
+  const saved = settings || {}
+  for (const key in saved) {
+    localSettings[key] = saved[key]
+  }
 
   function save() {
-    storage.write(SETTINGS_FILE, s1);
- //   console.log(s1);
+    settings = localSettings
+    storage.write(SETTINGS_FILE, settings)
   }
 
   var color_options = ['Green','Orange','Cyan','Purple','Red','Blue'];
   var bg_code = ['#0f0','#ff0','#0ff','#f0f','#f00','#00f'];
   
-  E.showMenu({
-    '': { 'title': 'Rebble Clock' },
-    '< Back': back,
-    'Colour': {
-      value: 0 | color_options.indexOf(s1.color),
-      min: 0, max: 5,
-      format: v => color_options[v],
-      onchange: v => {
-        s1.color = color_options[v];
-        s1.bg = bg_code[v];
-        save();
+  function showMenu()
+  {
+    const menu={
+      '': { 'title': 'Rebble Clock' },
+      '< Back': back,
+      'Colour': {
+        value: 0 | color_options.indexOf(localSettings.color),
+        min: 0, max: 5,
+        format: v => color_options[v],
+        onchange: v => {
+          localSettings.color = color_options[v];
+          localSettings.bg = bg_code[v];
+          save();
+        },
+      },
+      'Auto Cycle': {
+        value: localSettings.autoCycle,
+        onchange: (v) => {
+          localSettings.autoCycle = v;
+          save();
+          showMenu();
+        }
       }
-    },
-    'Cycle Sidebar': {
-      value : s1.cycle,
-      format: () => (s1.cycle ? 'Yes' : 'No'),
-      onchange : () => { 
-        s1.cycle = !s1.cycle;
-	save(); 
-      }
+    };
+
+    if( !localSettings.autoCycle)
+    {
+      menu['Tap to Cycle']= {
+        value: localSettings.sideTap,
+        min: 0,
+        max: 3,
+        step: 1,
+        format: v => NumberToSideTap(v),
+        onchange: v => {
+          localSettings.sideTap=v
+          save();
+          setTimeout(showMenu, 10);
+        }
+      };
     }
-  });
+    E.showMenu(menu);
+  }
+
+  function NumberToSideTap(Number)
+  {
+    if(Number==0)
+      return 'on';
+    return Number+"";
+  }
+  
+  showMenu();
 })

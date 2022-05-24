@@ -15,7 +15,7 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
     94+(scale<<8)+(1<<16)
   );
   return this;
-}
+};
 
 var boot_img = require("heatshrink").decompress(atob("oFAwkEogA/AH4A/AH4A/AH4A/AE8AAAoeXoAfeDQUBmcyD7A+Dh///8QD649CiAfaHwUvD4sEHy0DDYIfEICg+Cn4fHICY+DD4nxcgojOHwgfEIAYfRCIQaDD4ZAFD5r7DH4//kAfRCIZ/GAAnwD5p9DX44fTHgYSBf4ofVDAQEBl4fFUAgfOXoQzBgIfFBAIfPP4RAEAoYAB+cRiK/SG4h/WIBAfXIA7CBAAswD55AHn6fUIBMCD65AHl4gCmcziAfQQJqfQQJpiDgk0IDXxQLRAEECaBM+QgRYRYgUIA0CD4ggSQJiDCiAKBICszAAswD55AHABKBVD7BAFABIqBD5pAFABPxD55AOD6BADiIAJQAyxLABwf/gaAPAH4A/AH4ARA=="));
 var sunrise_img = require("heatshrink").decompress(atob("oFAwkEogA/AH4A/AH4A/AH4ACp5A/AH4A/AH4AIoEAggfcgAABD/4f/D/4f/CiNPmgfUoYIHoEAggfSoEQgYJGmAUJD5QJBgQ/IIBBKJChiVSCYR1LBZAzTICQyNICAxOICAwPD40xA4UTc5xAFiAuDiAWCAAMBc5hgHDxAgFeCKEDh//AAPwdiKDHh9PD4X0EAX0DyQ+BHoYgFh4+UDwofB/68OAAlBHw6CEQKITBDxAABMCReHUQhgSLxRgDDx9CD4g8DD4sUbqEUH5SABUB4fBDxYfKkQAFkEAiQJGAAcjgECBQ6qBAH4A9Y5wA/AH4Aw"));
@@ -42,7 +42,7 @@ function loadSettings() {
 
   let tmp =  require('Storage').readJSON(SETTINGS_FILE, 1) || settings;
   for (const key in tmp) {
-    settings[key] = tmp[key]
+    settings[key] = tmp[key];
   }
 
   if(settings.sideTap!=0)
@@ -50,7 +50,7 @@ function loadSettings() {
   is12Hour = (require("Storage").readJSON(GLOBAL_SETTINGS, 1) || {})["12hour"] || false;
 }
 
-const zeroPad = (num, places) => String(num).padStart(places, '0')
+const zeroPad = (num, places) => String(num).padStart(places, '0');
 
 function formatHours(h) {
   if (is12Hour) {
@@ -109,7 +109,7 @@ function avgBattery() {
   var value=E.getBattery();
   while (avr.length>MEDIANLENGTH) avr.pop();
   avr.unshift(value);
-  return(Math.round(E.sum(avr)/avr.length);
+  return(Math.round(E.sum(avr)/avr.length));
 }
 
 function draw() {
@@ -254,7 +254,7 @@ function drawBattery(x,y,wi,hi) {
   if( Bangle.isCharging() )
   {
     g.setBgColor(settings.bg);
-    image = ()=> { return require("heatshrink").decompress(atob("j8OwMB/4AD94DC44DCwP//n/gH//EOgE/+AdBh/gAYMH4EAvkDAYP/+/AFAX+FgfzGAnAA=="));}
+    image = ()=> { return require("heatshrink").decompress(atob("j8OwMB/4AD94DC44DCwP//n/gH//EOgE/+AdBh/gAYMH4EAvkDAYP/+/AFAX+FgfzGAnAA=="));};
     g.drawImage(image(),x+3,y+4);
   }
 

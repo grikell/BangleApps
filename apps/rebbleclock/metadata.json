@@ -2,7 +2,7 @@
   "id": "rebbleclock",
   "name": "RblClock",
   "shortName": "RblClk",
-  "version": "0.1",
+  "version": "0.2",
   "description": "Another  Pebble style clock",
   "readme": "README.md",
   "icon": "rebble.png",
@@ -12,9 +12,9 @@
   "tags": "clock",
   "supports": ["BANGLEJS2"],
   "storage": [
-    {"name":"rebble.app.js","url":"rebble.app.js"},
-    {"name":"rebble.settings.js","url":"rebble.settings.js"},
-    {"name":"rebble.img","url":"rebble.icon.js","evaluate":true},
+    {"name":"rebbleclock.app.js","url":"rebble.app.js"},
+    {"name":"rebbleclock.settings.js","url":"rebble.settings.js"},
+    {"name":"rebbleclock.img","url":"rebble.icon.js","evaluate":true},
     {"name":"suncalc","url":"suncalc.js"}
   ]
 }

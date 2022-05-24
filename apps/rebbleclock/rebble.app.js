@@ -102,6 +102,16 @@ const w3 = w2 + ((w - w2)/2);  // centre line of the sidebar
 const ws = w - w2; // sidebar width
 const wb = 40; // battery width
 
+var MEDIANLENGTH = 9;
+var avr = [];
+
+function avgBattery() {
+  var value=E.getBattery();
+  while (avr.length>MEDIANLENGTH) avr.pop();
+  avr.unshift(value);
+  return(Math.round(E.sum(avr)/avr.length);
+}
+
 function draw() {
   log_debug("draw()");
   let date = new Date();
@@ -113,7 +123,7 @@ function draw() {
   
   //const t = 6;
 
-  if (drawCount % 60 == 0)
+  if (drawCount % 300 == 0)
     updateSunRiseSunSet(location.lat, location.lon);
   
   g.reset();
@@ -147,25 +157,6 @@ function draw() {
   drawCount++;
   queueDraw();
 }
-
-var MEDIANLENGTH = 12;
-var avr = [];
-
-function avgBattery() {
-  var value=E.getBattery();
-  while (avr.length>MEDIANLENGTH) avr.pop();
-  avr.unshift(value);
-  var median = avr.slice().sort();
-  if (median.length>10) {
-    var mid = median.length>>1;
-    value = E.sum(median.slice(mid-4,mid+5)) / 9;
-  }
-  else {
-    value=E.sum(median)/median.length;
-  }
-  return Math.round(value);
-}
-
 
 function drawSideBar1() {
   let date = new Date();
@@ -344,7 +335,6 @@ Bangle.on('lock', function(isLocked) {
   drawTimeout = undefined;
   draw();
 });
-
 
 
 draw();  // queues the next draw for a minutes time

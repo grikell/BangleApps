@@ -1,7 +1,7 @@
 {
-  "id": "rebble",
-  "name": "Rebble Clock",
-  "shortName": "Rebble",
+  "id": "rblclk",
+  "name": "RblClock",
+  "shortName": "RblClk",
   "version": "0.1",
   "description": "Another  Pebble style clock",
   "readme": "README.md",

@@ -4,8 +4,8 @@
   if (typeof settings.offset !== "number") settings.offset = 0; // default values
   if (typeof settings.filt !== "boolean") settings.filt=true;
   if (typeof settings.delta !== "number") settings.delta=1;   
-  if (typeof settings.timeint !== "number") settings.timeint=10;
-  if (typeof settings.avrlen !== "number") settings.avrlen=3;
+  if (typeof settings.timeint !== "number") settings.timeint=5;
+  if (typeof settings.avrlen !== "number") settings.avrlen=2;
 
   function save(key, value) {
     settings[key] = value;
@@ -36,14 +36,14 @@
     },   
     'Sample Int.': {
       value: settings.timeint,
-      min: 5,
+      min: 1,
       max: 30,
       step: 5,
       onchange: (m) => {save('timeint', m);}
     },
     'AvgOver': {
       value: settings.avrlen,
-      min: 2,
+      min: 1,
       max: 10,
       step: 1,
       onchange: (m) => {save('avrlen', m);}

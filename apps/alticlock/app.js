@@ -200,7 +200,7 @@ Bangle.setBarometerPower(true, "app");
 g.clear(1);
 
 var altFilter = new KalmanFilter({R: 0.01, Q: 2 });
-var altitude;
+let altitude=-999;
 
 function getAlt2(e) {
   var alt=e.altitude;
@@ -244,9 +244,7 @@ function drawalt(f) {
     v1=Math.round(avr[0]);
     flg=(avr.length>0);
   }
-
-//  console.log(v1);
-//  console.log(flg);
+  
   if (flg) {
       g.reset().clearRect(0,y-30,g.getWidth()-10,y+30);
       g.setFont("Vector",50).setFontAlign(0,0).drawString(''+(v1-zero), g.getWidth()/2, y);
@@ -285,7 +283,8 @@ function draw() {
 
 
 // draw immediately at first
-draw();
+getAlt();
+
 var mInterval = setInterval(draw, INTERVAL);
 var aInterval = setInterval(getAlt,timeint*1000);
 // Stop updates when LCD is off, restart when on
@@ -298,12 +297,9 @@ Bangle.on('lcdPower',on=>{
 });
 
 Bangle.on('lock', function(isLocked) {
-  if (!isLocked) {
     if (mInterval) clearInterval(mInterval);
     mInterval = setInterval(draw, INTERVAL);
-    draw();
-  }
-  
+    draw();  
 });
 
 setWatch(function() {
@@ -320,3 +316,4 @@ Bangle.setUI("clockupdown", btn=> {
   if (btn>0) zero +=5;
   drawalt(true);
 });
+draw();

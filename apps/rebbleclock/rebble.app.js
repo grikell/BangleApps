@@ -159,7 +159,8 @@ function draw() {
 }
 
 const bx=142;
-const by=70;
+const by1=h/2-18;
+const by2=h/2+5;
 
 function drawBluetooth(x,y) {
   if (NRF.getSecurityStatus().connected) {
@@ -185,7 +186,7 @@ function drawSideBar1() {
   g.drawString(avgBattery() + '%', w3,  (h/10) + 17 + 7);
   
   drawDateAndCalendar(w3, h/2, dy, dd, mm);
-  drawBluetooth(bx,by);
+  drawBluetooth(bx,by1);
 }
 
 function drawSideBar2() {
@@ -201,7 +202,7 @@ function drawSideBar2() {
   setSmallFont();
   g.setFontAlign(0, -1);
   g.drawString(formatSteps(), w3, 7*h/8);
-  drawBluetooth(bx,by);
+  drawBluetooth(bx,by1);
 }
 
 // sunrise, sunset times
@@ -219,7 +220,7 @@ function drawSideBar3() {
   setSmallFont();
   g.setFontAlign(0, -1);
   g.drawString(sunSet, w3, (h/2) + 64);
-  drawBluetooth(bx,by);
+  drawBluetooth(bx,by2);
 }
 
 function drawDateAndCalendar(x,y,dy,dd,mm) {

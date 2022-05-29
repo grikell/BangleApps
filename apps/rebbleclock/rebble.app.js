@@ -158,16 +158,16 @@ function draw() {
   queueDraw();
 }
 
+const bx=142;
+const by=70;
+
 function drawBluetooth(x,y) {
   if (NRF.getSecurityStatus().connected) {
-    g.setBgColor(settings.bg);
+    if (Bangle.isLocked()) g.setColor(settings.bg);
+    else g.setColor(g.theme.fg);
     setTextColor();
     g.drawImage(atob("CxQBBgDgFgJgR4jZMawfAcA4D4NYybEYIwTAsBwDAA=="), x, y, {rotate:Math.PI/2});
   } 
-//  else {
-//  g.setColor(g.theme.dark ? "#666" : "#999");
-//    g.setColor("#f00"); // red is easier to distinguish from blue
-//  }
 }
 
 function drawSideBar1() {
@@ -185,7 +185,7 @@ function drawSideBar1() {
   g.drawString(avgBattery() + '%', w3,  (h/10) + 17 + 7);
   
   drawDateAndCalendar(w3, h/2, dy, dd, mm);
-  drawBluetooth(142,70);
+  drawBluetooth(bx,by);
 }
 
 function drawSideBar2() {
@@ -201,6 +201,7 @@ function drawSideBar2() {
   setSmallFont();
   g.setFontAlign(0, -1);
   g.drawString(formatSteps(), w3, 7*h/8);
+  drawBluetooth(bx,by);
 }
 
 // sunrise, sunset times
@@ -218,6 +219,7 @@ function drawSideBar3() {
   setSmallFont();
   g.setFontAlign(0, -1);
   g.drawString(sunSet, w3, (h/2) + 64);
+  drawBluetooth(bx,by);
 }
 
 function drawDateAndCalendar(x,y,dy,dd,mm) {

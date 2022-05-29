@@ -163,8 +163,8 @@ const by=70;
 
 function drawBluetooth(x,y) {
   if (NRF.getSecurityStatus().connected) {
-    if (Bangle.isLocked()) g.setColor(settings.bg);
-    else g.setColor(g.theme.fg);
+    if (Bangle.isLocked()) g.setBgColor(settings.bg);
+    else g.setBgColor(g.theme.fg);
     setTextColor();
     g.drawImage(atob("CxQBBgDgFgJgR4jZMawfAcA4D4NYybEYIwTAsBwDAA=="), x, y, {rotate:Math.PI/2});
   } 

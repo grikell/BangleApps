@@ -158,6 +158,18 @@ function draw() {
   queueDraw();
 }
 
+function drawBluetooth(x,y) {
+  if (NRF.getSecurityStatus().connected) {
+    g.setBgColor(settings.bg);
+    setTextColor();
+    g.drawImage(atob("CxQBBgDgFgJgR4jZMawfAcA4D4NYybEYIwTAsBwDAA=="), x, y, {rotate:Math.PI/2});
+  } 
+//  else {
+//  g.setColor(g.theme.dark ? "#666" : "#999");
+//    g.setColor("#f00"); // red is easier to distinguish from blue
+//  }
+}
+
 function drawSideBar1() {
   let date = new Date();
   let dy=require("date_utils").dow(date.getDay(),1).toUpperCase();
@@ -173,6 +185,7 @@ function drawSideBar1() {
   g.drawString(avgBattery() + '%', w3,  (h/10) + 17 + 7);
   
   drawDateAndCalendar(w3, h/2, dy, dd, mm);
+  drawBluetooth(142,70);
 }
 
 function drawSideBar2() {

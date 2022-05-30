@@ -85,10 +85,13 @@ function setSmallFont() {
 // set the text color of the sidebar elements that dont change with the Theme
 function setTextColor() {
   // day and steps
-  if (settings.color == 'Blue' || settings.color == 'Red') {
-    g.setColor('#fff'); // white on blue or red best contrast
-  } else {
-    g.setColor('#000'); // otherwise black regardless of theme
+  if (!Bangle.isLocked()) g.setColor(g.theme.bg);
+  else {
+    if (settings.color == 'Blue' || settings.color == 'Red') {
+      g.setColor('#fff'); // white on blue or red best contrast
+    } else {
+      g.setColor('#000'); // otherwise black regardless of theme
+    }
   }
 }
 
@@ -346,14 +349,11 @@ else{
   Bangle.setUI("clock");
 }
 
-Bangle.on('lock', function(isLocked) {
-  if (drawTimeout) clearTimeout(drawTimeout);
-  drawTimeout = undefined;
-  draw();
-});
+Bangle.on('lock', draw);
 
+NRF.on('connect',draw);
+NRF.on('disconnect',draw);
 
-draw();  // queues the next draw for a minutes time
 Bangle.on('charging', function(charging) { 
   //redraw the sidebar ( with the battery )
   switch(sideBar) {
@@ -365,3 +365,5 @@ Bangle.on('charging', function(charging) {
       break;
   }
 });
+
+draw();  // queues the next draw for a minutes time

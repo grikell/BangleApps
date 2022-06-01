@@ -38,7 +38,7 @@
       value: settings.timeint,
       min: 1,
       max: 30,
-      step: 5,
+      step: 2,
       onchange: (m) => {save('timeint', m);}
     },
     'AvgOver': {

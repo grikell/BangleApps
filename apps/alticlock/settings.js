@@ -19,7 +19,7 @@
       value: settings.offset,
       min: -200,
       max: 200,
-      step: 5,
+      step: 1,
       onchange: (m) => {save('offset', m);}
     },
     'Kalman Filter' : {

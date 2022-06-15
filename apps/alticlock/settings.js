@@ -9,6 +9,7 @@
 
   function save(key, value) {
     settings[key] = value;
+    console.log(settings);
     require('Storage').write('alticlock.json', settings);
   }
 

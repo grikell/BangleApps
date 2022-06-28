@@ -1,7 +1,7 @@
 {
   "id": "pebbleclock",
   "name": "PebbleClock",
-  "version": "0.3",
+  "version": "0.03",
   "description": "A new clock based on nifty clock (series B)",
   "icon": "app.png",
   "screenshots": [{"url":"screenshot.png"}],

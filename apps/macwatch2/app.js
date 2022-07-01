@@ -51,15 +51,8 @@ function draw() {
 
 
 // handle switch display on by pressing BTN1
-Bangle.on('lcdPower',on=>{
-  if (on) {
-    draw(); // draw immediately, queue redraw
-  } else { // stop draw timer
-    if (drawTimeout) clearTimeout(drawTimeout);
-    drawTimeout = undefined;
-  }
-});
 
+Bangle.on('lock', draw);
 
 // Load widgets but hide them
 Bangle.loadWidgets();

@@ -22,7 +22,10 @@ function draw() {
   queueDraw();
   
   // Fix theme to "light"
-  g.setTheme({bg:"#fff", fg:"#000", dark:false}).clear();
+  if (Bangle.isLocked()) 
+     g.setTheme({bg:"#fff", fg:"#000", dark:false}).clear();
+  else
+     g.setTheme({bg:"#fff", fg:"#f00", dark:false}).clear();
   g.reset();
   g.drawImage(img,0,0);
 

@@ -192,14 +192,14 @@ function setNumSets(){
   ]});
   menuLayout.render();
 
-  const incrementNumSets = () => {
+  incrementNumSets = () => {
       ++numSets;
       menuLayout.clear(menuLayout.numSets);
       menuLayout.value.label = numSets;
       menuLayout.render();
   };
 
-  const decrementNumSets = () => {
+  decrementNumSets = () => {
       if(numSets === 1){
         return; 
       }
@@ -233,14 +233,14 @@ function setRestTime(){
   ]});
   menuLayout.render();
 
-  const incrementRestTime = () => {
+  incrementRestTime = () => {
       restTime += 5;
       menuLayout.clear(menuLayout.restTime);
       menuLayout.value.label = restTime;
       menuLayout.render();
   };
 
-  const decrementRestTime = () => {
+  decrementRestTime = () => {
       if(restTime === 0){
         return; 
       }
@@ -271,14 +271,14 @@ function setActiveTime(){
   ]});
   menuLayout.render();
 
-  const incrementActiveTime = () => {
+  incrementActiveTime = () => {
       activeTime += 5;
       menuLayout.clear(menuLayout.activeTime);
       menuLayout.value.label = activeTime;
       menuLayout.render();
   };
 
-  const decrementActiveTime = () => {
+  decrementActiveTime = () => {
       if(activeTime === 0){
         return; 
       }

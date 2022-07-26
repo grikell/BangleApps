@@ -44,7 +44,7 @@ Bangle.on('touch', function(on) {
 
 g.clear();
 var showDate = 0;
-setInterval(draw, 15000);     // refresh display every 15s
+setInterval(draw, 60000);     // refresh display every 60s
 draw();
 
 // Show launcher when button pressed

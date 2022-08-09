@@ -277,8 +277,8 @@ function draw() {
   g.drawString(time, g.getWidth()/2-10, y+40, true /*clear background*/);
   g.clearRect(0,0,g.getWidth()-10,30);
   if (Bangle.isLocked())g.setColor(cyan);
-  g.setFont("Vector",20).setFontAlign(-1,0).drawString('D+ '+ascent, 20, 25);
-  g.setFont("Vector",20).setFontAlign(1,0).drawString('D- '+descent, R.x+R.w-20, 25);
+  g.setFont("Vector",20).setFontAlign(-1,0).drawString('+'+ascent, 20, 25);
+  g.setFont("Vector",20).setFontAlign(1,0).drawString('-'+descent, R.x+R.w-20, 25);
 }
 
 

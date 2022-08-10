@@ -17,33 +17,43 @@ function queueDraw() {
   }, 60000 - (Date.now() % 60000));
 }
 
+var MEDIANLENGTH = 10;
+var avr = [];
+
+function avgBattery() {
+  var value=E.getBattery();
+  while (avr.length>MEDIANLENGTH) avr.pop();
+  avr.unshift(value);
+  return(Math.round(E.sum(avr)/avr.length));
+}
 
 function draw() {
   queueDraw();
   
   // Fix theme to "light"
-  if (Bangle.isLocked()) 
-     g.setTheme({bg:"#fff", fg:"#000", dark:false}).clear();
-  else
-     g.setTheme({bg:"#fff", fg:"#f00", dark:false}).clear();
+  g.setTheme({bg:"#fff", fg:"#000", dark:false}).clear();
   g.reset();
   g.drawImage(img,0,0);
 
   g.setFontCustom(font, 48, 8, 1033);
   g.setFontAlign(0, -1, 0);
-  g.setColor(0,0,0);
+  if (Bangle.isLocked()) 
+    g.setColor(0,0,0);
+  else
+    g.setColor(0,0,1);
   var d = new Date();
   var da = d.toString().split(" ");
   hh = da[4].substr(0,2);
   mi = da[4].substr(3,2);
-  dd = ("0"+(new Date()).getDate()).substr(-2);
-  mo = ("0"+((new Date()).getMonth()+1)).substr(-2);
-  yy = ("0"+((new Date()).getFullYear())).substr(-2);
+  let dd = ("0"+(new Date()).getDate()).substr(-2);
+  let mo = ("0"+((new Date()).getMonth()+1)).substr(-2);
+//  yy = ("0"+((new Date()).getFullYear())).substr(-2);
+  let bb = avgBattery();
   g.drawString(hh, 52, 65, true);
   g.drawString(mi, 132, 65, true);
   g.drawString(':', 93,65);
   g.setFontCustom(font, 48, 8, 521);
-  g.drawString(dd + ':' + mo + ':' + yy, 88, 120, true);
+  g.drawString(dd + ':' + mo + ':' + bb, 88, 120, true);
   
   // Hide widgets
   for (let wd of WIDGETS) {wd.draw=()=>{};wd.area="";}

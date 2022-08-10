@@ -37,18 +37,21 @@ function draw() {
 
   g.setFontCustom(font, 48, 8, 1033);
   g.setFontAlign(0, -1, 0);
-  if (Bangle.isLocked()) 
+  if (Bangle.isLocked()) { 
     g.setColor(0,0,0);
-  else
+    let bb=("0"+((new Date()).getFullYear())).substr(-2);
+  } 
+  else {
     g.setColor(1,0,0);
+    let bb = avgBattery();
+  }
   var d = new Date();
   var da = d.toString().split(" ");
-  hh = da[4].substr(0,2);
-  mi = da[4].substr(3,2);
+  let hh = da[4].substr(0,2);
+  let mi = da[4].substr(3,2);
   let dd = ("0"+(new Date()).getDate()).substr(-2);
   let mo = ("0"+((new Date()).getMonth()+1)).substr(-2);
 //  yy = ("0"+((new Date()).getFullYear())).substr(-2);
-  let bb = avgBattery();
   g.drawString(hh, 52, 65, true);
   g.drawString(mi, 132, 65, true);
   g.drawString(':', 93,65);

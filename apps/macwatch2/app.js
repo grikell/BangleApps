@@ -37,13 +37,14 @@ function draw() {
 
   g.setFontCustom(font, 48, 8, 1033);
   g.setFontAlign(0, -1, 0);
+  let bb="";
   if (Bangle.isLocked()) { 
-    g.setColor(0,0,0);
-    let bb=("0"+((new Date()).getFullYear())).substr(-2);
+   let bb=("0"+((new Date()).getFullYear())).substr(-2);
+   g.setColor(0,0,0);
   } 
   else {
     g.setColor(1,0,0);
-    let bb = avgBattery();
+    bb = ("0"+avgBattery()).substr(-2);
   }
   var d = new Date();
   var da = d.toString().split(" ");

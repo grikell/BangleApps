@@ -40,7 +40,7 @@ function draw() {
   if (Bangle.isLocked()) 
     g.setColor(0,0,0);
   else
-    g.setColor(0,0,1);
+    g.setColor(1,0,0);
   var d = new Date();
   var da = d.toString().split(" ");
   hh = da[4].substr(0,2);

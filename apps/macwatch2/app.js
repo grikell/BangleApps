@@ -38,14 +38,7 @@ function draw() {
   g.setFontCustom(font, 48, 8, 1033);
   g.setFontAlign(0, -1, 0);
   let bb="";
-  if (Bangle.isLocked()) { 
-   let bb=("0"+((new Date()).getFullYear())).substr(-2);
-   g.setColor(0,0,0);
-  } 
-  else {
-    g.setColor(1,0,0);
-    bb = ("0"+avgBattery()).substr(-2);
-  }
+
   var d = new Date();
   var da = d.toString().split(" ");
   let hh = da[4].substr(0,2);
@@ -57,12 +50,19 @@ function draw() {
   g.drawString(mi, 132, 65, true);
   g.drawString(':', 93,65);
   g.setFontCustom(font, 48, 8, 521);
-  g.drawString(dd + ':' + mo + ':' + bb, 88, 120, true);
   
+  if (Bangle.isLocked()) {
+    g.setColor(0,0,0);
+    g.drawString(dd + ':' + mo , 88, 120, true);
+  } 
+  else {
+    g.setColor(1,0,0);
+    bb = ("0"+avgBattery()).substr(-2);
+    g.drawString(bb, 88, 120, true);
+  }  
   // Hide widgets
   for (let wd of WIDGETS) {wd.draw=()=>{};wd.area="";}
 }
-
 
 // handle switch display on by pressing BTN1
 

@@ -53,7 +53,7 @@ function draw() {
   g.drawString(':', 93,65);
   g.setFontCustom(font, 48, 8, 521);
   
-  if (!Bangle.isLocked()) {
+  if (Bangle.isLocked()) {
     g.setColor(0,0,0);
     g.drawString(dd + ':' + mo , 88, 120, true);
   } 

@@ -24,7 +24,9 @@ function avgBattery() {
   var value=E.getBattery();
   while (avr.length>MEDIANLENGTH) avr.pop();
   avr.unshift(value);
-  return(Math.round(E.sum(avr)/avr.length));
+  let v=Math.round(E.sum(avr)/avr.length);
+  if (v>99) v=99;
+  return(v);
 }
 
 function draw() {
@@ -43,8 +45,10 @@ function draw() {
   var da = d.toString().split(" ");
   let hh = da[4].substr(0,2);
   let mi = da[4].substr(3,2);
-  let dd = ("0"+(new Date()).getDate()).substr(-2);
-  let mo = ("0"+((new Date()).getMonth()+1)).substr(-2);
+  let dd = ("0"+d.getDate()).substr(-2);
+  let mo = ("0"+d.getMonth()+1)).substr(-2);
+  //let dd = ("0"+(new Date()).getDate()).substr(-2);
+  //let mo = ("0"+((new Date()).getMonth()+1)).substr(-2);
 //  yy = ("0"+((new Date()).getFullYear())).substr(-2);
   g.drawString(hh, 52, 65, true);
   g.drawString(mi, 132, 65, true);

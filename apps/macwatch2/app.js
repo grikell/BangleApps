@@ -46,16 +46,14 @@ function draw() {
   let hh = da[4].substr(0,2);
   let mi = da[4].substr(3,2);
   let dd = ("0"+d.getDate()).substr(-2);
-  let mo = ("0"+d.getMonth()+1)).substr(-2);
-  //let dd = ("0"+(new Date()).getDate()).substr(-2);
-  //let mo = ("0"+((new Date()).getMonth()+1)).substr(-2);
-//  yy = ("0"+((new Date()).getFullYear())).substr(-2);
+  let mo = ("0"+(d.getMonth()+1)).substr(-2);
+
   g.drawString(hh, 52, 65, true);
   g.drawString(mi, 132, 65, true);
   g.drawString(':', 93,65);
   g.setFontCustom(font, 48, 8, 521);
   
-  if (Bangle.isLocked()) {
+  if (!Bangle.isLocked()) {
     g.setColor(0,0,0);
     g.drawString(dd + ':' + mo , 88, 120, true);
   } 

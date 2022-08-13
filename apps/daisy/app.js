@@ -116,14 +116,14 @@ function updateSunRiseSunSet(now, lat, lon, line){
 const infoData = {
   ID_DATE:  { calc: () => {var d = (new Date()).toString().split(" "); return d[2] + ' ' + d[1] + ' ' + d[3];} },
   ID_DAY:   { calc: () => {var d = require("locale").dow(new Date()).toLowerCase(); return d[0].toUpperCase() + d.substring(1);} },
+  ID_BATT:  { calc: () => 'BATTERY ' + E.getBattery() + '%' },
+  ID_STEP:  { calc: () => 'STEPS ' + getSteps() },
   ID_SR:    { calc: () => 'SUNRISE ' + sunRise },
   ID_SS:    { calc: () => 'SUNSET ' + sunSet },
-  ID_STEP:  { calc: () => 'STEPS ' + getSteps() },
-  ID_BATT:  { calc: () => 'BATTERY ' + E.getBattery() + '%' },
   ID_HRM:   { calc: () => hrmCurrent }
 };
 
-const infoList = Object.keys(infoData).sort();
+const infoList = Object.keys(infoData);
 let infoMode = infoList[0];
 
 function nextInfo() {

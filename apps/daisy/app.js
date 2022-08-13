@@ -548,6 +548,7 @@ loadLocation();
 
 NRF.on('connect',draw);
 NRF.on('disconnect',draw);
+Bangle.on('lock', draw);
 
 g.clear();
 Bangle.loadWidgets();

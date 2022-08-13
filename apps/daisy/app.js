@@ -156,7 +156,8 @@ function clearInfo() {
 
 function drawInfo() {
   clearInfo();
-  g.setColor(g.theme.fg);
+  if (NRF.getSecurityStatus().connected) g.setColor(g.theme.fg);
+  else g.setColor('#f00');
   setSmallFont();
   g.setFontAlign(0,0);
 
@@ -209,11 +210,13 @@ function drawClock() {
   g.drawImage(getGaugeImage(p_steps), 0, 0);
   setLargeFont();
 
-  g.setColor(settings.fg);
+  if (Bangle.isLocked()) g.setColor(settings.fg);
+  else g.setColor(g.theme.fg);
   g.setFontAlign(1,0);  // right aligned
   g.drawString(hh, (w/2) - 1, h/2);
 
-  g.setColor(g.theme.fg);
+  if (Bangle.isLocked()) g.setColor(g.theme.fg);
+  else g.setColor(settings.fg);
   g.setFontAlign(-1,0); // left aligned
   g.drawString(mm, (w/2) + 1, h/2);
 
@@ -542,6 +545,9 @@ Bangle.setUI("clockupdown", btn=> {
 
 loadSettings();
 loadLocation();
+
+NRF.on('connect',draw);
+NRF.on('disconnect',draw);
 
 g.clear();
 Bangle.loadWidgets();

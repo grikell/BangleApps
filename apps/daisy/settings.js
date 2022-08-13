@@ -5,7 +5,7 @@
   let s = {'gy' : '#020',
            'fg' : '#0f0',
            'color': 'Green',
-           'check_idle' : true};
+           'idle_check' : False};
 
   // ...and overwrite them with any saved values
   // This way saved values are preserved if a new version adds more settings

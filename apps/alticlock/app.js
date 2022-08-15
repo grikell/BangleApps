@@ -20,13 +20,13 @@ let settings = require('Storage').readJSON('alticlock.json',1)||{};
 var zero = 0;
 var filt=true;
 var delta=1;
-var timeint=10;
+var timeint=5000;
 var avrlen=3;
 
 if (typeof settings.offset == "number") zero = -settings.offset;
 if (typeof settings.filt == "boolean") filt=settings.filt;
 if (typeof settings.delta == "number") delta=settings.delta;
-if (typeof settings.timeint == "number") timeint=settings.timeint;
+if (typeof settings.timeint == "number") timeint=settings.timeint*1000;
 if (typeof settings.avrlen == "number") avrlen=settings.avrlen;
 
 
@@ -197,31 +197,28 @@ var KalmanFilter = (function () {
 
 // Clear the screen once, at startup
 g.clear(1);
+Bangle.setBarometerPower(1, "alticlock");
 
 var altFilter = new KalmanFilter({R: 0.01, Q: 2 });
 let altitude=-999;
 
-function getAlt2(e) {
-  var alt=e.altitude;
+
+Bangle.on("pressure", (p)=>{
+  var alt=p.altitude;
   while (avr.length>MEDIANLENGTH) avr.pop();
   if (filt) altitude=altFilter.filter(alt);
   else altitude=alt;
   avr.unshift(altitude);
-  Bangle.setBarometerPower(0, "alticlock");
-//  console.log(altitude);
-}
+  // console.log(altitude);
+  Bangle.setBarometerPower(0,"alticlock");
+  setTimeout(()=>{Bangle.setBarometerPower(1,"alticlock");},timeint);
+});
 
-function getAlt() {
-//  if (aInterval) clearInterval(aInterval);
-  Bangle.setBarometerPower(1, "alticlock");
-  Bangle.getPressure().then(getAlt2);
-//  aInterval = setInterval(getAlt,timeint*1000);
-}
 
 function drawalt(f) {
   var flg=f;
   var v1=0;
-  
+
   if (f) v1=oldv;
   else if (avr.length>=avrlen) {
     var avg=avr.slice(0,avrlen);
@@ -245,7 +242,7 @@ function drawalt(f) {
     v1=Math.round(avr[0]);
     flg=(avr.length>0);
   }
-  
+
   if (flg) {
       g.reset().clearRect(0,y-30,g.getWidth()-10,y+30);
       g.setFont("Vector",50).setFontAlign(0,0).drawString(''+(v1-zero), g.getWidth()/2, y);
@@ -282,12 +279,6 @@ function draw() {
   g.setFont("Vector",20).setFontAlign(1,0).drawString('-'+descent, R.x+R.w-20, 25);
 }
 
-
-// draw immediately at first
-getAlt();
-
-var mInterval = setInterval(draw, INTERVAL);
-var aInterval = setInterval(getAlt,timeint*1000);
 // Stop updates when LCD is off, restart when on
 Bangle.on('lcdPower',on=>{
   if (on) {
@@ -307,9 +298,8 @@ setWatch(function() {
   zero = value;
 }, (process.env.HWVERSION==2) ? BTN1 : BTN2, {repeat:true});
 
-// Load widgets
+//Load widgets
 //Bangle.loadWidgets();
-//Bangle.drawWidgets();
 
 Bangle.setUI("clockupdown", btn=> {
   console.log(zero);
@@ -317,4 +307,6 @@ Bangle.setUI("clockupdown", btn=> {
   if (btn>0) zero +=5;
   drawalt(true);
 });
+
+var mInterval = setInterval(draw, INTERVAL);
 draw();

@@ -195,7 +195,6 @@ var KalmanFilter = (function () {
 
 
 
-Bangle.setBarometerPower(true, "app");
 // Clear the screen once, at startup
 g.clear(1);
 
@@ -208,11 +207,13 @@ function getAlt2(e) {
   if (filt) altitude=altFilter.filter(alt);
   else altitude=alt;
   avr.unshift(altitude);
+  Bangle.setBarometerPower(0, "alticlock");
 //  console.log(altitude);
 }
 
 function getAlt() {
 //  if (aInterval) clearInterval(aInterval);
+  Bangle.setBarometerPower(1, "alticlock");
   Bangle.getPressure().then(getAlt2);
 //  aInterval = setInterval(getAlt,timeint*1000);
 }

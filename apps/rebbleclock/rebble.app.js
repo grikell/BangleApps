@@ -85,13 +85,10 @@ function setSmallFont() {
 // set the text color of the sidebar elements that dont change with the Theme
 function setTextColor() {
   // day and steps
-  if (!Bangle.isLocked()) g.setColor(g.theme.bg);
-  else {
-    if (settings.color == 'Blue' || settings.color == 'Red') {
-      g.setColor('#fff'); // white on blue or red best contrast
-    } else {
-      g.setColor('#000'); // otherwise black regardless of theme
-    }
+  if (settings.color == 'Blue' || settings.color == 'Red') {
+    g.setColor('#fff'); // white on blue or red best contrast
+  } else {
+    g.setColor('#000'); // otherwise black regardless of theme
   }
 }
 
@@ -130,7 +127,8 @@ function draw() {
     updateSunRiseSunSet(location.lat, location.lon);
   
   g.reset();
-  g.setColor(g.theme.bg);
+   if (Bangle.isLocked()) g.setColor(g.theme.bg);
+  else g.setColor(g.theme.fg);
   g.fillRect(0, 0, w2, h);
 
   g.setColor(settings.bg);
@@ -138,7 +136,7 @@ function draw() {
 
   // time
   if (Bangle.isLocked()) g.setColor(g.theme.fg);
-  else g.setColor(1,0,0);
+  else g.setcolor(g.theme.bg);
   g.setFontKdamThmor();
   g.setFontAlign(0, -1);
   g.drawString(hh, w2/2, 10 + 0);

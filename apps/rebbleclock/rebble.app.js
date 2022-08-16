@@ -136,7 +136,7 @@ function draw() {
 
   // time
   if (Bangle.isLocked()) g.setColor(g.theme.fg);
-  else g.setcolor(g.theme.bg);
+  else g.setColor(g.theme.bg);
   g.setFontKdamThmor();
   g.setFontAlign(0, -1);
   g.drawString(hh, w2/2, 10 + 0);

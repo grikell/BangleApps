@@ -133,13 +133,12 @@ function draw() {
   g.setColor(g.theme.bg);
   g.fillRect(0, 0, w2, h);
 
-  if (Bangle.isLocked()) g.setColor(settings.bg);
-  else g.setColor(g.theme.fg);
-
+  g.setColor(settings.bg);
   g.fillRect(w2, 0, w, h);
 
   // time
-  g.setColor(g.theme.fg);
+  if (Bangle.isLocked()) g.setColor(g.theme.fg);
+  else g.setColor(1,0,0);
   g.setFontKdamThmor();
   g.setFontAlign(0, -1);
   g.drawString(hh, w2/2, 10 + 0);
@@ -167,8 +166,7 @@ const by2=h/2+5;
 
 function drawBluetooth(x,y) {
   if (NRF.getSecurityStatus().connected) {
-    if (Bangle.isLocked()) g.setBgColor(settings.bg);
-    else g.setBgColor(g.theme.fg);
+    g.setBgColor(settings.bg);
     setTextColor();
     g.drawImage(atob("CxQBBgDgFgJgR4jZMawfAcA4D4NYybEYIwTAsBwDAA=="), x, y, {rotate:Math.PI/2});
   } 
@@ -198,7 +196,7 @@ function drawSideBar2() {
   setTextColor();
   g.setFont('Vector', 20);
   g.setFontAlign(0, -1);
-  g.drawString(E.getBattery() + '%', w3,  (h/10) + 17 + 7);
+  g.drawString(avgBattery() + '%', w3,  (h/10) + 17 + 7);
 
   // steps
   g.drawImage(boot_img, w2 + (ws - 64)/2, h/2, { scale: 1 });
@@ -268,7 +266,7 @@ function drawBattery(x,y,wi,hi) {
   g.clearRect(x+2,y+2+2,x+wi-4-2,y+2+hi-2); // centre
   g.setColor(g.theme.fg);
   g.fillRect(x+wi-3,y+2+(((hi - 1)/2)-1),x+wi-2,y+2+(((hi - 1)/2)-1)+4); // contact
-  g.fillRect(x+3, y+5, x +4 + E.getBattery()*(wi-12)/100, y+hi-1); // the level
+  g.fillRect(x+3, y+5, x +4 + avgBattery()*(wi-12)/100, y+hi-1); // the level
 
   if( Bangle.isCharging() )
   {

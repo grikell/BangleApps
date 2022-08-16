@@ -127,7 +127,7 @@ function draw() {
     updateSunRiseSunSet(location.lat, location.lon);
   
   g.reset();
-   if (Bangle.isLocked()) g.setColor(g.theme.bg);
+  if (Bangle.isLocked()) g.setColor(g.theme.bg);
   else g.setColor(g.theme.fg);
   g.fillRect(0, 0, w2, h);
 

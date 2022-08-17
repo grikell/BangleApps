@@ -135,21 +135,8 @@ function draw() {
     updateSunRiseSunSet(location.lat, location.lon);
   
   g.reset();
-  if (Bangle.isLocked()) g.setColor(bgcl);
-  else g.setColor(fgcl);
-  g.fillRect(0, 0, w2, h);
-
   g.setColor(settings.bg);
   g.fillRect(w2, 0, w, h);
-
-  // time
-  if (Bangle.isLocked()) g.setColor(fgcl);
-  else g.setColor(bgcl);
-  g.setFontKdamThmor();
-  g.setFontAlign(0, -1);
-  g.drawString(hh, w2/2, 10 + 0);
-  g.drawString(mm, w2/2, 10 + h/2);
-
   switch(sideBar) {
   case 0:
     drawSideBar1();
@@ -161,6 +148,18 @@ function draw() {
     drawSideBar3();
     break;
   }
+
+  // time
+  if (Bangle.isLocked()) g.setColor(bgcl);
+  else g.setColor(fgcl);
+  g.fillRect(0, 0, w2, h);
+
+  if (Bangle.isLocked()) g.setColor(fgcl);
+  else g.setColor(bgcl);
+  g.setFontKdamThmor();
+  g.setFontAlign(0, -1);
+  g.drawString(hh, w2/2, 10 + 0);
+  g.drawString(mm, w2/2, 10 + h/2);
   
   drawCount++;
   queueDraw();

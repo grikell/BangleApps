@@ -37,7 +37,7 @@ function loadLocation() {
 }
 
 function loadSettings() {
-  settings = {'bg': '#0f0', 'color': 'Green', 'autoCycle': true,'sideTap':0};
+  settings = {'bg': '#0f0', 'color': 'Green', 'autoCycle': true,'sideTap':0, 'invert':false};
   //sideTap 0 = on | 1 = sidebar1...
 
   let tmp =  require('Storage').readJSON(SETTINGS_FILE, 1) || settings;
@@ -97,7 +97,8 @@ const w = g.getWidth();
 const ha = 2*h/5 - 8;
 const h2 = 3*h/5 - 10;
 const h3 = 7*h/8;
-const w2 = 9*w/14;
+const w2 = 9*w/14+15;
+// const w2 = 9*w/14;
 const w3 = w2 + ((w - w2)/2);  // centre line of the sidebar
 const ws = w - w2; // sidebar width
 const wb = 40; // battery width
@@ -117,6 +118,13 @@ function draw() {
   let date = new Date();
   let hh = date.getHours();
   let mm = date.getMinutes();
+  let fgcl=g.theme.fg;
+  let bgcl=g.theme.bg;
+
+  if (settings.invert) {
+    fgcl=g.theme.bg;
+    bgcl=g.theme.fg;
+  }
   
   hh = formatHours(hh);
   mm = zeroPad(mm,2);
@@ -127,16 +135,16 @@ function draw() {
     updateSunRiseSunSet(location.lat, location.lon);
   
   g.reset();
-  if (Bangle.isLocked()) g.setColor(g.theme.bg);
-  else g.setColor(g.theme.fg);
+  if (Bangle.isLocked()) g.setColor(bgcl);
+  else g.setColor(fgcl);
   g.fillRect(0, 0, w2, h);
 
   g.setColor(settings.bg);
   g.fillRect(w2, 0, w, h);
 
   // time
-  if (Bangle.isLocked()) g.setColor(g.theme.fg);
-  else g.setColor(g.theme.bg);
+  if (Bangle.isLocked()) g.setColor(fgcl);
+  else g.setColor(bgcl);
   g.setFontKdamThmor();
   g.setFontAlign(0, -1);
   g.drawString(hh, w2/2, 10 + 0);
@@ -158,7 +166,7 @@ function draw() {
   queueDraw();
 }
 
-const bx=142;
+const bx=w3;
 const by1=h/2-18;
 const by2=h/2+5;
 

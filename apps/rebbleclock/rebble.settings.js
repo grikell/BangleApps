@@ -2,7 +2,7 @@
   const SETTINGS_FILE = "rebble.json";
 
   // initialize with default settings...
-  let localSettings = {'bg': '#0f0', 'color': 'Green', 'autoCycle': true, 'sideTap':0};
+  let localSettings = {'bg': '#0f0', 'color': 'Green', 'autoCycle': true, 'sideTap':0, 'invert': false};
   //sideTap 0 = on| 1= sideBar1 | 2 = ...
 
   // ...and overwrite them with any saved values
@@ -42,6 +42,14 @@
         value: localSettings.autoCycle,
         onchange: (v) => {
           localSettings.autoCycle = v;
+          save();
+          showMenu();
+        }
+      },
+      'Invert Bkgnd': {
+        value: localSettings.invert,
+        onchange: (v) => {
+          localSettings.invert = v;
           save();
           showMenu();
         }

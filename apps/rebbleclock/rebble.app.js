@@ -97,17 +97,25 @@ const w = g.getWidth();
 const ha = 2*h/5 - 8;
 const h2 = 3*h/5 - 10;
 const h3 = 7*h/8;
-const w2 = 9*w/14+15;
-// const w2 = 9*w/14;
-const w3 = w2 + ((w - w2)/2);  // centre line of the sidebar
-const ws = w - w2; // sidebar width
 const wb = 40; // battery width
+const w2i = 9*w/14;
 
-var MEDIANLENGTH = 9;
+let w2 = 0;
+let w3 = 0;
+let ws = 0;
+
+function compSdWd() {
+  if (sideBar==0) w2 = w2i+15;
+  else w2 = w2i;
+  w3 = w2 + ((w - w2)/2);  // centre line of the sidebar
+  ws = w - w2; // sidebar width
+}
+
+let MEDIANLENGTH = 9;
 var avr = [];
 
 function avgBattery() {
-  var value=E.getBattery();
+  let value=E.getBattery();
   while (avr.length>MEDIANLENGTH) avr.pop();
   avr.unshift(value);
   return(Math.round(E.sum(avr)/avr.length));
@@ -136,6 +144,7 @@ function draw() {
   
   g.reset();
   g.setColor(settings.bg);
+  compSdWd();
   g.fillRect(w2, 0, w, h);
   switch(sideBar) {
   case 0:

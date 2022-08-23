@@ -42,17 +42,17 @@ function draw() {
   let bb="";
 
   var d = new Date();
-  var da = d.toString().split(" ");
-  let hh = da[4].substr(0,2);
-  let mi = da[4].substr(3,2);
+  var dt = require("locale").time(d, 1);
+  var hh = dt.split(":")[0];
+  var mm = dt.split(":")[1];
+  g.drawString(hh, 52, 65, true);
+  g.drawString(mm, 132, 65, true);
+  g.drawString(':', 93,65);
   let dd = ("0"+d.getDate()).substr(-2);
   let mo = ("0"+(d.getMonth()+1)).substr(-2);
 
-  g.drawString(hh, 52, 65, true);
-  g.drawString(mi, 132, 65, true);
   g.drawString(':', 93,65);
   g.setFontCustom(font, 48, 8, 521);
-  
   if (Bangle.isLocked()) {
     g.setColor(0,0,0);
     g.drawString(dd + ':' + mo , 88, 120, true);

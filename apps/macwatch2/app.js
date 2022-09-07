@@ -69,8 +69,8 @@ function draw() {
 // handle switch display on by pressing BTN1
 
 Bangle.on('lock', draw);
+Bangle.setUI("clock");
 
 // Load widgets but hide them
 Bangle.loadWidgets();
 draw();
-Bangle.setUI("clock");

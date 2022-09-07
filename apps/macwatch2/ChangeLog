@@ -3,4 +3,4 @@
 0.03: Incorporated improvements from Peer David for accuracy, fix dark mode, widgets run in background
 0.04: Change color to blue on unlock
 0.05: display battery instead of year
-0.06: Changed clock to use 12/24 hour format based on locale
+0.06: Changed clock to use 12/24 hour format based on locale & merge conflicts

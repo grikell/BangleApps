@@ -30,16 +30,17 @@ function draw() {
   g.reset();
   var date = new Date();
   var timeStr = require("locale").time(date,1);
-  var dateStr = require("locale").date(date).toUpperCase();
+  // var dateStr = require("locale").date(date).toUpperCase();
+  var dateStr = require("locale").dow(date,1)+('   '+date.getDate()).slice(-3)+' '+require("locale").month(date,1);
   // draw time
   g.setFontAlign(0,0).setFont("BuildingTypeface");
   g.clearRect(0, 24, g.getWidth(), y+35); // clear the background
   g.drawString(timeStr,x,y);
   // draw date
   y += 60;
-  g.setFontAlign(0,0).setFont("6x8",2);
-  g.clearRect(0,y-8,g.getWidth(),y+8); // clear the background
-  g.drawString(dateStr,x,y);
+  g.setFontAlign(0,0).setFont("Vector16");
+  g.clearRect(0,y-10,g.getWidth(),y+10); // clear the background
+  g.drawString(dateStr.toUpperCase(),x,y);
   // queue draw in one minute
   queueDraw();
 }

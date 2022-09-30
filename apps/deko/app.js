@@ -38,7 +38,7 @@ function draw() {
   g.drawString(timeStr,x,y);
   // draw date
   y += 60;
-  g.setFontAlign(0,0).setFont("Vector16");
+  g.setFontAlign(0,0).setFont("Vector20");
   g.clearRect(0,y-10,g.getWidth(),y+10); // clear the background
   g.drawString(dateStr.toUpperCase(),x,y);
   // queue draw in one minute

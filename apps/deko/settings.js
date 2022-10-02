@@ -23,8 +23,9 @@
         onchange: v => {
           settings.timeCol = color_options[v];
           save();
-        },
-    'Datye Colour': {
+        }
+    },
+    'Date Colour': {
         value: 0 | color_options.indexOf(settings.dateCol),
         min: 0, max: 6,
         format: v => color_options[v],
@@ -32,7 +33,7 @@
           settings.dateCol = color_options[v];
           save();
         }
-    }   
+    }
   };
   E.showMenu(appMenu);
 })

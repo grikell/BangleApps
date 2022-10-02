@@ -17,7 +17,7 @@ let dateCol='#fff';
 
 let settings = require('Storage').readJSON('deko.json',1)||{};
 if (typeof settings.timeCol == "string") timeCol=col_code[color_options.indexOf(settings.timeCol)];   
-if (typeof settings.dateCol == "strinstring") dateCol=col_code[color_options.indexOf(settings.dateCol)];   
+if (typeof settings.dateCol == "string") dateCol=col_code[color_options.indexOf(settings.dateCol)];   
 
 // timeout used to update every minute
 var drawTimeout;

@@ -5,7 +5,7 @@
 
   let settings = require('Storage').readJSON('deko.json',1)||{};
   if (typeof settings.timeCol !== "string") settings.timeCol=color_options[0];   
-  if (typeof settings.dateCol !== "string") settings.dateCol=color_options[0];;   
+  if (typeof settings.dateCol !== "string") settings.dateCol=color_options[0];
 
 
   function save(key, value) {

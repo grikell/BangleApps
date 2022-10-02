@@ -9,7 +9,15 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
   return this;
 };
 
+let color_options = ['White', 'Green','Orange','Cyan','Purple','Red','Blue'];
+let col_code = ['#fff', '#0f0','#ff0','#0ff','#f0f','#f00','#00f'];
 
+let timeCol='#fff';
+let dateCol='#fff';
+
+let settings = require('Storage').readJSON('deko.json',1)||{};
+if (typeof settings.timeCol == "string") timeCol=col_code[color_options.indexOf(settings.timeCol)];   
+if (typeof settings.dateCol == "strinstring") dateCol=col_code[color_options.indexOf(settings.dateCol)];   
 
 // timeout used to update every minute
 var drawTimeout;
@@ -35,11 +43,13 @@ function draw() {
   // draw time
   g.setFontAlign(0,0).setFont("BuildingTypeface");
   g.clearRect(0, 24, g.getWidth(), y+35); // clear the background
+  g.setColor(timeCol);
   g.drawString(timeStr,x,y);
   // draw date
   y += 60;
   g.setFontAlign(0,0).setFont("Vector20");
   g.clearRect(0,y-10,g.getWidth(),y+10); // clear the background
+  g.setColor(dateCol);
   g.drawString(dateStr.toUpperCase(),x,y);
   // queue draw in one minute
   queueDraw();

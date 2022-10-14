@@ -1,7 +1,7 @@
 
 (function(back) {
 
-  let color_options = ['White', 'Green','Orange','Cyan','Purple','Red','Blue'];
+  let color_options = ['White', 'Green','Orange','Cyan','Purple','Red','Blue','Black'];
 
   let settings = require('Storage').readJSON('deko.json',1)||{};
   if (typeof settings.timeCol !== "string") settings.timeCol=color_options[0];   

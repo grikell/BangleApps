@@ -9,11 +9,11 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
   return this;
 };
 
-let color_options = ['White', 'Green','Orange','Cyan','Purple','Red','Blue'];
-let col_code = ['#fff', '#0f0','#ff0','#0ff','#f0f','#f00','#00f'];
+let color_options = ['White', 'Green','Orange','Cyan','Purple','Red','Blue','Black'];
+let col_code = ['#fff', '#0f0','#ff0','#0ff','#f0f','#f00','#00f','#000'];
 
-let timeCol='#fff';
-let dateCol='#fff';
+let timeCol='#00f';
+let dateCol='#00f';
 
 let settings = require('Storage').readJSON('deko.json',1)||{};
 if (typeof settings.timeCol == "string") timeCol=col_code[color_options.indexOf(settings.timeCol)];   
@@ -55,21 +55,36 @@ function draw() {
   queueDraw();
 }
 
-// Clear the screen once, at startup
-g.clear();
-// draw immediately at first, queue update
-draw();
-// Stop updates when LCD is off, restart when on
-Bangle.on('lcdPower',on=>{
-  if (on) {
+function updateState() {
+  if (Bangle.isLCDOn()) {
     draw(); // draw immediately, queue redraw
   } else { // stop draw timer
     if (drawTimeout) clearTimeout(drawTimeout);
     drawTimeout = undefined;
   }
-});
+}
+
+// Clear the screen once, at startup
+g.clear();
+
+// draw immediately at first, queue update
+draw();
+
+// Stop updates when LCD is off, restart when on
+Bangle.on('lcdPower', updateState);
+Bangle.on('lock', updateState);
+
 // Show launcher when middle button pressed
-Bangle.setUI("clock");
+Bangle.setUI({
+  mode : "clock",
+  remove : function() {
+    // Called to unload all of the clock app
+    Bangle.removeListener('lcdPower', updateState);
+    Bangle.removeListener('lock', updateState);
+    if (drawTimeout) clearTimeout(drawTimeout);
+    drawTimeout = undefined;
+    delete Graphics.prototype.setFontBuildingTypeface;
+  }});
 // Load widgets
 Bangle.loadWidgets();
 Bangle.drawWidgets();

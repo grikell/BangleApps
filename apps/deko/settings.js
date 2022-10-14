@@ -2,6 +2,7 @@
 (function(back) {
 
   let color_options = ['White', 'Green','Orange','Cyan','Purple','Red','Blue','Black'];
+  let nc=color_options.length;
 
   let settings = require('Storage').readJSON('deko.json',1)||{};
   if (typeof settings.timeCol !== "string") settings.timeCol=color_options[0];   
@@ -18,7 +19,7 @@
     '< Back': back,
     'Time Colour': {
         value: 0 | color_options.indexOf(settings.timeCol),
-        min: 0, max: 6,
+        min: 0, max: nc,
         format: v => color_options[v],
         onchange: v => {
           settings.timeCol = color_options[v];
@@ -27,7 +28,7 @@
     },
     'Date Colour': {
         value: 0 | color_options.indexOf(settings.dateCol),
-        min: 0, max: 6,
+        min: 0, max: nc,
         format: v => color_options[v],
         onchange: v => {
           settings.dateCol = color_options[v];

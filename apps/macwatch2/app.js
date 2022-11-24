@@ -31,7 +31,7 @@ function avgBattery() {
 
 function draw() {
   queueDraw();
-  
+
   // Fix theme to "light"
   g.setTheme({bg:"#fff", fg:"#000", dark:false}).clear();
   g.reset();
@@ -62,8 +62,6 @@ function draw() {
     bb = ("0"+avgBattery()).substr(-2);
     g.drawString(bb, 88, 120, true);
   }  
-  // Hide widgets
-  for (let wd of WIDGETS) {wd.draw=()=>{};wd.area="";}
 }
 
 // handle switch display on by pressing BTN1
@@ -73,4 +71,5 @@ Bangle.setUI("clock");
 
 // Load widgets but hide them
 Bangle.loadWidgets();
+require("widget_utils").swipeOn(); // hide widgets, make them visible with a swipe
 draw();

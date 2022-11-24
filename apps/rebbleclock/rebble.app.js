@@ -333,10 +333,20 @@ function queueDraw() {
   }, 60000 - (Date.now() % 60000));
 }
 
+let deleteAll=function()
+{
+    // Called to unload all of the clock app
+    if (drawTimeout) clearTimeout(drawTimeout);
+    drawTimeout = undefined;
+    delete Graphics.prototype.setFontKdamThmor;
+    Bangle.removeListener('charging',chargingListener);
+}
+
 
 log_debug("starting..");
 g.clear();
 Bangle.loadWidgets();
+require("widget_utils").hide();
 /*
  * we are not drawing the widgets as we are taking over the whole screen
  * so we will blank out the draw() functions of each widget and change the
@@ -350,14 +360,21 @@ loadLocation();
 
 if(settings.autoCycle || settings.sideTap==0)
 {
-  Bangle.setUI("clockupdown", btn=> {
-    if (btn<0) prevSidebar();
-    if (btn>0) nextSidebar();
-    draw();
-  });
+  Bangle.setUI({
+    mode : "clockupdown",
+    remove : deleteAll
+  },
+    btn=> {
+      if (btn<0) prevSidebar();
+      if (btn>0) nextSidebar();
+      draw();
+    });
 }
 else{
-  Bangle.setUI("clock");
+  Bangle.setUI({
+    mode : "clock",
+    remove : deleteAll
+  });
 }
 
 Bangle.on('lock', draw);

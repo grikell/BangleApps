@@ -2,7 +2,7 @@
   "id": "rebbleclock",
   "name": "RblClock",
   "shortName": "RblClk",
-  "version": "0.54",
+  "version": "0.55",
   "description": "Another  Pebble style clock",
   "readme": "README.md",
   "icon": "rebble.png",

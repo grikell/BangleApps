@@ -9,82 +9,84 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
   return this;
 };
 
-let color_options = ['White', 'Green','Orange','Cyan','Purple','Red','Blue','Black'];
-let col_code = ['#fff', '#0f0','#ff0','#0ff','#f0f','#f00','#00f','#000'];
+{
+  let color_options = ['White', 'Green','Orange','Cyan','Purple','Red','Blue','Black'];
+  let col_code = ['#fff', '#0f0','#ff0','#0ff','#f0f','#f00','#00f','#000'];
 
-let timeCol='#00f';
-let dateCol='#00f';
+  let timeCol='#00f';
+  let dateCol='#00f';
 
-let settings = require('Storage').readJSON('deko.json',1)||{};
-if (typeof settings.timeCol == "string") timeCol=col_code[color_options.indexOf(settings.timeCol)];   
-if (typeof settings.dateCol == "string") dateCol=col_code[color_options.indexOf(settings.dateCol)];   
+  let settings = require('Storage').readJSON('deko.json',1)||{};
+  if (typeof settings.timeCol == "string") timeCol=col_code[color_options.indexOf(settings.timeCol)];   
+  if (typeof settings.dateCol == "string") dateCol=col_code[color_options.indexOf(settings.dateCol)];   
 
-// timeout used to update every minute
-var drawTimeout;
+  // timeout used to update every minute
+  let drawTimeout;
 
-// schedule a draw for the next minute
-function queueDraw() {
-  if (drawTimeout) clearTimeout(drawTimeout);
-  drawTimeout = setTimeout(function() {
-    drawTimeout = undefined;
-    draw();
-  }, 60000 - (Date.now() % 60000));
-}
-
-
-function draw() {
-  var x = g.getWidth()/2;
-  var y = g.getHeight()/2;
-  g.reset();
-  var date = new Date();
-  var timeStr = require("locale").time(date,1);
-  // var dateStr = require("locale").date(date).toUpperCase();
-  var dateStr = require("locale").dow(date,1)+('   '+date.getDate()).slice(-3)+' '+require("locale").month(date,1);
-  // draw time
-  g.setFontAlign(0,0).setFont("BuildingTypeface");
-  g.clearRect(0, 24, g.getWidth(), y+35); // clear the background
-  g.setColor(timeCol);
-  g.drawString(timeStr,x,y);
-  // draw date
-  y += 60;
-  g.setFontAlign(0,0).setFont("Vector20");
-  g.clearRect(0,y-10,g.getWidth(),y+10); // clear the background
-  g.setColor(dateCol);
-  g.drawString(dateStr.toUpperCase(),x,y);
-  // queue draw in one minute
-  queueDraw();
-}
-
-function updateState() {
-  if (Bangle.isLCDOn()) {
-    draw(); // draw immediately, queue redraw
-  } else { // stop draw timer
+  // schedule a draw for the next minute
+  let queueDraw = function() {
     if (drawTimeout) clearTimeout(drawTimeout);
-    drawTimeout = undefined;
-  }
+    drawTimeout = setTimeout(function() {
+      drawTimeout = undefined;
+      draw();
+    }, 60000 - (Date.now() % 60000));
+  };
+
+
+  let draw=function() {
+    var x = g.getWidth()/2;
+    var y = g.getHeight()/2;
+    g.reset();
+    var date = new Date();
+    var timeStr = require("locale").time(date,1);
+    // var dateStr = require("locale").date(date).toUpperCase();
+    var dateStr = require("locale").dow(date,1)+('   '+date.getDate()).slice(-3)+' '+require("locale").month(date,1);
+    // draw time
+    g.setFontAlign(0,0).setFont("BuildingTypeface");
+    g.clearRect(0, 24, g.getWidth(), y+35); // clear the background
+    g.setColor(timeCol);
+    g.drawString(timeStr,x,y);
+    // draw date
+    y += 60;
+    g.setFontAlign(0,0).setFont("Vector20");
+    g.clearRect(0,y-10,g.getWidth(),y+10); // clear the background
+    g.setColor(dateCol);
+    g.drawString(dateStr.toUpperCase(),x,y);
+    // queue draw in one minute
+    queueDraw();
+  };
+
+  let updateState=function() {
+    if (Bangle.isLCDOn()) {
+      draw(); // draw immediately, queue redraw
+    } else { // stop draw timer
+      if (drawTimeout) clearTimeout(drawTimeout);
+      drawTimeout = undefined;
+    }
+  };
+
+  // Clear the screen once, at startup
+  g.clear();
+
+  // draw immediately at first, queue update
+  draw();
+
+  // Stop updates when LCD is off, restart when on
+  Bangle.on('lcdPower', updateState);
+  Bangle.on('lock', updateState);
+
+  // Show launcher when middle button pressed
+  Bangle.setUI({
+    mode : "clock",
+    remove : function() {
+      // Called to unload all of the clock app
+      Bangle.removeListener('lcdPower', updateState);
+      Bangle.removeListener('lock', updateState);
+      if (drawTimeout) clearTimeout(drawTimeout);
+      drawTimeout = undefined;
+      delete Graphics.prototype.setFontBuildingTypeface;
+    }});
+  // Load widgets
+  Bangle.loadWidgets();
+  Bangle.drawWidgets();
 }
-
-// Clear the screen once, at startup
-g.clear();
-
-// draw immediately at first, queue update
-draw();
-
-// Stop updates when LCD is off, restart when on
-Bangle.on('lcdPower', updateState);
-Bangle.on('lock', updateState);
-
-// Show launcher when middle button pressed
-Bangle.setUI({
-  mode : "clock",
-  remove : function() {
-    // Called to unload all of the clock app
-    Bangle.removeListener('lcdPower', updateState);
-    Bangle.removeListener('lock', updateState);
-    if (drawTimeout) clearTimeout(drawTimeout);
-    drawTimeout = undefined;
-    delete Graphics.prototype.setFontBuildingTypeface;
-  }});
-// Load widgets
-Bangle.loadWidgets();
-Bangle.drawWidgets();

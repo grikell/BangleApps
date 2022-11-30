@@ -25,11 +25,20 @@ const slopeBorder = 10, slopeBorderUpper = 4; // fudge-factor to move minutes do
 let R,x,y; // middle of the clock face
 let dateStr = "";
 let bgColors = g.theme.dark ? ["#ff0","#0ff","#f0f"] : ["#f00","#0f0","#00f"];
-let bgColor = bgColors[(Math.random()*bgColors.length)|0];
+let fgColors = g.theme.dark ? ["#00f","#f00","#0f0"] : ["#0ff","#f0f","#ff0"];
+let rndm=(Math.random()*bgColors.length)|0;
+let bgColor = bgColors[rndm];
+let fgColor=fgColors[rndm];
+
 
 
 // Draw the hour, and the minute into an offscreen buffer
 let draw = function() {
+
+  rndm = (rndm+1)%bgColors.length;
+  bgColor = bgColors[rndm];
+  fgColor=fgColors[rndm];
+  
   R = Bangle.appRect;
   x = R.w / 2;
   y = R.y + R.h / 2 - 12; // 12 = room for date
@@ -37,8 +46,8 @@ let draw = function() {
   var local_time = require("locale").time(date, 1);
   var hourStr = local_time.split(":")[0].trim().padStart(2,'0');
   var minStr = local_time.split(":")[1].trim().padStart(2, '0');
-  dateStr = require("locale").dow(date, 1).toUpperCase()+ " "+
-            require("locale").date(date, 0).toUpperCase();
+  dateStr = require("locale").dow(date, 1).toUpperCase()+('    '+date.getDate()).slice(-3)+" "+
+            require("locale").month(date, 1).toUpperCase();
 
   // Draw hour
   g.reset().clearRect(R); // clear whole background (w/o widgets)
@@ -80,7 +89,7 @@ let animate = function(isIn, callback) {
   minuteX = isAnimIn ? -g2.getWidth() : 0;
   drawMinute();
   animInterval = setInterval(function() {
-    minuteX += 8;
+    minuteX += 64;
     let stop = false;
     if (isAnimIn && minuteX>=0) {
       minuteX=0;
@@ -92,7 +101,7 @@ let animate = function(isIn, callback) {
       clearInterval(animInterval);
       animInterval=undefined;
       if (isAnimIn) // draw the date
-        g.setColor(g.theme.bg).setFontAlign(0, 0).setFont("6x15").drawString(dateStr, R.x + R.w/2, R.y+R.h-9);
+        g.setColor(fgColor).setFontAlign(0, 0).setFont("Vector:20").drawString(dateStr, R.x + R.w/2, R.y+R.h-9);
       if (callback) callback();
     }
   }, 20);

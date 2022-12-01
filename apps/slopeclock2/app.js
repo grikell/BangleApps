@@ -83,20 +83,24 @@ let drawMinute = function() {
   // draw the minutes
   g.setColor(g.theme.bg).drawImage(g2img, x+minuteX-(g2.getWidth()/2), yo-(g2.getHeight()/2));
 };
+  
 let animate = function(isIn, callback) {
   if (animInterval) clearInterval(animInterval);
   isAnimIn = isIn;
   minuteX = isAnimIn ? -g2.getWidth() : 0;
   drawMinute();
   animInterval = setInterval(function() {
-    minuteX += 64;
+    if (isAnimIn) minuteX += 64;
+    else minuteX += 32;
     let stop = false;
+    
     if (isAnimIn && minuteX>=0) {
       minuteX=0;
       stop = true;
-    } else if (!isAnimIn && minuteX>=R.w)
-      stop = true;
+    } else if (!isAnimIn && minuteX>=R.w) stop = true;
+    
     drawMinute();
+    
     if (stop) {
       clearInterval(animInterval);
       animInterval=undefined;

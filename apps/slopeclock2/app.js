@@ -75,6 +75,8 @@ let draw = function() {
 
 let isAnimIn = true;
 let animInterval;
+let minuteX=0;
+let deltaX=0;
 // Draw *just* the minute image
 let drawMinute = function() {
   var yo = slopeBorder + offsy + y - 2*slope*minuteX/R.w;
@@ -87,11 +89,20 @@ let drawMinute = function() {
 let animate = function(isIn, callback) {
   if (animInterval) clearInterval(animInterval);
   isAnimIn = isIn;
-  minuteX = isAnimIn ? -g2.getWidth() : 0;
+  if (isAnimIn) {
+    minuteX = -g2.getWidth();
+    deltaX=8;
+  }
+  else {
+    minuteX = 0;
+    deltaX=16;
+  }
   drawMinute();
   animInterval = setInterval(function() {
-    if (isAnimIn) minuteX += 64;
-    else minuteX += 32;
+
+    minuteX += deltaX;
+    deltaX += deltaX;
+    
     let stop = false;
     
     if (isAnimIn && minuteX>=0) {

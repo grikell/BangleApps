@@ -101,16 +101,20 @@ let animate = function(isIn, callback) {
   animInterval = setInterval(function() {
 
     minuteX += deltaX;
-    deltaX += deltaX;
+    deltaX = deltaX*2;
     
     let stop = false;
+    let drw=true;
     
     if (isAnimIn && minuteX>=0) {
       minuteX=0;
       stop = true;
-    } else if (!isAnimIn && minuteX>=R.w) stop = true;
+    } else if (!isAnimIn && minuteX>=R.w) {
+      stop = true;
+      drw=false;
+    }
     
-    drawMinute();
+    if (drw) drawMinute();
     
     if (stop) {
       clearInterval(animInterval);

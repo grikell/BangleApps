@@ -24,7 +24,7 @@ const fontBorder = 4; // offset from left/right
 const slopeBorder = 10, slopeBorderUpper = 4; // fudge-factor to move minutes down from slope
 let R,x,y; // middle of the clock face
 let dateStr = "";
-let bgColors = g.theme.dark ? ["#0f0","#ff0","#0ff","#fff"] : ["#f00","#0f0","#00f","#000"];
+let bgColors = g.theme.dark ? ["#0f0","#ff0","#0ff","#fff"] : ["#f0f","#f00","#00f","#000"];
 let fgColors = g.theme.dark ? ["#000","#000","#000","#000"] : ["#fff","#fff","#fff","#fff"];
 let rndm=(Math.random()*bgColors.length)|0;
 let bgColor = bgColors[rndm];

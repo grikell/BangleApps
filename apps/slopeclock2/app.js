@@ -98,11 +98,11 @@ let animate = function(isIn, callback) {
   isAnimIn = isIn;
   if (isAnimIn) {
     minuteX = -g2.getWidth();
-    deltaX=8;
+    deltaX=16;
   }
   else {
     minuteX = 0;
-    deltaX=16;
+    deltaX=32;
   }
   drawMinute();
   animInterval = setInterval(function() {
@@ -116,7 +116,7 @@ let animate = function(isIn, callback) {
     if (isAnimIn && minuteX>=0) {
       minuteX=0;
       stop = true;
-    } else if (!isAnimIn && minuteX>=R.w) {
+    } else if (!isAnimIn && minuteX>R.w) {
       stop = true;
       drw=false;
     }

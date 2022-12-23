@@ -21,14 +21,15 @@ let g2img = {
 const slope = 20;
 const offsy = 20; // offset of numbers from middle
 const fontBorder = 4; // offset from left/right
-const slopeBorder = 10, slopeBorderUpper = 4; // fudge-factor to move minutes down from slope
+const slopeBorder = 5, slopeBorderUpper = 4; // fudge-factor to move minutes down from slope
 let R,x,y; // middle of the clock face
 let dateStr = "";
-let bgColors = g.theme.dark ? ["#0f0","#ff0","#0ff","#fff"] : ["#f0f","#f00","#00f","#000"];
+let bgColors = g.theme.dark ? ["#0f0","#ff0","#0ff","#f0f"] : ["#f0f","#f00","#00f","#000"];
 let fgColors = g.theme.dark ? ["#000","#000","#000","#000"] : ["#fff","#fff","#fff","#fff"];
 let rndm=(Math.random()*bgColors.length)|0;
 let bgColor = bgColors[rndm];
 let fgColor=fgColors[rndm];
+let invert=true;
 
 
 
@@ -36,9 +37,15 @@ let fgColor=fgColors[rndm];
 let draw = function() {
 
   rndm = (rndm+1)%bgColors.length;
-  bgColor = bgColors[rndm];
-  fgColor=fgColors[rndm];
-  
+  if (invert) {
+    bgColor = fgColors[rndm];
+    fgColor=bgColors[rndm];
+  }
+  else {
+    bgColor = fgColors[rndm];
+    fgColor=bgColors[rndm];
+  }
+    
   R = Bangle.appRect;
   x = R.w / 2;
   y = R.y + R.h / 2 - 12; // 12 = room for date
@@ -54,7 +61,7 @@ let draw = function() {
   g.setFontAlign(-1, 0).setFont("PaytoneOne");
   g.drawString(hourStr, fontBorder, y-offsy).setFont("4x6"); // draw and unload custom font
   // add slope in background color
-  g.setColor(g.theme.bg).fillPoly([0,y+slope-slopeBorderUpper, R.w,y-slope-slopeBorderUpper,
+  g.setColor("#7f7f7f").fillPoly([0,y+slope-slopeBorderUpper, R.w,y-slope-slopeBorderUpper,
                                    R.w,y-slope, 0,y+slope]);
   // Draw minute to offscreen buffer
   g2.setColor(0).fillRect(0,0,g2.getWidth(),g2.getHeight()).setFontAlign(1, 0).setFont("PaytoneOne");
@@ -83,7 +90,7 @@ let drawMinute = function() {
   // draw over the slanty bit
   g.setColor(bgColor).fillPoly([0,y+slope, R.w,y-slope, R.w,R.h+R.y, 0,R.h+R.y]);
   // draw the minutes
-  g.setColor(g.theme.bg).drawImage(g2img, x+minuteX-(g2.getWidth()/2), yo-(g2.getHeight()/2));
+  g.setColor(fgColor).drawImage(g2img, x+minuteX-(g2.getWidth()/2), yo-(g2.getHeight()/2));
 };
   
 let animate = function(isIn, callback) {
@@ -102,10 +109,10 @@ let animate = function(isIn, callback) {
 
     minuteX += deltaX;
     deltaX = deltaX*2;
-    
+
     let stop = false;
     let drw=true;
-    
+
     if (isAnimIn && minuteX>=0) {
       minuteX=0;
       stop = true;
@@ -113,14 +120,19 @@ let animate = function(isIn, callback) {
       stop = true;
       drw=false;
     }
-    
+
     if (drw) drawMinute();
-    
+
     if (stop) {
       clearInterval(animInterval);
       animInterval=undefined;
       if (isAnimIn) // draw the date
-        g.setColor(fgColor).setFontAlign(0, 0).setFont("Vector:20").drawString(dateStr, R.x + R.w/2, R.y+R.h-9);
+        if (invert) {
+          g.setColor(g.theme.fg).setFontAlign(0, 0).setFont("Vector:20").drawString(dateStr, R.x + R.w/2, R.y+R.h-9);
+        }
+        else {
+          g.setColor(g.theme.bg).setFontAlign(0, 0).setFont("Vector:20").drawString(dateStr, R.x + R.w/2, R.y+R.h-9);
+        }
       if (callback) callback();
     }
   }, 20);

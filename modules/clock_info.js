@@ -278,9 +278,12 @@ exports.addInteractive = function(menu, options) {
       if (!options.focus) {
         options.focus=true; // if not focussed, set focus
        options.redraw();
-      } else if (menu[options.menuA].items[options.menuB].run)
+      } else if (menu[options.menuA].items[options.menuB].run) {
+        Bangle.buzz(100, 0.7);
         menu[options.menuA].items[options.menuB].run(); // allow tap on an item to run it (eg home assistant)
-      else options.focus=true;
+      } else {
+        options.focus=true;
+      }
     };
     Bangle.on("touch",touchHandler);
   }
@@ -296,6 +299,23 @@ exports.addInteractive = function(menu, options) {
   options.redraw = function() {
     drawItem(menu[options.menuA].items[options.menuB]);
   };
+  options.setItem = function (menuA, menuB) {
+    if (!menu[menuA] || !menu[menuA].items[menuB] || (options.menuA == menuA && options.menuB == menuB)) {
+      // menuA or menuB did not exist or did not change
+      return false;
+    }
+
+    const oldMenuItem = menu[options.menuA].items[options.menuB];
+    if (oldMenuItem) {
+      menuHideItem(oldMenuItem);
+      oldMenuItem.removeAllListeners("draw");
+    }
+    options.menuA = menuA;
+    options.menuB = menuB;
+    menuShowItem(menu[options.menuA].items[options.menuB]);
+
+    return true;
+  }
   return options;
 };
 

@@ -18,6 +18,11 @@
         format: () => (settings.autoCycle ? 'Yes' : 'No'),
         onchange: x => save('autoCycle', x),
       },
+      /*LANG*/'Animate': {
+        value: !!settings.Animate,
+        format: () => (settings.Animate ? 'Yes' : 'No'),
+        onchange: x => save('Animate', x),
+      },
       /*LANG*/'Invert': {
         value: !!settings.Invert,
         format: () => (settings.Invert ? 'Yes' : 'No'),

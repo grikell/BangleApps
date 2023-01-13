@@ -33,12 +33,12 @@ Graphics.prototype.setFontPaytoneOne = function(scale) {
     slopeBorderUpper = 4; // fudge-factor to move minutes down from slope
   let R, x, y; // middle of the clock face
   let dateStr = "";
-  let bgColors = g.theme.dark ? ["#0f0", "#ff0", "#0ff", "#f0f"] : ["#f0f", "#f00", "#00f", "#000"];
-  let fgColors = g.theme.dark ? ["#000", "#000", "#000", "#000"] : ["#fff", "#fff", "#fff", "#fff"];
+  let invert = settings.Invert;
+  let bgColors = invert ? ["#0f0", "#ff0", "#0ff", "#f0f"] : ["#f0f", "#f00", "#00f", "#000"];
+  let fgColors = invert ? ["#000", "#000", "#000", "#000"] : ["#fff", "#fff", "#fff", "#fff"];
   let rndm = (Math.random() * bgColors.length) | 0;
   let bgColor = bgColors[rndm];
   let fgColor = fgColors[rndm];
-  let invert = settings.Invert;
   let anim = settings.Animate;
 
 
@@ -66,7 +66,8 @@ Graphics.prototype.setFontPaytoneOne = function(scale) {
       require("locale").month(date, 1).toUpperCase();
 
     // Draw hour
-    g.reset().clearRect(R); // clear whole background (w/o widgets)
+    g.reset();
+    g.clearRect(R); // clear whole background (w/o widgets)
     g.setFontAlign(-1, 0).setFont("PaytoneOne");
     g.drawString(hourStr, fontBorder, y - offsy).setFont("4x6"); // draw and unload custom font
     // add slope in background color
@@ -139,10 +140,10 @@ Graphics.prototype.setFontPaytoneOne = function(scale) {
           animInterval = undefined;
           if (isAnimIn) // draw the date
             if (invert) {
-              g.setColor(g.theme.fg).setFontAlign(0, 0).setFont("Vector:20").drawString(dateStr, R.x + R.w / 2, R.y + R.h - 9);
+              g.setColor("#FFF").setFontAlign(0, 0).setFont("Vector:20").drawString(dateStr, R.x + R.w / 2, R.y + R.h - 9);
             }
           else {
-            g.setColor(g.theme.bg).setFontAlign(0, 0).setFont("Vector:20").drawString(dateStr, R.x + R.w / 2, R.y + R.h - 9);
+            g.setColor("#000").setFontAlign(0, 0).setFont("Vector:20").drawString(dateStr, R.x + R.w / 2, R.y + R.h - 9);
           }
           if (callback) callback();
         }

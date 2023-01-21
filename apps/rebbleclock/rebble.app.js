@@ -361,6 +361,7 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
     Bangle.removeListener('lock', lockListener);
     NRF.removeListener('connect', connListener);
     NRF.removeListener('disconnect', discListener);
+    require("widget_utils").show();
   };
 
   let lockListener = function(l) {
@@ -392,7 +393,7 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
     log_debug("starting..");
 
     Bangle.loadWidgets();
-    require("widget_utils").hide();
+    require("widget_utils").swipeOn();
     loadSettings();
     loadLocation();
 

@@ -127,12 +127,15 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
   let avr = [];
 
   let avgBattery = function() {
-    let value = E.getBattery();
-    while (avr.length > MEDIANLENGTH) avr.pop();
-    avr.unshift(value);
     return (Math.round(E.sum(avr) / avr.length));
   };
 
+  let getBattery = function() {
+    let value = E.getBattery();
+    while (avr.length > MEDIANLENGTH) avr.pop();
+    avr.unshift(value);
+  };
+  
   let draw = function() {
     log_debug("draw()");
     let date = new Date();
@@ -351,11 +354,18 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
       draw();
     }, 60000 - (Date.now() % 60000));
   };
+  
+  let batInterval;
+  getBattery();
+  batInterval=setInterval(getBattery,10000);
 
   let deleteAll = function() {
     // Called to unload all of the clock app
     if (drawTimeout) clearTimeout(drawTimeout);
+    if (batInterval) clearInterval(batInterval);
     drawTimeout = undefined;
+    batInterval=undefined;
+    
     delete Graphics.prototype.setFontKdamThmor;
     Bangle.removeListener('charging', chargingListener);
     Bangle.removeListener('lock', lockListener);

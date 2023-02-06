@@ -13,7 +13,11 @@ Graphics.prototype.setFontPaytoneOne = function(scale) {
   // we also define functions using 'let fn = function() {..}' for the same reason. function decls are global
   let drawTimeout;
   const storage = require('Storage');
-  let localSettings = {'Colour': 'C', 'Invert': false, 'Animate': false};
+  let localSettings = {
+    'Colour': 'C',
+    'Invert': false,
+    'Animate': false
+  };
   let settings = storage.readJSON("slopeclock2.json", 1) || localSettings;
 
   let g2 = Graphics.createArrayBuffer(g.getWidth(), 90, 1, {
@@ -29,34 +33,39 @@ Graphics.prototype.setFontPaytoneOne = function(scale) {
   const slope = 20;
   const offsy = 20; // offset of numbers from middle
   const fontBorder = 4; // offset from left/right
-  const slopeBorder = 5, slopeBorderUpper = 4; // fudge-factor to move minutes down from slope
+  const slopeBorder = 5,
+    slopeBorderUpper = 4; // fudge-factor to move minutes down from slope
   let R, x, y; // middle of the clock face
   let dateStr = "";
   let invert = settings.Invert;
   let bgColors = invert ? ["#0f0", "#ff0", "#0ff", "#f0f"] : ["#f0f", "#f00", "#00f", "#000"];
   let fgColors = invert ? ["#000", "#000", "#000", "#000"] : ["#fff", "#fff", "#fff", "#fff"];
 
-  if (localSettings.Colour=='C') {
-    let rndm = (Math.random() * bgColors.length) | 0;
-    let bgColor = bgColors[rndm];
-    let fgColor = fgColors[rndm];
-  }
-  else {
-    let bgColor = fgColors[0];
-    let fgColor = localSettings.Colour;
-  }
-  let anim = settings.Animate;
+  let autoCycle = (settings.Colour == 'C');
+  let rndm = 0;
+  
+  let bgColor = fgColors[0];
+  let fgColor = settings.Colour;
 
+  if (autoCycle) {
+    rndm = Math.random() * bgColors.length;
+    bgColor = bgColors[rndm];
+    fgColor = fgColors[rndm];
+  }
+  
+  let anim = settings.Animate;
   // Draw the hour, and the minute into an offscreen buffer
   let draw = function() {
 
-    if (settings.autoCycle) rndm = (rndm + 1) % bgColors.length;
-    if (invert) {
-      bgColor = fgColors[rndm];
-      fgColor = bgColors[rndm];
-    } else {
-      bgColor = fgColors[rndm];
-      fgColor = bgColors[rndm];
+    if (autoCycle) {
+      rndm = (rndm + 1) % bgColors.length;
+      if (invert) {
+        bgColor = fgColors[rndm];
+        fgColor = bgColors[rndm];
+      } else {
+        bgColor = fgColors[rndm];
+        fgColor = bgColors[rndm];
+      }
     }
 
     R = Bangle.appRect;

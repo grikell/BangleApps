@@ -118,7 +118,10 @@ Graphics.prototype.setFontPaytoneOne = function(scale) {
   };
 
   let animate = function(isIn, callback) {
-    if (!anim && callback) callback();
+    if (!anim ) {
+      if (callback) callback();
+      else drawMinute();
+    }
     else {
       if (animInterval) clearInterval(animInterval);
       isAnimIn = isIn;

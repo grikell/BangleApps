@@ -97,10 +97,10 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
   // set the text color of the sidebar elements that dont change with the Theme
   let setTextColor = function() {
     // day and steps
-    if (settings.color == 'Blue' || settings.color == 'Red' || settings.color == 'Black') {
-      g.setColor('#fff'); // white on blue or red best contrast
+    if (settings.color == 'Blue' || settings.color == 'Red' || settings.color == 'Black' || settings.color == 'Gray') {
+      g.setColor('#fff'); // white 
     } else {
-      g.setColor('#000'); // otherwise black regardless of theme
+      g.setColor('#000'); // otherwise black 
     }
   };
 

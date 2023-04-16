@@ -46,29 +46,25 @@ Graphics.prototype.setFontPaytoneOne = function(scale) {
 
   let autoCycle = (settings.Colour == 'C');
   let rndm = 0;
-  
-  let bgColor = fgColors[0];
-  let fgColor = settings.Colour;
 
-  if (autoCycle) {
-    rndm = Math.random() * bgColors.length;
-    bgColor = bgColors[rndm];
-    fgColor = fgColors[rndm];
-  }
-  
+  let bgColor = fgColors[0];
+
   let anim = settings.Animate;
   // Draw the hour, and the minute into an offscreen buffer
   let draw = function() {
 
     if (autoCycle) {
-      rndm = (rndm + 1) % bgColors.length;
       if (invert) {
-        bgColor = fgColors[rndm];
         fgColor = bgColors[rndm];
-      } else {
         bgColor = fgColors[rndm];
-        fgColor = bgColors[rndm];
       }
+      else {
+        fgColor = fgColors[rndm];
+        bgColor = bgColors[rndm];
+      }
+//      print(rndm,bgColors.length);
+//      print(fgColor,bgColor);
+      rndm = (rndm + 1) % bgColors.length;
     }
 
     R = Bangle.appRect;

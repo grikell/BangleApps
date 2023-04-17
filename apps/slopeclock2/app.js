@@ -41,7 +41,7 @@ Graphics.prototype.setFontPaytoneOne = function(scale) {
   let R, x, y; // middle of the clock face
   let dateStr = "";
   let invert = settings.Invert;
-  let bgColors = invert ? ["#0f0", "#ff0", "#0ff", "#f0f"] : ["#f0f", "#f00", "#00f", "#000"];
+  let bgColors = invert ? ["#0f0", "#ff0", "#0ff", "#f00"] : ["#f0f", "#f00", "#00f", "#000"];
   let fgColors = invert ? ["#000", "#000", "#000", "#000"] : ["#fff", "#fff", "#fff", "#fff"];
 
   let autoCycle = (settings.Colour == 'C');

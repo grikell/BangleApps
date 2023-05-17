@@ -15,7 +15,7 @@ exports.loadSettings = function() {
   return Object.assign({
       hrmOn : 0, // 0(Always), 1(Tap)
       defocusOnLock : true,
-      maxAltitude : 3000,
+      deltaAltitude : 0,
       apps : {}
     },
     require("Storage").readJSON("clock_info.json",1)||{}
@@ -39,7 +39,7 @@ exports.load = function() {
     try {
       Bangle.getPressure().then(data=>{
         if (!data) return;
-        alt = Math.round(data.altitude) + "m";
+        alt = Math.round(data.altitude-settings.deltaAltitude) + "m";
         bangleItems[3].emit("redraw");
       });
     } catch (e) {
@@ -118,7 +118,7 @@ exports.load = function() {
       hasRange : true,
       get : () => ({
         text : alt, v : parseInt(alt),
-        min : 0, max : settings.maxAltitude,
+        min : 0, max : settings.deltaAltitude,
         img : atob("GBiBAAAAAAAAAAAAAAAAAAAAAAACAAAGAAAPAAEZgAOwwAPwQAZgYAwAMBgAGBAACDAADGAABv///////wAAAAAAAAAAAAAAAAAAAA==")
       }),
       show : function() { this.interval = setInterval(altUpdateHandler, 60000); alt = "--"; altUpdateHandler(); },

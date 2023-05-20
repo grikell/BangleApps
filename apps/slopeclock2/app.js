@@ -66,6 +66,9 @@ Graphics.prototype.setFontPaytoneOne = function(scale) {
 //      print(fgColor,bgColor);
       rndm = (rndm + 1) % bgColors.length;
     }
+    else {
+      fgColor =settings.Colour;
+    }   
 
     R = Bangle.appRect;
     x = R.w / 2;

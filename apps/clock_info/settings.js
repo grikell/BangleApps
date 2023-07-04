@@ -19,11 +19,11 @@
       format: v => ["Always","Tap"][v],
       onchange: x => save('hrmOn', x),
     },
-    /*LANG*/'Delta Altitude': {
-      value: settings.deltaAltitude,
-      min: -100, max: 100, step: 5,
+    /*LANG*/'Max Altitude': {
+      value: settings.maxAltitude,
+      min: 500, max: 10000, step: 500,
       format: v => v+"m",
-      onchange: x => save('deltaAltitude', x),
+      onchange: x => save('maxAltitude', x),
     }
   };
   E.showMenu(menu);

@@ -4,6 +4,8 @@
   let onLock;
   let onTap;
   let onTwist;
+  let fontName;
+  let digits;
   let settings = require('Storage').readJSON("contourclock.json", true) || {};
   if (settings.fontIndex == undefined) {
     settings.fontIndex = 0;
@@ -49,7 +51,7 @@
     require("widget_utils").hide();
     extrasShown = false;
   };
-  let {fontName, digits } = require('contourclock').getDigits(settings.fontIndex);
+  { fontName, digits } = require('contourclock').getDigits(settings.fontIndex);
   let draw = function() {
     let date = new Date();
     g.reset();

@@ -19,7 +19,8 @@ exports.getDigits = function(fontIndex) {
       buffer:E.toArrayBuffer(atob(font.characters[n].buffer))});
     }
   if (n!=10) return (false); //font file seems to be invalid
-  return { digits, font.name };
+  let fname=font.name;
+  return { digits, fname };
 }
 
 exports.drawClock = function(fontIndex, digits) {

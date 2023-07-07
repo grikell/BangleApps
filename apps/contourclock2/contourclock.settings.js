@@ -59,7 +59,7 @@
       mainMenu();
     });
     swipeListener = Bangle.on('swipe', function (direction) {
-      let { fontName, digits  } = require('contourclock').getDigits(settings.fontIndex+direction);
+      var { fontName, digits  } = require('contourclock').getDigits(settings.fontIndex+direction);
       require('contourclock').drawClock(fontName, digits);
       if (fontName) {
         settings.fontIndex+=direction;
@@ -72,7 +72,7 @@
     g.reset();
     g.clearRect(0,24,g.getWidth()-1,g.getHeight()-1);
     g.setFont('6x8:2x2').setFontAlign(0,-1);
-    let { fontName, digits  } = require('contourclock').getDigits(settings.fontIndex);
+    var { fontName, digits  } = require('contourclock').getDigits(settings.fontIndex);
     g.drawString(fontName,g.getWidth()/2,g.getHeight()-36);
     g.drawString('Button to save',g.getWidth()/2,g.getHeight()-18);
   }

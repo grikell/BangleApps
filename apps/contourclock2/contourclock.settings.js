@@ -60,11 +60,11 @@
     });
     swipeListener = Bangle.on('swipe', function (direction) {
       let D = require('contourclock2').getDigits(settings.fontIndex+direction);
-      let fontName=D.fontName;
-      let digits=D.digits;
-      require('contourclock2').drawClock(fontName, digits);
+      let fontName=D.fname;
+      let digits1=D.digits;
       if (fontName) {
         settings.fontIndex+=direction;
+        require('contourclock2').drawClock(settings.fontIndex+direction, digits1);
         g.clearRect(0,g.getHeight()-36,g.getWidth()-1,g.getHeight()-36+16);
         g.setFont('6x8:2x2').setFontAlign(0,-1).drawString(fontName,g.getWidth()/2,g.getHeight()-36);
       } else {

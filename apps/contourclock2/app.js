@@ -4,7 +4,7 @@
   let onLock;
   let onTap;
   let onTwist;
-  let settings = require('Storage').readJSON("contourclock.json", true) || {};
+  let settings = require('Storage').readJSON("contourclock2.json", true) || {};
   if (settings.fontIndex == undefined) {
     settings.fontIndex = 0;
     settings.widgets = true;
@@ -13,14 +13,14 @@
     settings.tapToShow = false;
     settings.twistToShow = false;
     settings.date = true;
-    require('Storage').writeJSON("contourclock.json", settings);
+    require('Storage').writeJSON("contourclock2.json", settings);
   }
   require("FontTeletext10x18Ascii").add(Graphics);
   let extrasShown = (!settings.hidewhenlocked) && (!Bangle.isLocked());
   let installedFonts = require('Storage').readJSON("contourclock-install.json") || {};
   if (installedFonts.n > 0) { //New install - check for unused font files
     settings.fontIndex = E.clip(settings.fontIndex, -installedFonts.n + 1, installedFonts.n - 1);
-    require('Storage').writeJSON("contourclock.json", settings);
+    require('Storage').writeJSON("contourclock2.json", settings);
     for (let n = installedFonts.n;; n++) {
       if (require("Storage").read("contourclock-" + n + ".json") == undefined) break;
       require("Storage").erase("contourclock-" + n + ".json");
@@ -49,13 +49,13 @@
     require("widget_utils").hide();
     extrasShown = false;
   };
-  var { fontName, digits } = require('contourclock').getDigits(settings.fontIndex);
+  var { fontName, digits } = require('contourclock2').getDigits(settings.fontIndex);
   let draw = function() {
     let date = new Date();
     g.reset();
     if (extrasShown) drawExtras();
     else hideExtras();
-    require('contourclock').drawClock(settings.fontIndex,digits);
+    require('contourclock2').drawClock(settings.fontIndex,digits);
     if (drawTimeout) clearTimeout(drawTimeout);
     drawTimeout = setTimeout(function() {
       drawTimeout = undefined;

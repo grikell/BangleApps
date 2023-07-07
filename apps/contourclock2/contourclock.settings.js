@@ -68,7 +68,7 @@
         g.clearRect(0,g.getHeight()-36,g.getWidth()-1,g.getHeight()-36+16);
         g.setFont('6x8:2x2').setFontAlign(0,-1).drawString(fontName,g.getWidth()/2,g.getHeight()-36);
       } else {
-        let D = require('contourclock2').getDigits(settings.fontIndex+direction);
+        let D = require('contourclock2').getDigits(settings.fontIndex);
         let digits=D.digits;        
         require('contourclock2').drawClock(settings.fontIndex,digits);
       }
@@ -77,7 +77,9 @@
     g.clearRect(0,24,g.getWidth()-1,g.getHeight()-1);
     g.setFont('6x8:2x2').setFontAlign(0,-1);
     let D = require('contourclock2').getDigits(settings.fontIndex);
-    let fontName=D.fontName;
+    let fontName=D.fname;
+    let digits=D.digits;
+    require('contourclock2').drawClock(settings.fontIndex,digits);
     g.drawString(fontName,g.getWidth()/2,g.getHeight()-36);
     g.drawString('Button to save',g.getWidth()/2,g.getHeight()-18);
   }

@@ -49,7 +49,9 @@
     require("widget_utils").hide();
     extrasShown = false;
   };
-  var { fontName, digits } = require('contourclock2').getDigits(settings.fontIndex);
+
+  let D = require('contourclock2').getDigits(settings.fontIndex);
+  let digits=D.digits;
   let draw = function() {
     let date = new Date();
     g.reset();

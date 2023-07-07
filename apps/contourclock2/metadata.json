@@ -1,0 +1,20 @@
+{ "id": "contourclock2",
+  "name": "Contour Clock 2",
+  "shortName" : "ConClock 2",
+  "version":"0.01",
+  "icon": "app.png",
+  "readme": "README.md",
+  "description": "A fork of Contour Clock",
+  "screenshots" : [{"url":"cc-screenshot-1.png"},{"url":"cc-screenshot-2.png"}],
+  "tags": "clock",
+  "custom": "custom.html",
+  "supports" : ["BANGLEJS2"],
+  "type": "clock",
+  "storage": [
+    {"name":"contourclock2.app.js","url":"app.js"},
+    {"name":"contourclock2.settings.js","url":"contourclock.settings.js"},
+    {"name":"contourclock2","url":"lib.js"},
+    {"name":"contourclock2.img","url":"app-icon.js","evaluate":true}
+  ],
+  "data": [{"name":"contourclock2.json"}]
+}

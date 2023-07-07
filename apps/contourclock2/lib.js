@@ -18,7 +18,7 @@ exports.getDigits = function(fontIndex) {
       transparent: 1,
       buffer:E.toArrayBuffer(atob(font.characters[n].buffer))});
     }
-    if (n!=10) return (false); //font file seems to be invalid
+  if (n!=10) return (false); //font file seems to be invalid
   return { digits, font.name };
 }
 

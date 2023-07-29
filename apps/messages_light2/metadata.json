@@ -1,0 +1,21 @@
+{
+  "id": "messages_light2",
+  "name": "Messages Light2",
+  "version": "0.1",
+  "description": "A fork of message light",
+  "icon": "app.png",
+  "type": "app",
+  "tags": "tool,system",
+  "supports": ["BANGLEJS","BANGLEJS2"],
+  "dependencies" : { "messageicons":"module","messages":"app" },
+  "readme": "README.md",
+  "storage": [
+    {"name":"messages_light2.app.js","url":"messages_light.app.js"},
+    {"name":"messages_light2.settings.js","url":"messages_light.settings.js"},
+    {"name":"messages_light2.img","url":"app-icon.js","evaluate":true},
+    {"name":"boot_messages_light2.boot.js","url":"messages_light.boot.js"},
+    {"name":"messages_light2.listener.js","url":"messages_light.listener.js"}
+  ],
+  "data": [{"name":"messages_light2.settings.json"},{"name":"messages_light2.NewEvent.json"}],
+  "screenshots": [{"url":"screenshot-notify.png"} ,{"url":"screenshot-long-text1.png"},{"url":"screenshot-long-text2.png"}, {"url":"screenshot-call.png"} ]
+}

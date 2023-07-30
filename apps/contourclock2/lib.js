@@ -33,12 +33,7 @@ exports.drawClock = function(fontIndex, digits) {
     d3=10;
     d4=parseInt(date.getMinutes()/10);
     d5=parseInt(date.getMinutes()%10);
-    if (d1==0) {
-	w1=0;
-    }
-    else {
-	w1=digits[d1].width;
-    }
+    w1=digits[d1].width;
     w2=digits[d2].width;
     w3=digits[d3].width;
     w4=digits[d4].width;
@@ -53,6 +48,9 @@ exports.drawClock = function(fontIndex, digits) {
     if (d1!=0) {
 	g.drawImage(digits[d1],x,y);
 	x+=parseInt(w1*squeeze);
+    }
+    else {
+	x+=parseInt(w1*squeeze)/2;
     }
     g.drawImage(digits[d2],x,y);
     x+=parseInt(w2*squeeze);

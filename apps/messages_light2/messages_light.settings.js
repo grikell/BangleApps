@@ -3,7 +3,7 @@
     let  settings = function() {
         let settings = require('Storage').readJSON(SETTINGS_FILE_NAME, true) || {};
         return settings;
-    }
+    };
     function updateSetting(setting, value) {
       let settings = require('Storage').readJSON(SETTINGS_FILE_NAME, true) || {};
       settings[setting] = value;
@@ -20,6 +20,14 @@
         onchange: m => {
           updateSetting("timeOut", timeOutChoices[m]);
         }
+      },
+      'Invert BG': {
+        value: (settings.invert !== undefined ? settings.invert : false),
+        onchange : v => { updateSetting("invert", v); } 
+      },
+      'Show Nav.': {
+        value: (settings.showNav !== undefined ? settings.showNav : false),
+        onchange : v => { updateSetting("showNav", v); } 
       },
     };
     E.showMenu(mainmenu);

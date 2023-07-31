@@ -10,13 +10,11 @@
   }
 */
 
-
-
-
 let LOG=function(){  
-  print.apply(null, arguments);
-}
+// print.apply(null, arguments);
+};
 
+let setngs = require('Storage').readJSON("messages_light2.settings.json", true) || {};
 
 let settings= {
   NewEventFileName:"messages_light2.NewEvent.json",
@@ -24,26 +22,24 @@ let settings= {
   fontMedium : "Vector:16",
   fontBig : "Vector:20",
   fontLarge : "Vector:30",
-  
+
   colHeadBg : g.theme.dark ? "#141":"#4f4",
-  
+
   colBg : g.theme.dark ? "#000":"#fff",
   colLock : g.theme.dark ? "#ff0000":"#ff0000",
+  invert : (setngs.invert !== undefined ? setngs.invert : false),
+
+  showNav: (setngs.invert !== undefined ? setngs.showNav : false),
 
   quiet:!!((require('Storage').readJSON('setting.json', 1) || {}).quiet),
-  timeOut:(require('Storage').readJSON("messages_light2.settings.json", true) || {}).timeOut || "Off",
+  timeOut:(setngs.timeOut || "Off"),
 };
 
 
-
-
-let EventQueue=[];    //in posizione 0, c'Ã¨ quello attualmente visualizzato
+let EventQueue=[];    //in posizione 0, c'ý quello attualmente visualizzato
 let callInProgress=false;
 
-
 let justOpened=true;
-
-
 
 //TODO: RICORDARSI DI FARE IL DELETE
 var manageEvent = function(event) {
@@ -56,8 +52,9 @@ var manageEvent = function(event) {
   if( event.id=="call"){
       showCall(event);
   }
-  else if( event.id=="music"){
-      //la musica non la gestisco piÃ¹ ( uso l'app standard o un altra app)
+  else if(event.id=="music" || (event.id=="nav" && !settings.showNav)) {
+      next();
+      return;
   }
   else{ 
 
@@ -87,13 +84,13 @@ var manageEvent = function(event) {
           showMessage(event);
     }
     else if(event.t=="remove"){       
-        //se non c'Ã¨ niente nella queue e non c'Ã¨ una chiamata in corso
+        //se non c'ý niente nella queue e non c'ý una chiamata in corso
         if( EventQueue.length==0 && !callInProgress)
           next();
   
-        //se l'id Ã¨ uguale a quello attualmente visualizzato  ( e non siamo in chiamata ) 
+        //se l'id ý uguale a quello attualmente visualizzato  ( e non siamo in chiamata ) 
         if(!callInProgress &&  EventQueue[0] !== undefined && EventQueue[0].id == event.id)
-          next();   //passo al messaggio successivo ( per la rimozione ci penserÃ  la next ) 
+          next();   //passo al messaggio successivo ( per la rimozione ci penserý la next ) 
   
         else{
           //altrimenti rimuovo tutti gli elementi con quell'id( creando un nuovo array )
@@ -114,14 +111,9 @@ var manageEvent = function(event) {
     //notification
     //-----------------
 
-
   }
   
 };
-
-
-
-
 
 
 let showMessage = function(msg){
@@ -130,7 +122,10 @@ let showMessage = function(msg){
 
   updateTimeout();
 
-
+  if (msg.instr && !msg.body) {
+    msg.body=msg.instr; 
+  }
+  
   g.setBgColor(settings.colBg);
 
 
@@ -138,9 +133,6 @@ let showMessage = function(msg){
     msg.CanScrollDown=false;
   if(typeof msg.CanScrollUp==="undefined")
     msg.CanScrollUp=false;
-
-
-
 
 
   // Normal text message display
@@ -154,9 +146,7 @@ let showMessage = function(msg){
       title = (lines.length>2) ? lines.slice(0,2).join("\n")+"..." : lines.join("\n");
     }
   }
-  
 
- 
   let Layout = require("Layout");
   layout = new Layout({ type:"v", c: [
     {type:"h", fillx:1, bgCol:settings.colHeadBg,  c: [
@@ -167,19 +157,13 @@ let showMessage = function(msg){
       ]},
     ]},
     {type:"v",fillx:1,filly:1,pad:2 ,halign:-1,c:[]},
-
-   
-   
-    
   ]});
- 
 
   if (!settings.quiet && msg.new)
   {
     msg.new=false;
     Bangle.buzz();
   }
-    
 
   g.clearRect(Bangle.appRect);
   layout.render();
@@ -202,17 +186,12 @@ let DrawLock=function()
   g.clearRect(x,y,x+w,y+h);
 };
 
-
-
-
-
-
 let showCall = function(msg)
 {
   LOG("showCall");
   LOG(msg);
   // se anche prima era una call    PrevMessage==msg.id 
-  //non so perchÃ¨ prima era cosi
+  //non so perchý prima era cosi
   if( msg.t=="remove")
   {
     LOG("hide call screen");
@@ -224,7 +203,7 @@ let showCall = function(msg)
   updateTimeout();
 
 
-  //se Ã¨ una chiamata ( o una nuova chiamata, diversa dalla precedente )
+  //se ý una chiamata ( o una nuova chiamata, diversa dalla precedente )
   //la visualizzo
   
   let title=msg.title, titleFont = settings.fontLarge, lines;
@@ -258,7 +237,6 @@ let showCall = function(msg)
       CallBuzzTimer = setInterval(function() {
           Bangle.buzz(500);
       }, 1000);
-      
       Bangle.buzz(500);
     }
   }
@@ -269,19 +247,11 @@ let showCall = function(msg)
   DrawLock();
 };
 
-
-
-
-
-
-
   
 let next=function(){
   LOG("next");
   StopBuzzCall();
-  
-
-  //se c'Ã¨ una chiamata, non shifto
+  //se c'ý una chiamata, non shifto
   if(!callInProgress)
     EventQueue.shift();    //passa al messaggio successivo, se presente - tolgo il primo
 
@@ -294,29 +264,29 @@ let next=function(){
     return;
   }
 
-  
   showMessage(EventQueue[0]);
-
 };
 
 
 
-let CallBuzzTimer=undefined;
+let CallBuzzTimer;
+
+CallBuzzTimer=undefined;
 let StopBuzzCall=function()
 {
   if (CallBuzzTimer){
     clearInterval(CallBuzzTimer);
     CallBuzzTimer=undefined;
   }
-}
+};
 let DrawTriangleUp=function()
 {
   g.fillPoly([169,46,164,56,174,56]);
-}
+};
 let DrawTriangleDown=function()
 {
   g.fillPoly([169,170,164,160,174,160]);
-}
+};
 
 
 
@@ -335,7 +305,7 @@ let ScrollUp=function()
   msg.FirstLine = msg.FirstLine>0?msg.FirstLine-1:0;
 
   PrintMessageStrings(msg);
-}
+};
 let ScrollDown=function()
 {
   msg= EventQueue[0];
@@ -348,11 +318,7 @@ let ScrollDown=function()
   
   msg.FirstLine = msg.FirstLine+1;
   PrintMessageStrings(msg);
-}
-
-
-
-
+};
 
 
 let PrintMessageStrings=function(msg)
@@ -361,37 +327,44 @@ let PrintMessageStrings=function(msg)
   {
     str=str.replace("\r\n","\n").replace("\r","\n");
     return g.wrapString(str,maxWidth);
-  }
+  };
 
-
+  LOG(msg);
   if(typeof msg.FirstLine==="undefined")  msg.FirstLine=0;
 
-  let bodyFont = typeof msg.bodyFont==="undefined"? settings.fontMedium : msg.bodyFont;
+  let bodyFont = typeof msg.bodyFont==="undefined"? settings.fontLarge : msg.bodyFont;
+  LOG(bodyFont);
   let Padding=2;
   if(typeof msg.lines==="undefined")
   {
     g.setFont(bodyFont);
-    msg.lines = MyWrapString(msg.body,g.getWidth()-(Padding*2))
+    msg.lines = MyWrapString(msg.body,g.getWidth()-(Padding*2));
     if ( msg.lines.length<=2)
     {
-      bodyFont=  g.getFonts().includes("Vector")?"Vector:20":"6x8:3";
+      bodyFont=  g.getFonts().includes("Vector")?"Vector:40":"6x8:4";
       g.setFont(bodyFont);
-      msg.lines = MyWrapString(msg.body,g.getWidth()-(Padding*2))
+      msg.lines = MyWrapString(msg.body,g.getWidth()-(Padding*2));
       msg.bodyFont = bodyFont;
     }
   }
 
-  
 
   //prendo le linee da stampare
-  let NumLines=8;
+  let NumLines=4;
   let linesToPrint = (msg.lines.length>NumLines) ? msg.lines.slice(msg.FirstLine,msg.FirstLine+NumLines):msg.lines;
-  
-    
+
+
   let yText=45;
-  
+
   //invalido l'area e disegno il testo
-  g.setBgColor(settings.colBg);
+  if (settings.invert) {
+    g.setBgColor(1,1,1);
+    g.setColor(0,0,0);
+  }
+  else {
+    g.setColor(1,1,1);
+    g.setBgColor(settings.colBg);
+  }
   g.clearRect(0,yText,176,176);
   let xText=Padding;
   yText+=Padding;
@@ -408,7 +381,7 @@ let PrintMessageStrings=function(msg)
   else
     g.setFontAlign(-1,-1);
 
-  
+
   linesToPrint.forEach((line, i)=>{
     g.drawString(line,xText,yText+HText*i);
   });
@@ -431,7 +404,7 @@ let PrintMessageStrings=function(msg)
     msg.CanScrollDown=false;
 
 
-}
+};
 
 
 
@@ -443,7 +416,7 @@ let doubleTapUnlock=function(data) {
     Bangle.setLocked(false);
     Bangle.setLCDPower(1);
   }
-}
+};
 let toushScroll=function(_, xy) { 
   updateTimeout();
 
@@ -458,15 +431,14 @@ let toushScroll=function(_, xy) {
   {
     ScrollDown();
   }
-}
-
+};
 
 
 let timeout;
 const updateTimeout = function(){
 if (settings.timeOut!="Off"){
     removeTimeout();
-    if( callInProgress) return; //c'Ã¨ una chiamata in corso -> no timeout
+    if( callInProgress) return; //c'ý una chiamata in corso -> no timeout
     //if( typeof music !== 'undefined'  && EventQueue.length==0 ) return; //ho aperto l'interfaccia della musica e non ho messaggi davanti -> no timeout
 
 
@@ -476,7 +448,7 @@ if (settings.timeOut!="Off"){
 };
 const removeTimeout=function(){
   if (timeout) clearTimeout(timeout);
-}
+};
 
 
 let main = function(){
@@ -486,22 +458,22 @@ let main = function(){
 
   Bangle.on('lock', DrawLock);
 
-  //se c'Ã¨ una chiamata in corso NON devo togliere niente dal next ( in q)
+  //se c'ý una chiamata in corso NON devo togliere niente dal next ( in q)
   setWatch(_=> next(), BTN1,{repeat: true});
 
-  //il tap Ã¨ il tocco con l'accellerometro!
+  //il tap ý il tocco con l'accellerometro!
   Bangle.on('tap', doubleTapUnlock);
   Bangle.on('touch', toushScroll);
 
-  //quando apro quest'app, do per scontato che c'Ã¨ un messaggio da leggere posto in un file particolare ( messages_light2.NewEvent.json )
+  //quando apro quest'app, do per scontato che c'ý un messaggio da leggere posto in un file particolare ( messages_light2.NewEvent.json )
   let eventToShow = require('Storage').readJSON(settings.NewEventFileName, true);
-  require("Storage").erase(settings.NewEventFileName)
+  require("Storage").erase(settings.NewEventFileName);
   if( eventToShow!==undefined)
     manageEvent(eventToShow);
   else
   {
     LOG("file event not found! -> ?? open debug text");
-    setTimeout(_=>{      GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification \nmessage contents  demo demo demo demo"})    },0);
+    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification \nmessage contents  demo demo demo demo"});},0);
   }
   justOpened=false;
 

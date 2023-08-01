@@ -23,10 +23,10 @@ let settings= {
   fontBig : "Vector:20",
   fontLarge : "Vector:30",
 
-  colHeadBg : g.theme.dark ? "#141":"#4f4",
-
-  colBg : g.theme.dark ? "#000":"#fff",
-  colLock : g.theme.dark ? "#ff0000":"#ff0000",
+  colHeadBg : "#141",
+  colBg :  "#000",
+  colFg :  "#fff",
+  colLock : "#ff0000",
   invert : (setngs.invert !== undefined ? setngs.invert : false),
 
   showNav: (setngs.invert !== undefined ? setngs.showNav : false),
@@ -35,6 +35,13 @@ let settings= {
   timeOut:(setngs.timeOut || "Off"),
 };
 
+let dark=(g.theme.dark && !settings.invert) || (!g.theme.dark && !settings.invert);
+if (!dark) {
+  settings.colHeadBg = "#4f4";
+  settings.colBg = "#fff";
+  settings.colFg = "#000";
+  settings.colLock = "#ff0000";
+}
 
 let EventQueue=[];    //in posizione 0, c'ý quello attualmente visualizzato
 let callInProgress=false;
@@ -152,8 +159,8 @@ let showMessage = function(msg){
     {type:"h", fillx:1, bgCol:settings.colHeadBg,  c: [
       { type:"btn", src:require("messageicons").getImage(msg), col:require("messageicons").getColor(msg), pad: 3},
       { type:"v", fillx:1, c: [
-        {type:"txt", font:settings.fontSmall, label:msg.src||/*LANG*/"Message", bgCol:settings.colHeadBg, fillx:1, pad:2, halign:1 },
-        title?{type:"txt", font:titleFont, label:title, bgCol:settings.colHeadBg, fillx:1, pad:2 }:{},
+        {type:"txt", font:settings.fontSmall, label:msg.src||/*LANG*/"Message", bgCol:settings.colHeadBg, fillx:1, pad:2, halign:1, col:settings.colFg },
+        title?{type:"txt", font:titleFont, label:title, bgCol:settings.colHeadBg, col:settings.colFg, fillx:1, pad:2 }:{},
       ]},
     ]},
     {type:"v",fillx:1,filly:1,pad:2 ,halign:-1,c:[]},
@@ -357,14 +364,9 @@ let PrintMessageStrings=function(msg)
   let yText=45;
 
   //invalido l'area e disegno il testo
-  if (settings.invert) {
-    g.setBgColor(1,1,1);
-    g.setColor(0,0,0);
-  }
-  else {
-    g.setColor(1,1,1);
-    g.setBgColor(settings.colBg);
-  }
+  g.setColor(settings.colFg);
+  g.setBgColor(settings.colBg);
+
   g.clearRect(0,yText,176,176);
   let xText=Padding;
   yText+=Padding;
@@ -373,14 +375,11 @@ let PrintMessageStrings=function(msg)
 
   yText=((176-yText)/2)-(linesToPrint.length * HText / 2) + yText;
 
-  if( linesToPrint.length<=2)
+  if(linesToPrint.length<=2)
   {
     g.setFontAlign(0,-1);
     xText = g.getWidth()/2;
-  }
-  else
-    g.setFontAlign(-1,-1);
-
+  } else g.setFontAlign(-1,-1);
 
   linesToPrint.forEach((line, i)=>{
     g.drawString(line,xText,yText+HText*i);

@@ -9,8 +9,15 @@
     settings.hideWhenLocked=false;
     settings.tapToShow=false;
     settings.twistToShow=false;
+    settings.tensCol="#fff";
+    settings.digitsCol="#fff";
+    settings.dotsCol="#fff";
     require('Storage').writeJSON("contourclock2.json", settings);
   }
+
+  let color_options = ['Green', 'Orange', 'Cyan', 'Purple', 'Red', 'Blue', 'Black', 'White'];
+  let color_code = ['#0f0', '#ff0', '#0ff', '#f0f', '#f00', '#00f', '#000', '#fff'];
+
   function mainMenu() {
     E.showMenu({
       "" : { "title" : "ContourClock" },
@@ -39,9 +46,28 @@
         value: (settings.twistToShow !== undefined ? settings.twistToShow : false),
         onchange : v => {settings.twistToShow=v; require('Storage').writeJSON('contourclock2.json', settings);}
       },
+      'Tens Color': {
+        value: color_code.indexOf(settings.tensCol),
+        min:0, max:7,
+        format: v => color_options[v],
+        onchange: v => {settings.tensCol=color_code[v]; require('Storage').writeJSON('contourclock2.json', settings);}
+      },
+      'Digits Color': {
+        value: color_code.indexOf(settings.digitsCol),
+        min:0, max:7,
+        format: v => color_options[v],
+        onchange: v => {settings.digitsCol=color_code[v]; require('Storage').writeJSON('contourclock2.json', settings);}
+      },
+      'Dots Color': {
+        value: color_code.indexOf(settings.dotsCol),
+        min:0, max:7,
+        format: v => color_options[v],
+        onchange: v => {settings.dotsCol=color_code[v]; require('Storage').writeJSON('contourclock2.json', settings);}
+      },
       'set Font': () => fontMenu() 
     });
   }
+
   function fontMenu() {
     Bangle.setUI("");
     savedIndex=settings.fontIndex;

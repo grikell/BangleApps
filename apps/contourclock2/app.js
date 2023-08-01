@@ -13,6 +13,9 @@
     settings.tapToShow = false;
     settings.twistToShow = false;
     settings.date = true;
+    settings.tensCol=g.theme.fg;
+    settings.digitsCol=g.theme.fg;
+    settings.dotsCol=g.theme.fg;
     require('Storage').writeJSON("contourclock2.json", settings);
   }
   require("FontTeletext10x18Ascii").add(Graphics);
@@ -57,7 +60,7 @@
     g.reset();
     if (extrasShown) drawExtras();
     else hideExtras();
-    require('contourclock2').drawClock(settings.fontIndex,digits);
+    require('contourclock2').drawClock(settings,digits);
     if (drawTimeout) clearTimeout(drawTimeout);
     drawTimeout = setTimeout(function() {
       drawTimeout = undefined;

@@ -23,10 +23,13 @@ exports.getDigits = function(fontIndex) {
   return { digits, fname };
 }
 
-exports.drawClock = function(fontIndex, digits) {
+exports.drawClock = function(settings, digits) {
     var x=0;
     var y = g.getHeight()/2-digits[0].height/2;
     var date = new Date();
+
+    let fn=(settings.fontindex>0);
+
     g.clearRect(0,38,g.getWidth()-1,138);
     d1=parseInt(getHours(date)/10);
     d2=parseInt(getHours(date)%10);
@@ -39,27 +42,33 @@ exports.drawClock = function(fontIndex, digits) {
     w4=digits[d4].width;
     w5=digits[d5].width;
     squeeze=(g.getWidth()-w5)/(w1+w2+w3+w4);
-    if (fontIndex<0) {
-      fg=g.theme.fg;
-      bg=g.theme.bg;
+
+    let fg=g.theme.fg;
+    let bg=g.theme.bg;
+    if (!fn) {
       g.setColor(bg);
       g.setBgColor(fg);
     }
     if (d1!=0) {
+	if (fn>0) g.setColor(settings.tensCol);
 	g.drawImage(digits[d1],x,y);
 	x+=parseInt(w1*squeeze);
     }
     else {
 	x+=parseInt(w1*squeeze)/2;
     }
+    if (fn) g.setColor(settings.digitsCol);
     g.drawImage(digits[d2],x,y);
     x+=parseInt(w2*squeeze);
+    if (fn) g.setColor(settings.dotsCol);
     g.drawImage(digits[d3],x,y);
     x+=parseInt(w3*squeeze);
+    if (fn) g.setColor(settings.tensCol);
     g.drawImage(digits[d4],x,y);
     x+=parseInt(w4*squeeze);
+    if (fn) g.setColor(settings.digitsCol);
     g.drawImage(digits[d5],x,y);
-    if (fontIndex<0) {
+    if (!fn) {
       g.setColor(fg);
       g.setBgColor(bg);
     }

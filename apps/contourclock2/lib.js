@@ -50,9 +50,9 @@ exports.drawClock = function(settings, digits) {
       g.setBgColor(fg);
     }
     if (d1!=0) {
-	    if (fn) g.setColor(settings.tensCol);
-	    g.drawImage(digits[d1],x,y);
-	    x+=parseInt(w1*squeeze);
+      if (fn) g.setColor(settings.tensCol);
+      g.drawImage(digits[d1],x,y);
+      x+=parseInt(w1*squeeze);
     }
     else {
 	    x+=parseInt(w1*squeeze)/2;

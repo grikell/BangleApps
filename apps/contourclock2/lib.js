@@ -21,14 +21,14 @@ exports.getDigits = function(fontIndex) {
   if (n!=10) return (false); //font file seems to be invalid
   let fname=font.name;
   return { digits, fname };
-}
+};
 
 exports.drawClock = function(settings, digits) {
     var x=0;
     var y = g.getHeight()/2-digits[0].height/2;
     var date = new Date();
 
-    let fn=(settings.fontindex>0);
+    let fn=(settings.fontIndex>=0);
 
     g.clearRect(0,38,g.getWidth()-1,138);
     d1=parseInt(getHours(date)/10);
@@ -50,12 +50,12 @@ exports.drawClock = function(settings, digits) {
       g.setBgColor(fg);
     }
     if (d1!=0) {
-	if (fn>0) g.setColor(settings.tensCol);
-	g.drawImage(digits[d1],x,y);
-	x+=parseInt(w1*squeeze);
+	    if (fn) g.setColor(settings.tensCol);
+	    g.drawImage(digits[d1],x,y);
+	    x+=parseInt(w1*squeeze);
     }
     else {
-	x+=parseInt(w1*squeeze)/2;
+	    x+=parseInt(w1*squeeze)/2;
     }
     if (fn) g.setColor(settings.digitsCol);
     g.drawImage(digits[d2],x,y);
@@ -68,8 +68,7 @@ exports.drawClock = function(settings, digits) {
     x+=parseInt(w4*squeeze);
     if (fn) g.setColor(settings.digitsCol);
     g.drawImage(digits[d5],x,y);
-    if (!fn) {
-      g.setColor(fg);
-      g.setBgColor(bg);
-    }
-  }
+  
+    g.setColor(fg);
+    g.setBgColor(bg);
+  };

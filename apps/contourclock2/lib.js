@@ -55,7 +55,7 @@ exports.drawClock = function(settings, digits) {
       x+=parseInt(w1*squeeze);
     }
     else {
-	    x+=parseInt(w1*squeeze)/2;
+      x+=parseInt(w1*squeeze)/2;
     }
     if (fn) g.setColor(settings.digitsCol);
     g.drawImage(digits[d2],x,y);

@@ -11,7 +11,7 @@
 */
 
 let LOG=function(){  
-// print.apply(null, arguments);
+//  print.apply(null, arguments);
 };
 
 let setngs = require('Storage').readJSON("messages_light2.settings.json", true) || {};
@@ -59,7 +59,7 @@ var manageEvent = function(event) {
   if( event.id=="call"){
       showCall(event);
   }
-  else if(event.id=="music" || (event.id=="nav" && !settings.showNav)) {
+  else if(event.id=="nav" && !settings.showNav) {
       next();
       return;
   }
@@ -213,23 +213,15 @@ let showCall = function(msg)
   //se ý una chiamata ( o una nuova chiamata, diversa dalla precedente )
   //la visualizzo
   
-  let title=msg.title, titleFont = settings.fontLarge, lines;
-  if (title) {
-    let w = g.getWidth()-48;
-    if (g.setFont(titleFont).stringWidth(title) > w)
-      titleFont = settings.fontMedium;
-    if (g.setFont(titleFont).stringWidth(title) > w) {
-      lines = g.wrapString(title, w);
-      title = (lines.length>2) ? lines.slice(0,2).join("\n")+"..." : lines.join("\n");
-    }
-  }
+  let title="Call", titleFont = settings.fontLarge, lines;
+ 
   let Layout = require("Layout");
   layout = new Layout({ type:"v", c: [
-    {type:"h", fillx:1, bgCol:settings.colHeadBg,  c: [
+    {type:"h", fillx:1, bgCol:settings.colHeadBg, col:settings.colFg,  c: [
       { type:"btn", src:require("messageicons").getImage(msg), col:require("messageicons").getColor(msg), pad: 3},
       { type:"v", fillx:1, c: [
         {type:"txt", font:settings.fontSmall, label:msg.src||/*LANG*/"Message", bgCol:settings.colHeadBg, fillx:1, pad:2, halign:1 },
-        title?{type:"txt", font:titleFont, label:title, bgCol:settings.colHeadBg, fillx:1, pad:2 }:{},
+        title?{type:"txt", font:titleFont, label:title, bgCol:settings.colHeadBg, col:settings.colFg, fillx:1, pad:2 }:{},
       ]},
     ]},
     {type:"txt", font:settings.fontMedium, label:msg.body,  fillx:1,filly:1,pad:2 ,halign:0}   
@@ -249,6 +241,7 @@ let showCall = function(msg)
   }
   g.clearRect(Bangle.appRect);
   layout.render();
+  msg.body=msg.title;
   PrintMessageStrings(msg);
   Bangle.setLCDPower(1);
   DrawLock();

@@ -28,6 +28,7 @@ exports.drawClock = function(settings, digits) {
     var y = g.getHeight()/2-digits[0].height/2;
     var date = new Date();
 
+    print(settings.fontIndex);
     let fn=(settings.fontIndex<0);
     let setcol = function(fg,bg) {
       g.setColor(fg);
@@ -53,7 +54,7 @@ exports.drawClock = function(settings, digits) {
     if (!fn) {
       setcol(bg,fg);
     }
-  
+
     if (d1!=0) {
       if (fn) setcol(bg,settings.tensCol);
       g.drawImage(digits[d1],x,y);

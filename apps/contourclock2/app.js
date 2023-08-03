@@ -4,6 +4,7 @@
   let onLock;
   let onTap;
   let onTwist;
+
   let libs=require('contourclock2');
   
   let settings = require('Storage').readJSON("contourclock2.json", true) || {};

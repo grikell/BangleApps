@@ -4,6 +4,8 @@
   let onLock;
   let onTap;
   let onTwist;
+  let libs=require('contourclock2');
+  
   let settings = require('Storage').readJSON("contourclock2.json", true) || {};
   if (settings.fontIndex == undefined) {
     settings.fontIndex = 0;
@@ -53,14 +55,14 @@
     extrasShown = false;
   };
 
-  let D = require('contourclock2').getDigits(settings.fontIndex);
+  let D = libs.getDigits(settings.fontIndex);
   let digits=D.digits;
   let draw = function() {
     let date = new Date();
     g.reset();
     if (extrasShown) drawExtras();
     else hideExtras();
-    require('contourclock2').drawClock(settings,digits);
+    libs.drawClock(settings,digits);
     if (drawTimeout) clearTimeout(drawTimeout);
     drawTimeout = setTimeout(function() {
       drawTimeout = undefined;

@@ -28,12 +28,15 @@ exports.drawClock = function(settings, digits) {
     var y = g.getHeight()/2-digits[0].height/2;
     var date = new Date();
 
-    print(settings.fontIndex);
-    let fn=(settings.fontIndex<0);
-    let setcol = function(fg,bg) {
-      g.setColor(fg);
-      g.setBgColor(bg);
+    let fg=g.theme.fg;
+    let bg=g.theme.bg;
+
+    let setcol = function(c1,c2) {
+      g.setColor(c1);
+      g.setBgColor(c2);
     };
+
+    let fn=(settings.fontIndex >= 0 );
 
     g.clearRect(0,38,g.getWidth()-1,138);
     d1=parseInt(getHours(date)/10);
@@ -48,10 +51,7 @@ exports.drawClock = function(settings, digits) {
     w5=digits[d5].width;
     squeeze=(g.getWidth()-w5)/(w1+w2+w3+w4);
 
-    let fg=g.theme.fg;
-    let bg=g.theme.bg;
-  
-    if (!fn) {
+    if (fn) {
       setcol(bg,fg);
     }
 

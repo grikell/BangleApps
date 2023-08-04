@@ -39,27 +39,27 @@ exports.drawClock = function(settings, digits) {
     let fn=(settings.fontIndex >= 0 );
 
     g.clearRect(0,38,g.getWidth()-1,138);
-    d1=parseInt(getHours(date)/10);
-    d2=parseInt(getHours(date)%10);
-    d3=10;
-    d4=parseInt(date.getMinutes()/10);
-    d5=parseInt(date.getMinutes()%10);
-    w1=digits[d1].width;
-    w2=digits[d2].width;
-    w3=digits[d3].width;
-    w4=digits[d4].width;
-    w5=digits[d5].width;
+    let d1=parseInt(getHours(date)/10);
+    let d2=parseInt(getHours(date)%10);
+    let d3=10;
+    let d4=parseInt(date.getMinutes()/10);
+    let d5=parseInt(date.getMinutes()%10);
+    let w1=digits[d1].width;
+    let w2=digits[d2].width;
+    let w3=digits[d3].width;
+    let w4=digits[d4].width;
+    let w5=digits[d5].width;
 
-    squeeze=(g.getWidth()-w5)/(w1+w2+w3+w4);
+    let squeeze=(g.getWidth()-w5)/(w1+w2+w3+w4);
 
-    x1=x;
+    let x1=x;
 
-    if (d1!=0) x2=x1+parseInt(w1*squeeze);
-    else x2=x1+parseInt(w1*squeeze)/2;
+    if (d1!=0) let x2=x1+parseInt(w1*squeeze);
+    else let x2=x1+parseInt(w1*squeeze)/2;
 
-    x3=x2+parseInt(w2*squeeze);
-    x4=x3+parseInt(w3*squeeze);
-    x5=x4+parseInt(w4*squeeze);
+    let x3=x2+parseInt(w2*squeeze);
+    let x4=x3+parseInt(w3*squeeze);
+    let x5=x4+parseInt(w4*squeeze);
 
     if (fn) setcol(bg,fg);
 

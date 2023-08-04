@@ -54,8 +54,9 @@ exports.drawClock = function(settings, digits) {
 
     let x1=x;
 
-    if (d1!=0) let x2=x1+parseInt(w1*squeeze);
-    else let x2=x1+parseInt(w1*squeeze)/2;
+    let x2;
+    if (d1!=0) x2=x1+parseInt(w1*squeeze);
+    else x2=x1+parseInt(w1*squeeze)/2;
 
     let x3=x2+parseInt(w2*squeeze);
     let x4=x3+parseInt(w3*squeeze);

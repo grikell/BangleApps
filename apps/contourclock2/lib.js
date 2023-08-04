@@ -49,31 +49,30 @@ exports.drawClock = function(settings, digits) {
     w3=digits[d3].width;
     w4=digits[d4].width;
     w5=digits[d5].width;
+
     squeeze=(g.getWidth()-w5)/(w1+w2+w3+w4);
 
-    if (fn) {
-      setcol(bg,fg);
-    }
+    x1=x;
 
-    if (d1!=0) {
-      if (fn) setcol(bg,settings.tensCol);
-      g.drawImage(digits[d1],x,y);
-      x+=parseInt(w1*squeeze);
-    }
-    else {
-      x+=parseInt(w1*squeeze)/2;
-    }
+    if (d1!=0) x2=x1+parseInt(w1*squeeze);
+    else x2=x1+parseInt(w1*squeeze)/2;
+
+    x3=x2+parseInt(w2*squeeze);
+    x4=x3+parseInt(w3*squeeze);
+    x5=x4+parseInt(w4*squeeze);
+
+    if (fn) setcol(bg,fg);
+
     if (fn) setcol(bg,settings.digitsCol);
-    g.drawImage(digits[d2],x,y);
-    x+=parseInt(w2*squeeze);
-    if (fn) setcol(bg,settings.dotsCol);
-    g.drawImage(digits[d3],x,y);
-    x+=parseInt(w3*squeeze);
+    g.drawImage(digits[d2],x2,y);
+    g.drawImage(digits[d5],x5,y);
+
     if (fn) setcol(bg,settings.tensCol);
-    g.drawImage(digits[d4],x,y);
-    x+=parseInt(w4*squeeze);
-    if (fn) setcol(bg,settings.digitsCol);
-    g.drawImage(digits[d5],x,y);
-  
+    if (d1!=0) g.drawImage(digits[d1],x1,y);
+    g.drawImage(digits[d4],x4,y);
+
+    if (fn) setcol(bg,settings.dotsCol);
+    g.drawImage(digits[d3],x3,y);
+
     setcol(fg,bg); 
   };

@@ -325,7 +325,7 @@ let PrintMessageStrings=function(msg)
 {
   let MyWrapString = function (str,maxWidth)
   {
-    str=str.replace("\r\n","\n").replace("\r","\n");
+    str=str.replace("\r\n","\n").replace("\r","\n").toUpperCase();
     return g.wrapString(str,maxWidth);
   };
 

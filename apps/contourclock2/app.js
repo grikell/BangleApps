@@ -59,12 +59,12 @@
   let D = libs.getDigits(settings.fontIndex);
   let digits=D.digits;
   let draw = function() {
+    if (drawTimeout) clearTimeout(drawTimeout);
     let date = new Date();
     g.reset();
     if (extrasShown) drawExtras();
     else hideExtras();
     libs.drawClock(settings,digits);
-    if (drawTimeout) clearTimeout(drawTimeout);
     drawTimeout = setTimeout(function() {
       drawTimeout = undefined;
       draw();

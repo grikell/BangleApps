@@ -34,12 +34,12 @@
     require("Storage").erase("contourclock-install.json");
   }
   let showExtras = function() { //show extras for a limited time
-    drawExtras();
     if (extrasTimeout) clearTimeout(extrasTimeout);
     extrasTimeout = setTimeout(() => {
       extrasTimeout = undefined;
       hideExtras();
     }, 5000);
+    drawExtras();
   };
   let drawExtras = function() { //draw date, day of the week and widgets
     let date = new Date();
@@ -60,15 +60,15 @@
   let digits=D.digits;
   let draw = function() {
     if (drawTimeout) clearTimeout(drawTimeout);
+    drawTimeout = setTimeout(function() {
+      drawTimeout = undefined;
+      draw();
+    }, 60000 - (Date.now() % 60000));
     let date = new Date();
     g.reset();
     if (extrasShown) drawExtras();
     else hideExtras();
     libs.drawClock(settings,digits);
-    drawTimeout = setTimeout(function() {
-      drawTimeout = undefined;
-      draw();
-    }, 60000 - (Date.now() % 60000));
   };
   if (settings.hideWhenLocked) {
     onLock = locked => {

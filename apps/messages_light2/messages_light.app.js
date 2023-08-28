@@ -339,9 +339,9 @@ let PrintMessageStrings=function(msg)
   {
     g.setFont(bodyFont);
     msg.lines = MyWrapString(msg.body,g.getWidth()-(Padding*2));
-    if ( msg.lines.length<=2)
+    if ( msg.lines.length<2)
     {
-      bodyFont=  g.getFonts().includes("Vector")?"Vector:40":"6x8:4";
+      bodyFont=  g.getFonts().includes("Vector")?"Vector:50":"6x8:5";
       g.setFont(bodyFont);
       msg.lines = MyWrapString(msg.body,g.getWidth()-(Padding*2));
       msg.bodyFont = bodyFont;

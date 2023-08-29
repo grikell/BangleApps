@@ -64,7 +64,7 @@ exports.drawClock = function(settings, digits) {
 
     if (fn) setcol(bg,fg);
 
-    if (setting.colTwins) {
+    if (settings.colTwins) {
 	if (fn) setcol(bg,settings.digitsCol);
 	g.drawImage(digits[d2],x2,y);
 	g.drawImage(digits[d5],x5,y);
@@ -75,12 +75,12 @@ exports.drawClock = function(settings, digits) {
     }
     else {
 	if (fn) setcol(bg,settings.digitsCol);
-	g.drawImage(digits[d4],x2,y);
+	g.drawImage(digits[d4],x4,y);
 	g.drawImage(digits[d5],x5,y);
 
 	if (fn) setcol(bg,settings.tensCol);
 	if (d1!=0) g.drawImage(digits[d1],x1,y);
-	g.drawImage(digits[d2],x4,y);
+	g.drawImage(digits[d2],x2,y);
     }
 
     if (fn) setcol(bg,settings.dotsCol);

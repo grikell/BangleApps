@@ -16,6 +16,7 @@
     settings.tapToShow = false;
     settings.twistToShow = false;
     settings.date = true;
+    settings.colTwins = true;
     settings.tensCol=g.theme.fg;
     settings.digitsCol=g.theme.fg;
     settings.dotsCol=g.theme.fg;

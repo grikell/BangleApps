@@ -35,6 +35,7 @@
     require("Storage").erase("contourclock-install.json");
   }
   let showExtras = function() { //show extras for a limited time
+    drawExtras();
     if (extrasTimeout) clearTimeout(extrasTimeout);
     extrasTimeout = setTimeout(() => {
       extrasTimeout = undefined;
@@ -44,6 +45,8 @@
   };
   let drawExtras = function() { //draw date, day of the week and widgets
     let date = new Date();
+    g.reset();
+    g.clearRect(0, 138, g.getWidth() - 1, 176);
     g.setFont("Teletext10x18Ascii").setFontAlign(0, 1);
     if (settings.weekday) g.drawString(require("locale").dow(date).toUpperCase(), g.getWidth() / 2, g.getHeight() - 18);
     if (settings.date) g.drawString(require('locale').date(date, 1), g.getWidth() / 2, g.getHeight());
@@ -56,13 +59,13 @@
     g.reset();
     g.clearRect(0, 138, g.getWidth() - 1, 176);
     require("widget_utils").hide();
-    extrasShown = false;
+    extrasShown = false; ///NEW
   };
 
   let D = libs.getDigits(settings.fontIndex);
   let digits=D.digits;
   let draw = function() {
-    if (drawTimeout) clearTimeout(drawTimeout);
+    if (drawTimeout) clearTimeout(drawTimeout); //NEW
     drawTimeout = setTimeout(function() {
       drawTimeout = undefined;
       draw();
@@ -105,7 +108,7 @@
   g.clear();
   if (settings.widgets) {
     Bangle.loadWidgets();
-    setimeout(Bangle.drawWidgets,0); //NEWT
+    setTimeout(Bangle.drawWidgets,0); //NEW
   }
   draw();
 }

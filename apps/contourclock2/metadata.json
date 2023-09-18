@@ -1,7 +1,7 @@
 { "id": "contourclock2",
   "name": "Contour Clock 2",
   "shortName" : "ConClock 2",
-  "version":"0.02",
+  "version":"0.03",
   "icon": "app.png",
   "readme": "README.md",
   "description": "A fork of Contour Clock",

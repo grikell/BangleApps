@@ -40,7 +40,7 @@
       extrasTimeout = undefined;
       hideExtras();
     }, 5000);
-    drawExtras();
+    extrasShown = false;
   };
   let drawExtras = function() { //draw date, day of the week and widgets
     let date = new Date();
@@ -52,6 +52,8 @@
   };
   let hideExtras = function() {
     if (extrasTimeout) clearTimeout(extrasTimeout);
+    extrasTimeout = undefined; //NEW
+    g.reset();
     g.clearRect(0, 138, g.getWidth() - 1, 176);
     require("widget_utils").hide();
     extrasShown = false;
@@ -93,6 +95,8 @@
       Bangle.removeListener('twist', showExtras);
       if (drawTimeout) clearTimeout(drawTimeout);
       if (extrasTimeout) clearTimeout(extrasTimeout);
+      drawTimeout = undefined;
+      extrasTimeout = undefined;
       if (settings.hideWhenLocked) require("widget_utils").show();
       g.reset();
       g.clear();
@@ -101,7 +105,7 @@
   g.clear();
   if (settings.widgets) {
     Bangle.loadWidgets();
-    Bangle.drawWidgets();
+    setimeout(Bangle.drawWidgets,0); //NEWT
   }
   draw();
 }

@@ -67,7 +67,7 @@
     g.reset();
     g.clearRect(0, 138, g.getWidth() - 1, 176);
     require("widget_utils").hide();
-    extrasShown = false; ///NEW
+   //  extrasShown = false; ///NEW
   };
 
   let D = libs.getDigits(settings.fontIndex);
@@ -109,7 +109,7 @@
       if (extrasTimeout) clearTimeout(extrasTimeout);
       drawTimeout = undefined;
       extrasTimeout = undefined;
-      if (settings.hideWhenLocked) require("widget_utils").show();
+//      if (settings.hideWhenLocked) require("widget_utils").show();
       g.reset();
       g.clear();
     }

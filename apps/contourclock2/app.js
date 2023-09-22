@@ -6,7 +6,12 @@
   let onTwist;
 
   let libs=require('contourclock2');
+
+  let LOG=function() {  
+    print.apply(null, arguments);
+  };
   
+    
   let settings = require('Storage').readJSON("contourclock2.json", true) || {};
   if (settings.fontIndex == undefined) {
     settings.fontIndex = 0;
@@ -35,6 +40,7 @@
     require("Storage").erase("contourclock-install.json");
   }
   let showExtras = function() { //show extras for a limited time
+    LOG("showExtras");
     drawExtras();
     if (extrasTimeout) clearTimeout(extrasTimeout);
     extrasTimeout = setTimeout(() => {
@@ -44,6 +50,7 @@
     extrasShown = false;
   };
   let drawExtras = function() { //draw date, day of the week and widgets
+    LOG("drawExtras");
     let date = new Date();
     g.reset();
     g.clearRect(0, 138, g.getWidth() - 1, 176);
@@ -54,6 +61,7 @@
     extrasShown = true;
   };
   let hideExtras = function() {
+    LOG("hideExtras");
     if (extrasTimeout) clearTimeout(extrasTimeout);
     extrasTimeout = undefined; //NEW
     g.reset();
@@ -65,6 +73,7 @@
   let D = libs.getDigits(settings.fontIndex);
   let digits=D.digits;
   let draw = function() {
+    LOG("draw");
     if (drawTimeout) clearTimeout(drawTimeout); //NEW
     drawTimeout = setTimeout(function() {
       drawTimeout = undefined;

@@ -47,7 +47,7 @@
       extrasTimeout = undefined;
       hideExtras();
     }, 5000);
-//    extrasShown = false;
+    extrasShown = false;
   };
   let drawExtras = function() { //draw date, day of the week and widgets
     LOG("drawExtras");
@@ -57,6 +57,7 @@
     g.setFont("Teletext10x18Ascii").setFontAlign(0, 1);
     if (settings.weekday) g.drawString(require("locale").dow(date).toUpperCase(), g.getWidth() / 2, g.getHeight() - 18);
     if (settings.date) g.drawString(require('locale').date(date, 1), g.getWidth() / 2, g.getHeight());
+    LOG("showUtils");
     require("widget_utils").show();
     extrasShown = true;
   };
@@ -66,6 +67,7 @@
     extrasTimeout = undefined; //NEW
     g.reset();
     g.clearRect(0, 138, g.getWidth() - 1, 176);
+    LOG("hideutils");
     require("widget_utils").hide();
    //  extrasShown = false; ///NEW
   };
@@ -88,9 +90,11 @@
   if (settings.hideWhenLocked) {
     onLock = locked => {
       if (!locked) {
+	LOG("showwidgets);
         require("widget_utils").show();
         drawExtras();
       } else {
+	LOG("hidewidgets);
         require("widget_utils").hide();
         hideExtras();
       }
@@ -109,7 +113,10 @@
       if (extrasTimeout) clearTimeout(extrasTimeout);
       drawTimeout = undefined;
       extrasTimeout = undefined;
-//      if (settings.hideWhenLocked) require("widget_utils").show();
+      if (settings.hideWhenLocked) {
+	LOG("hidewidgets);
+        require("widget_utils").hide();
+      }
       g.reset();
       g.clear();
     }

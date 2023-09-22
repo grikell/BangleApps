@@ -1,2 +1,2 @@
 # New Features:
-- Remove 0
+- Remove 1

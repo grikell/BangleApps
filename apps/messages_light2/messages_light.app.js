@@ -255,7 +255,7 @@ let next=function(){
   while (EventQueue.length > 0 )
   {
     LOG("in loop");
-    if (typeof EventQueue[0] !== undefined) showMessage(EventQueue[0]);
+    if (EventQueue[0]) showMessage(EventQueue[0]);
     EventQueue.shift();
   }
     LOG("no element in queue - closing");

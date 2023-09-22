@@ -90,11 +90,11 @@
   if (settings.hideWhenLocked) {
     onLock = locked => {
       if (!locked) {
-	LOG("showwidgets);
+	LOG("showwidgets");
         require("widget_utils").show();
         drawExtras();
       } else {
-	LOG("hidewidgets);
+	LOG("hidewidgets");
         require("widget_utils").hide();
         hideExtras();
       }
@@ -114,7 +114,7 @@
       drawTimeout = undefined;
       extrasTimeout = undefined;
       if (settings.hideWhenLocked) {
-	LOG("hidewidgets);
+	LOG("hidewidgets");
         require("widget_utils").hide();
       }
       g.reset();

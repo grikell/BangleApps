@@ -8,7 +8,7 @@
   let libs=require('contourclock2');
 
   let LOG=function() {  
-    print.apply(null, arguments);
+//    print.apply(null, arguments);
   };
   
     

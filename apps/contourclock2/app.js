@@ -100,7 +100,7 @@
       if (extrasTimeout) clearTimeout(extrasTimeout);
       drawTimeout = undefined;
       extrasTimeout = undefined;
-      if (settings.hideWhenLocked) require("widget_utils").show();
+//      if (settings.hideWhenLocked) require("widget_utils").show();
       g.reset();
       g.clear();
     }

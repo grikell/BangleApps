@@ -10,7 +10,7 @@
   }
 */
 
-let LOG=function(){  
+let LOG=function(){ 
 //  print.apply(null, arguments);
 };
 
@@ -70,9 +70,7 @@ var manageEvent = function(event) {
     //-----------------
     if(event.t=="add"){
         EventQueue.unshift(event);
-  
-        if(!callInProgress)
-          showMessage(event);
+        if(!callInProgress) showMessage(event);
     }
     else if(event.t=="modify"){
         //cerco l'evento nella lista, se lo trovo, lo modifico, altrimenti lo pusho
@@ -121,7 +119,6 @@ var manageEvent = function(event) {
   }
   
 };
-
 
 let showMessage = function(msg){
   LOG("showMessage");
@@ -179,7 +176,6 @@ let showMessage = function(msg){
   Bangle.setLCDPower(1);
 
   DrawLock();
-
 };
 let DrawLock=function()
 {
@@ -254,17 +250,18 @@ let next=function(){
   //se c'ý una chiamata, non shifto
   if(!callInProgress)
     EventQueue.shift();    //passa al messaggio successivo, se presente - tolgo il primo
-
   callInProgress=false; 
   LOG(EventQueue.length);
-  if( EventQueue.length == 0)
+  while (EventQueue.length > 0 )
   {
-    LOG("no element in queue - closing");
-    setTimeout(_ => load());
-    return;
+    LOG("in loop");
+    if (typeof EventQueue[0] !== undefined) showMessage(EventQueue[0]);
+    EventQueue.shift();
   }
-
-  showMessage(EventQueue[0]);
+    LOG("no element in queue - closing");
+    
+  setTimeout(_ => load());
+  return;
 };
 
 
@@ -466,6 +463,8 @@ let main = function(){
   {
     LOG("file event not found! -> ?? open debug text");
     setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification \nmessage contents  demo demo demo demo"});},0);
+    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification 2"});},3000);
+    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification 3"});},6000);
   }
   justOpened=false;
 

@@ -1,7 +1,7 @@
 {
   "id": "messages_light2",
   "name": "Messages Light2",
-  "version": "0.4",
+  "version": "0.5",
   "description": "A fork of message light",
   "icon": "app.png",
   "type": "app",

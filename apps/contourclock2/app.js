@@ -47,7 +47,7 @@
       extrasTimeout = undefined;
       hideExtras();
     }, 5000);
-    extrasShown = false;
+//    extrasShown = false;
   };
   let drawExtras = function() { //draw date, day of the week and widgets
     LOG("drawExtras");
@@ -109,7 +109,7 @@
       if (extrasTimeout) clearTimeout(extrasTimeout);
       drawTimeout = undefined;
       extrasTimeout = undefined;
-//      if (settings.hideWhenLocked) require("widget_utils").show();
+      if (settings.hideWhenLocked) require("widget_utils").show();
       g.reset();
       g.clear();
     }

@@ -69,7 +69,7 @@
     g.clearRect(0, 138, g.getWidth() - 1, 176);
     LOG("hideutils");
     require("widget_utils").hide();
-   //  extrasShown = false; ///NEW
+    extrasShown = false; ///NEW
   };
 
   let D = libs.getDigits(settings.fontIndex);

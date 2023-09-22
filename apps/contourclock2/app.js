@@ -73,7 +73,7 @@
   let D = libs.getDigits(settings.fontIndex);
   let digits=D.digits;
   let draw = function() {
-    LOG("draw");
+    LOG("draw-1");
     if (drawTimeout) clearTimeout(drawTimeout); //NEW
     drawTimeout = setTimeout(function() {
       drawTimeout = undefined;

@@ -124,7 +124,8 @@
   g.clear();
   if (settings.widgets) {
     Bangle.loadWidgets();
-    setTimeout(Bangle.drawWidgets,0); //NEW
+    // setTimeout(Bangle.drawWidgets,0); //NEW
+    Bangle.drawWidgets(); 
   }
   draw();
 }

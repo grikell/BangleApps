@@ -21,9 +21,10 @@
     settings.tapToShow = false;
     settings.twistToShow = false;
     settings.date = true;
-    settings.colTwins = true;
-    settings.tensCol=g.theme.fg;
-    settings.digitsCol=g.theme.fg;
+    settings.col1=g.theme.fg;
+    settings.col2=g.theme.fg;
+    settings.col3=g.theme.fg;
+    settings.col4=g.theme.fg;
     settings.dotsCol=g.theme.fg;
     require('Storage').writeJSON("contourclock2.json", settings);
   }

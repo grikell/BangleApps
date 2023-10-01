@@ -10,8 +10,10 @@
     settings.hideWhenLocked=false;
     settings.tapToShow=false;
     settings.twistToShow=false;
-    settings.tensCol="#fff";
-    settings.digitsCol="#fff";
+    settings.col1="#fff";
+    settings.col2="#fff";
+    settings.col3="#fff";
+    settings.col4="#fff";
     settings.dotsCol="#fff";
     require('Storage').writeJSON("contourclock2.json", settings);
   }
@@ -47,17 +49,29 @@
         value: (settings.twistToShow !== undefined ? settings.twistToShow : false),
         onchange : v => {settings.twistToShow=v; require('Storage').writeJSON('contourclock2.json', settings);}
       },
-      'Tens Color': {
-        value: color_code.indexOf(settings.tensCol),
+      '1st Digit': {
+        value: color_code.indexOf(settings.col1),
         min:0, max:7,
         format: v => color_options[v],
-        onchange: v => {settings.tensCol=color_code[v]; require('Storage').writeJSON('contourclock2.json', settings);}
+        onchange: v => {settings.col1=color_code[v]; require('Storage').writeJSON('contourclock2.json', settings);}
       },
-      'Digits Color': {
-        value: color_code.indexOf(settings.digitsCol),
+      '2nd Digit': {
+        value: color_code.indexOf(settings.col2),
         min:0, max:7,
         format: v => color_options[v],
-        onchange: v => {settings.digitsCol=color_code[v]; require('Storage').writeJSON('contourclock2.json', settings);}
+        onchange: v => {settings.col2=color_code[v]; require('Storage').writeJSON('contourclock2.json', settings);}
+      },
+      '3rd Digit': {
+        value: color_code.indexOf(settings.col3),
+        min:0, max:7,
+        format: v => color_options[v],
+        onchange: v => {settings.col3=color_code[v]; require('Storage').writeJSON('contourclock2.json', settings);}
+      },
+      '4th Digit': {
+        value: color_code.indexOf(settings.col4),
+        min:0, max:7,
+        format: v => color_options[v],
+        onchange: v => {settings.col4=color_code[v]; require('Storage').writeJSON('contourclock2.json', settings);}
       },
       'Dots Color': {
         value: color_code.indexOf(settings.dotsCol),

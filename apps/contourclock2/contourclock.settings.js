@@ -6,7 +6,6 @@
     settings.widgets=true;
     settings.weekday=true;
     settings.date=true;
-    settings.colTwins=true;
     settings.hideWhenLocked=false;
     settings.tapToShow=false;
     settings.twistToShow=false;
@@ -78,10 +77,6 @@
         min:0, max:7,
         format: v => color_options[v],
         onchange: v => {settings.dotsCol=color_code[v]; require('Storage').writeJSON('contourclock2.json', settings);}
-      },
-      'Color Twins': {
-        value: (settings.colTwins !== undefined ? settings.colTwins : false),
-        onchange : v => {settings.colTwins=v; require('Storage').writeJSON('contourclock2.json', settings);}
       },
       'set Font': () => fontMenu() 
     });

@@ -63,12 +63,18 @@ exports.drawClock = function(settings, digits) {
     let x5=x4+parseInt(w4*squeeze);
 
     if (fn) setcol(bg,fg);
+    let c1=settings.col1;
+    let c2;
     if (d1!=0) {
-	if (fn) setcol(bg,settings.col1);
-	g.drawImage(digits[d1],x1,y);
+	    if (fn) setcol(bg,c1);
+	    g.drawImage(digits[d1],x1,y);
+      c2=settings.col2;
+    }
+    else {
+      c2=c1;
     }
 
-    if (fn) setcol(bg,settings.col2);
+    if (fn) setcol(bg,c2);
     g.drawImage(digits[d2],x2,y);
     if (fn) setcol(bg,settings.col3);
     g.drawImage(digits[d4],x4,y);

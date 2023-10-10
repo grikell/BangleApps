@@ -17,7 +17,7 @@ exports.getDigits = function(fontIndex) {
       bpp: 2,
       transparent: 1,
       buffer:E.toArrayBuffer(atob(font.characters[n].buffer))});
-    }
+  }
   if (n!=10) return (false); //font file seems to be invalid
   let fname=font.name;
   return { digits, fname };
@@ -66,8 +66,8 @@ exports.drawClock = function(settings, digits) {
     let c1=settings.col1;
     let c2;
     if (d1!=0) {
-	    if (fn) setcol(bg,c1);
-	    g.drawImage(digits[d1],x1,y);
+      if (fn) setcol(bg,c1);
+      g.drawImage(digits[d1],x1,y);
       c2=settings.col2;
     }
     else {

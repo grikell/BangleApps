@@ -17,8 +17,8 @@
     require('Storage').writeJSON("contourclock2.json", settings);
   }
 
-  let color_options = ['Green', 'Orange', 'Cyan', 'Purple', 'Red', 'Blue', 'Black', 'White'];
-  let color_code = ['#0f0', '#ff0', '#0ff', '#f0f', '#f00', '#00f', '#000', '#fff'];
+  let color_options = ['Green', 'Orange', 'Cyan', 'Gray', 'Red', 'Blue', 'Black', 'White'];
+  let color_code = ['#0f0', '#ff0', '#0ff', '#555', '#f00', '#00f', '#000', '#fff'];
 
   function mainMenu() {
     E.showMenu({

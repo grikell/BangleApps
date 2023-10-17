@@ -18,7 +18,7 @@
   }
 
   let color_options = ['Green', 'Orange', 'Cyan', 'Gray', 'Red', 'Blue', 'Black', 'White'];
-  let color_code = ['#0f0', '#ff0', '#0ff', '#555', '#f00', '#00f', '#000', '#fff'];
+  let color_code = ['#0f0', '#ff0', '#0ff', '#888', '#f00', '#00f', '#000', '#fff'];
 
   function mainMenu() {
     E.showMenu({

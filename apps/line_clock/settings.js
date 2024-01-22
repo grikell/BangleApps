@@ -41,7 +41,7 @@
             value: color_code.indexOf(settings.handColor),
             min:0, max:7,
             format: v => color_options[v],
-            onchange: () => {
+            onchange: v => {
                 settings.handColor = color_code[v];
                 save();
             },

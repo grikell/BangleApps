@@ -36,7 +36,8 @@
           settings.showMinute = !settings.showMinute;
           save();
         },
-        'Hand Color': {
+      },
+      'Hand Color': {
             value: color_code.indexOf(settings.handColor),
             min:0, max:7,
             format: v => color_options[v],

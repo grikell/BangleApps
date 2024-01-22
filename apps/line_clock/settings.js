@@ -44,6 +44,7 @@
             onchange: (v) => {
                 settings.handColor = color_code[v];
                 save();
+                showMenu();
             },
         }
     });

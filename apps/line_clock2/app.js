@@ -11,7 +11,7 @@ const numberSize = 22;
 
 const storage = require('Storage');
 
-const SETTINGS_FILE = "line_clock.setting.json";
+const SETTINGS_FILE = "line_clock2.setting.json";
 
 let initialSettings = {
   showLock: true,

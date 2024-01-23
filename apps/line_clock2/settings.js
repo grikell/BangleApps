@@ -6,6 +6,7 @@
     let settings = {
       showLock: true,
       showMinute: true,
+      invertMinute: false,
       handColor: '#f00',
     };
     let saved_settings = storage.readJSON(SETTINGS_FILE, 1) || settings;
@@ -34,6 +35,13 @@
         value: settings.showMinute,
         onchange: () => {
           settings.showMinute = !settings.showMinute;
+          save();
+        },
+      },
+      'Invert Minute': {
+        value: settings.invertMinute,
+        onchange: () => {
+          settings.invertMinute = !settings.invertMinute;
           save();
         },
       },

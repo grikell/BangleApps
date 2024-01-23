@@ -16,6 +16,7 @@ const SETTINGS_FILE = "line_clock.setting.json";
 let initialSettings = {
   showLock: true,
   showMinute: true,
+  invertMinute: false,
   handColor: '#f00',
 };
 
@@ -190,9 +191,11 @@ function drawNumber(n) {
   );
   g.setColor(initialSettings.handColor);
   g.fillCircle(rotatedPoints[0], rotatedPoints[1], numberSize+ halfWidth);
-  g.setColor(g.theme.bg);
+  if (initialSettings.invertMinute) g.setColor(g.theme.fg);
+  else g.setColor(g.theme.bg);
   g.fillCircle(rotatedPoints[0], rotatedPoints[1], numberSize - halfWidth);
-  g.setColor(g.theme.fg);
+  if (initialSettings.invertMinute) g.setColor(g.theme.bg);
+  else g.setColor(g.theme.fg);
   g.setFont("Vector:"+numberSize);
   g.drawString(String(n), rotatedPoints[0]+2, rotatedPoints[1]+2);
 }

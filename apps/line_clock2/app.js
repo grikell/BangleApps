@@ -16,6 +16,7 @@ const SETTINGS_FILE = "line_clock.setting.json";
 let initialSettings = {
   showLock: true,
   showMinute: true,
+  handColor: '#f00',
 };
 
 let saved_settings = storage.readJSON(SETTINGS_FILE, 1) || initialSettings;
@@ -95,7 +96,7 @@ function rotatePoints(points, angle, rad) {
  * @returns {void}
  */
 function drawHand() {
-  g.setColor(0xF800);
+  g.setColor(initialSettings.handColor);
   const halfWidth = handWidth / 2;
 
   const points = [{
@@ -187,13 +188,13 @@ function drawNumber(n) {
       y: -h + hourLength + numberOffset
     }], hourAngle, radius
   );
-  g.setColor(0xF800);
+  g.setColor(initialSettings.handColor);
   g.fillCircle(rotatedPoints[0], rotatedPoints[1], numberSize+ halfWidth);
   g.setColor(g.theme.bg);
   g.fillCircle(rotatedPoints[0], rotatedPoints[1], numberSize - halfWidth);
   g.setColor(g.theme.fg);
   g.setFont("Vector:"+numberSize);
-  g.drawString(String(n), rotatedPoints[0], rotatedPoints[1]);
+  g.drawString(String(n), rotatedPoints[0]+2, rotatedPoints[1]+2);
 }
 
 const hourPoints = getHourCoordinates(false);

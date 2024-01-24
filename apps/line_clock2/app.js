@@ -293,7 +293,6 @@
   
   g.clear();
   Bangle.loadWidgets();
-  Bangle.drawWidgets();
   require("widget_utils").hide();
   Bangle.on('lock', lockListenerBw);
 

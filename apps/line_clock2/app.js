@@ -272,7 +272,12 @@ function draw() {
   g.fillRect(0, 0, gWidth, gHeight);
 
   if(initialSettings.showLock && Bangle.isLocked()){
-    g.setColor(g.theme.fg);
+    if (NRF.getSecurityStatus().connected) {
+       g.setColor(initialSettings.handColor);
+    }
+    else {
+        g.setColor(g.theme.fg);
+    }
     g.drawImage(imgLock(), gWidth-16, 2);
   }
 

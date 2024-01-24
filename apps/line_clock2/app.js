@@ -247,16 +247,6 @@
     draw();
   };
 
-  Bangle.on('lock', lockListenerBw);
-
-  Bangle.setUI({
-    mode: "clock",
-    remove: function() {
-      Bangle.removeListener('lock', lockListenerBw);
-      if (drawTimeout) clearTimeout(drawTimeout);
-      drawTimeout = undefined;
-    }
-  });
 
   /**
    * Draws a clock on the canvas using the current time.
@@ -301,7 +291,22 @@
     }
   };
   
+  g.clear();
   Bangle.loadWidgets();
+  Bangle.drawWidgets();
   require("widget_utils").hide();
+  Bangle.on('lock', lockListenerBw);
+
+  Bangle.setUI({
+    mode: "clock",
+    remove: function() {
+      Bangle.removeListener('lock', lockListenerBw);
+      if (drawTimeout) clearTimeout(drawTimeout);
+      drawTimeout = undefined;
+      g.clear();
+      require("widget_utils").show();
+    }
+  });
+  
   draw();
 }

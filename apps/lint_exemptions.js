@@ -996,12 +996,6 @@ module.exports = {
       "no-undef"
     ]
   },
-  "launch/app.js": {
-    "hash": "7d5b7d7f2adbe4c8c137f76b6560a06437ab142cfeffb3f0ff261f1250a6b687",
-    "rules": [
-      "no-undef"
-    ]
-  },
   "kitchen/stepo2.kit.js": {
     "hash": "b7660bef1a2560f23ff696b03d297cdd39936ca61c01b3d0a316d49f9cf72590",
     "rules": [
@@ -1473,6 +1467,12 @@ module.exports = {
     "rules": [
       "no-undef",
       "no-unused-vars",
+      "no-cond-assign"
+    ]
+  },
+  "kineticscroll/boot.min.js": {
+    "hash": "a5106fa601cdbd2179e32265a8b77e2df62ba44ca0f4b94ce1e594c95a47e20d",
+    "rules": [
       "no-cond-assign"
     ]
   }

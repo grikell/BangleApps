@@ -666,12 +666,6 @@ module.exports = {
       "no-undef"
     ]
   },
-  "taglaunch/app.js": {
-    "hash": "944689f0600e59bbe4d9e5e2684baeefabe4457a6edd938aae451dc4cd659ad3",
-    "rules": [
-      "no-undef"
-    ]
-  },
   "tabanchi/app.js": {
     "hash": "6ad6dc1d6b0f539f9f659d5773b5a26d19eb6dacafe7b4682469e6f3c412647e",
     "rules": [
@@ -794,12 +788,6 @@ module.exports = {
   },
   "regattatimer/app.js": {
     "hash": "8d579cc62d82599f776e5e230651f03481f18c3934f35f4fedfb6382a46db861",
-    "rules": [
-      "no-undef"
-    ]
-  },
-  "ratchet_launch/app.js": {
-    "hash": "592d432301d7836aa54e288d465ae8952ecb891d628f824ea9f62479a2a01631",
     "rules": [
       "no-undef"
     ]
@@ -1068,12 +1056,6 @@ module.exports = {
       "no-undef"
     ]
   },
-  "hrm/heartrate.js": {
-    "hash": "beb8e433f10d3639b343b060f0d5583ea665445f92b2171daff7612eaf135596",
-    "rules": [
-      "no-undef"
-    ]
-  },
   "hebrew_calendar/app.js": {
     "hash": "3077d581b9fcf73816e265e61105a0692356b89e8ed41a82be51960ae26fc8de",
     "rules": [
@@ -1082,12 +1064,6 @@ module.exports = {
   },
   "heartzone/app.js": {
     "hash": "0eab7e375ba25992b335a2589f80ce341b830cf0ae206c21eec664883f4e7de0",
-    "rules": [
-      "no-undef"
-    ]
-  },
-  "health/app.js": {
-    "hash": "6d612eed04ee5a844be6ad47c326624cd3e204fecf1c28c99a57ca963b3d7a7b",
     "rules": [
       "no-undef"
     ]

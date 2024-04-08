@@ -296,7 +296,7 @@ Bangle.on('lock', function(isLocked) {
     draw();  
 });
 
-Bangle.on('kill', function(isLocked) {
+Bangle.on('kill', function() {
     settings.offset = -zero;
     settings.filt = filt;
     settings.delta = delta;
@@ -304,7 +304,7 @@ Bangle.on('kill', function(isLocked) {
     settings.avrlen = avrlen;
     settings.uphill = ascent;
     settings.downhill = descent;
-    require('Storage').write('alticlock.json', settings);S
+    require('Storage').write('alticlock.json', settings);
 });
 
 setWatch(function() {
@@ -315,7 +315,7 @@ setWatch(function() {
 //Bangle.loadWidgets();
 
 Bangle.setUI("clockupdown", btn=> {
-  console.log(zero);
+//  console.log(zero);
   if (btn<0) zero -= 5;
   if (btn>0) zero +=5;
   drawalt(true);

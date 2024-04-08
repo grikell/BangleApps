@@ -19,7 +19,6 @@
     '< Back': back,
     'Reset Up/Down' : {
       value : false,
-      format : v => v ? "No":"Yes",
       onchange : (m) => {save('downhill',0); save('uphill',0);}
     },
     'Offset': {

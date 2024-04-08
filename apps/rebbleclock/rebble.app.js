@@ -130,8 +130,19 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
     return (Math.round(E.sum(avr) / avr.length));
   };
   
-  let minBattery = function() {
-    return (Math.min(avr));
+  let meanBattery = function() {
+    const mid = Math.floor(avr.length / 2);
+    const sortedArr = avr.sort((a, b) => a - b);
+ 
+   if (avr.length % 2 === 0) {
+      return (sortedArr[mid - 1] + sortedArr[mid]) / 2;
+   } else {
+      return sortedArr[mid];
+   }
+}
+    
+    
+    return (Math.(avr));
   };
 
   
@@ -219,7 +230,8 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
     setTextColor();
     g.setFont('Vector', 20);
     g.setFontAlign(0, -1);
-    g.drawString(avgBattery() + '%', w3, (h / 10) + 17 + 7);
+    // g.drawString(avgBattery() + '%', w3, (h / 10) + 17 + 7);
+    g.drawString(meanBattery() + '%', w3, (h / 10) + 17 + 7);
 
     drawDateAndCalendar(w3, h / 2, dy, dd, mm);
     drawBluetooth(w3, by1);
@@ -308,7 +320,7 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
     g.setColor(g.theme.fg);
     g.fillRect(x + wi - 3, y + 2 + (((hi - 1) / 2) - 1), x + wi - 2, y + 2 + (((hi - 1) / 2) - 1) + 4); // contact
 //    g.fillRect(x + 3, y + 5, x + 4 + avgBattery() * (wi - 12) / 100, y + hi - 1); // the level
-    g.fillRect(x + 3, y + 5, x + 4 + minBattery() * (wi - 12) / 100, y + hi - 1); // the level
+    g.fillRect(x + 3, y + 5, x + 4 + meanBattery() * (wi - 12) / 100, y + hi - 1); // the level
 
     if (Bangle.isCharging()) {
       g.setBgColor(settings.bg);

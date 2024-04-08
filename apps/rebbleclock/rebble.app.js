@@ -140,12 +140,7 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
       return sortedArr[mid];
    }
 }
-    
-    
-    return (Math.(avr));
-  };
 
-  
   let getBattery = function() {
     let value = E.getBattery();
     while (avr.length > MEDIANLENGTH) avr.pop();

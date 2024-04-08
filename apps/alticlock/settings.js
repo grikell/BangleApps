@@ -6,6 +6,8 @@
   if (typeof settings.delta !== "number") settings.delta=1;   
   if (typeof settings.timeint !== "number") settings.timeint=5;
   if (typeof settings.avrlen !== "number") settings.avrlen=2;
+  if (typeof settings.uphill !== "number") settings.uphill=0;
+  if (typeof settings.downhill !== "number") settings.downhill=0;
 
   function save(key, value) {
     settings[key] = value;
@@ -15,6 +17,11 @@
   const appMenu = {
     '': {'title': 'App Settings'},
     '< Back': back,
+    'Reset Up/Down' : {
+      value : false,
+      format : v => v ? "No":"Yes",
+      onchange : (m) => {save('downhill',0); save('uphill',0);}
+    },
     'Offset': {
       value: settings.offset,
       min: -200,

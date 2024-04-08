@@ -28,6 +28,8 @@ if (typeof settings.filt == "boolean") filt=settings.filt;
 if (typeof settings.delta == "number") delta=settings.delta;
 if (typeof settings.timeint == "number") timeint=settings.timeint*1000;
 if (typeof settings.avrlen == "number") avrlen=settings.avrlen;
+if (typeof settings.uphill == "number") ascent=settings.uphill;
+if (typeof settings.downhill == "number") descent=settings.downhill;
 
 
 /*kalmanjs, Wouter Bulten, MIT, https://github.com/wouterbulten/kalmanjs */
@@ -292,6 +294,17 @@ Bangle.on('lock', function(isLocked) {
     if (mInterval) clearInterval(mInterval);
     mInterval = setInterval(draw, INTERVAL);
     draw();  
+});
+
+Bangle.on('kill', function(isLocked) {
+    settings.offset = -zero;
+    settings.filt = filt;
+    settings.delta = delta;
+    settings.timeint = timeint/1000;
+    settings.avrlen = avrlen;
+    settings.uphill = ascent;
+    settings.downhill = descent;
+    require('Storage').write('alticlock.json', settings);S
 });
 
 setWatch(function() {

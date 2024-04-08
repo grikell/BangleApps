@@ -1,6 +1,6 @@
 { "id": "alticlock",
   "name": "AltiClock",
-  "version":"0.09",
+  "version":"0.10",
   "description": "Simple altimeter plus clock and Total Ascent/Descent.",
   "icon": "app.png",  
   "type": "clock",

@@ -296,7 +296,7 @@ Bangle.on('lock', function(isLocked) {
     draw();  
 });
 
-Bangle.on('kill', function() {
+E.on('kill', function() {
     settings.offset = -zero;
     settings.filt = filt;
     settings.delta = delta;

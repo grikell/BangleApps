@@ -5,11 +5,12 @@
     'Colour': 'C',
     'Invert': false,
     'Animate': false
+    'hideWhenLocked': false
   };
   let settings = storage.readJSON(SETTINGS_FILE, 1) || localSettings;
 
-  let color_options = ['Green', 'Orange', 'Cyan', 'Purple', 'Red', 'Blue', 'Black', 'White', 'Cycle'];
-  let color_code = ['#0f0', '#ff0', '#0ff', '#f0f', '#f00', '#00f', '#000', '#fff', 'C'];
+  let color_options = ['Green', 'Orange', 'Cyan', 'Purple', 'Red', 'Blue', 'Black', 'White', 'Gray', 'Cycle'];
+  let color_code =    ['#0f0',  '#ff0',   '#0ff', '#f0f',   '#f00','#00f', '#000',  '#fff',  '#888', 'C'];
 
   function save(key, value) {
     settings[key] = value;
@@ -34,6 +35,12 @@
         value: !!settings.Animate,
         format: () => (settings.Animate ? 'Yes' : 'No'),
         onchange: x => save('Animate', x),
+      },
+      /*LANG*/
+      'Hide Locked': {
+        value: !!settings.hideWhenLocked,
+        format: () => (settings.hideWhenLocked ? 'Yes' : 'No'),
+        onchange: x => save('hideWhenLocked', x),
       },
       /*LANG*/
       'Invert': {

@@ -19,8 +19,7 @@
   let localSettings = {
     'Colour': 'C',
     'Invert': false,
-    'Animate': false,
-    'hideWhenLocked': true
+    'Animate': false
   };
   let settings = storage.readJSON("slopeclock2.json", 1) || localSettings;
 
@@ -132,7 +131,7 @@
       if (callback) callback();
       else {
         drawMinute();
-        if (!settings.hideWhenLocked) drawdate();
+        drawdate();
       }
     } else {
       if (animInterval) clearInterval(animInterval);
@@ -172,34 +171,6 @@
       }, 10);
     }
   };
-
-  let drawExtras = function() { //draw date, day of the week and widgets
-    g.reset();
-    g.clearRect(R.x,R.y+R.h-20,R.x+R.w,R.y+R.h);
-    drawdate();
-    require("widget_utils").show();
-  };
-  let hideExtras = function() {
-    g.reset();
-    g.clearRect(R.x,R.y+R.h-20,R.x+R.w,R.y+R.h);
-    require("widget_utils").hide();
-  };
-
-
-  if (settings.hideWhenLocked) {
-    onLock = locked => {
-      if (!locked) {
-        console.log("drawing");
-        require("widget_utils").show();
-        drawExtras();
-      } else {
-        console.log("erasing");
-        require("widget_utils").hide();
-        hideExtras();
-      }
-    };
-    Bangle.on('lock', onLock);
-  }
 
 
   // Show launcher when middle button pressed

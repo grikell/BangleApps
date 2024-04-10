@@ -71,7 +71,7 @@
 
     R = Bangle.appRect;
     x = R.w / 2;
-    y = R.y + R.h / 2 - 12; // 12 = room for date
+    y = R.y + R.h / 2 - 9; // room for date
     var date = new Date();
     var local_time = require("locale").time(date, 1);
     var hourStr = local_time.split(":")[0].trim().padStart(2, '0');
@@ -189,9 +189,11 @@
   if (settings.hideWhenLocked) {
     onLock = locked => {
       if (!locked) {
+        console.log("drawing");
         require("widget_utils").show();
         drawExtras();
       } else {
+        console.log("erasing");
         require("widget_utils").hide();
         hideExtras();
       }
@@ -215,5 +217,5 @@
   // Load widgets
   Bangle.loadWidgets();
   draw();
-  setTimeout(Bangle.drawWidgets, 0);
+  if (!(Bangle.isLocked() && settings.hideWhenLocked)) setTimeout(Bangle.drawWidgets, 0);
 }

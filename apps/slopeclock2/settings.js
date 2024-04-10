@@ -4,7 +4,7 @@
   let localSettings = {
     'Colour': 'C',
     'Invert': false,
-    'Animate': false
+    'Animate': false,
     'hideWhenLocked': false
   };
   let settings = storage.readJSON(SETTINGS_FILE, 1) || localSettings;

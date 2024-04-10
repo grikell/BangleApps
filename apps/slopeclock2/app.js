@@ -85,7 +85,7 @@
     g.setFontAlign(-1, 0).setFont("PaytoneOne");
     g.drawString(hourStr, fontBorder, y - offsy).setFont("4x6"); // draw and unload custom font
     // add slope in background color
-    g.setColor("#7f7f7f").fillPoly([0, y + slope - slopeBorderUpper, R.w, y - slope - slopeBorderUpper,
+    g.setColor("#444").fillPoly([0, y + slope - slopeBorderUpper, R.w, y - slope - slopeBorderUpper,
       R.w, y - slope, 0, y + slope
     ]);
     // Draw minute to offscreen buffer
@@ -132,7 +132,7 @@
       if (callback) callback();
       else {
         drawMinute();
-        if (!settings.hideWhenLocked) drawdate();
+        if (!(Bangle.isLocked() && settings.hideWhenLocked)) drawdate();
       }
     } else {
       if (animInterval) clearInterval(animInterval);
@@ -166,7 +166,7 @@
         if (stop) {
           clearInterval(animInterval);
           animInterval = undefined;
-          if (isAnimIn) drawdate();
+          if (isAnimIn && !(Bangle.isLocked() && settings.hideWhenLocked)) drawdate();
           if (callback) callback();
         }
       }, 10);
@@ -175,13 +175,13 @@
 
   let drawExtras = function() { //draw date, day of the week and widgets
     g.reset();
-    g.clearRect(R.x,R.y+R.h-20,R.x+R.w,R.y+R.h);
+    g.setColor(bgColor).fillRect(R.x,R.y+R.h-20,R.x+R.w,R.y+R.h);
     drawdate();
     require("widget_utils").show();
   };
   let hideExtras = function() {
     g.reset();
-    g.clearRect(R.x,R.y+R.h-20,R.x+R.w,R.y+R.h);
+    g.setColor(bgColor).fillRect(R.x,R.y+R.h-20,R.x+R.w,R.y+R.h);
     require("widget_utils").hide();
   };
 

@@ -52,6 +52,7 @@
 
   let anim = settings.Animate;
   // Draw the hour, and the minute into an offscreen buffer
+
   let draw = function() {
 
     if (autoCycle) {
@@ -69,9 +70,7 @@
       fgColor = settings.Colour;
     }
 
-    R = Bangle.appRect;
-    x = R.w / 2;
-    y = R.y + R.h / 2 - 9; // room for date
+
     var date = new Date();
     var local_time = require("locale").time(date, 1);
     var hourStr = local_time.split(":")[0].trim().padStart(2, '0');
@@ -189,12 +188,10 @@
   if (settings.hideWhenLocked) {
     onLock = locked => {
       if (!locked) {
-        console.log("drawing");
-        require("widget_utils").show();
+//        console.log("drawing");
         drawExtras();
       } else {
-        console.log("erasing");
-        require("widget_utils").hide();
+//        console.log("erasing");
         hideExtras();
       }
     };
@@ -216,6 +213,12 @@
   });
   // Load widgets
   Bangle.loadWidgets();
+  
+  R = Bangle.appRect;
+  x = R.w / 2;
+  y = R.y + R.h / 2 - 9 ; // room for date
+  
+  setTimeout(Bangle.drawWidgets, 0);
   draw();
-  if (!(Bangle.isLocked() && settings.hideWhenLocked)) setTimeout(Bangle.drawWidgets, 0);
+//  if (Bangle.isLocked() && settings.hideWhenLocked) hideExtras(); 
 }

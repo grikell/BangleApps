@@ -189,11 +189,9 @@
   if (settings.hideWhenLocked) {
     onLock = locked => {
       if (!locked) {
-        console.log("drawing");
         require("widget_utils").show();
         drawExtras();
       } else {
-        console.log("erasing");
         require("widget_utils").hide();
         hideExtras();
       }

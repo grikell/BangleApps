@@ -51,9 +51,9 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
     y += 60;
     g.clearRect(0,y-10,g.getWidth(),y+10); // clear the background
     if (c) {
-	g.setColor(dateCol);
-	g.setFontAlign(0,0).setFont("Vector20");
-	g.drawString(dateStr.toUpperCase(),x,y);
+    g.setColor(dateCol);
+    g.setFontAlign(0,0).setFont("Vector20");
+    g.drawString(dateStr.toUpperCase(),x,y);
     }
     // queue draw in one minute
     queueDraw(c);
@@ -61,19 +61,19 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
 
   let updateState=function() {
     if (Bangle.isLCDOn()) {
-	if (settings.hideWhenLocked) {
-	    if (Bangle.isLocked()) {
-		require("widget_utils").hide();
-		draw(false);
-	    }
-	    else {
-		require("widget_utils").show();
-		draw(true);
-	    }
-	}
-	else {
-	    draw(true);
-	}
+    if (settings.hideWhenLocked) {
+        if (Bangle.isLocked()) {
+        require("widget_utils").hide();
+        draw(false);
+        }
+        else {
+        require("widget_utils").show();
+        draw(true);
+        }
+    }
+    else {
+        draw(true);
+    }
     } else { // stop draw timer
       if (drawTimeout) clearTimeout(drawTimeout);
       drawTimeout = undefined;

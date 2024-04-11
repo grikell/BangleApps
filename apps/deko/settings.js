@@ -6,11 +6,11 @@
 
   let localSettings = {
     'hideWhenLocked': false,
-    'timeCol'=color_options[0],   
-    'dateCol'=color_options[0]
+    'timeCol':color_options[0],
+    'dateCol':color_options[0]
   };
 
-  let settings = require('Storage').readJSON('deko.json',1)|| localSettings;{};
+  let settings = require('Storage').readJSON('deko.json',1)|| localSettings;
 
 
   function save(key, value) {

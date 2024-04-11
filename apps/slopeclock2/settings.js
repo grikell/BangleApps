@@ -2,7 +2,8 @@
   const SETTINGS_FILE = "slopeclock2.json";
   const storage = require('Storage');
   let localSettings = {
-    'Colour': 'C',
+    'ColourM': 'C',
+    'ColourH': 'White',
     'Invert': false,
     'Animate': false,
     'hideWhenLocked': false
@@ -24,11 +25,17 @@
       },      
       '< Back': back,
       /*LANG*/
-      'Colour': {
+      'Hour Colour': {
         value: color_code.indexOf(settings.Colour),
         min:0, max:8,
         format: v => color_options[v],
-        onchange: v => save('Colour', color_code[v]),
+        onchange: v => save('ColourH', color_code[v]),
+      },
+      'Minute Colour': {
+        value: color_code.indexOf(settings.Colour),
+        min:0, max:8,
+        format: v => color_options[v],
+        onchange: v => save('ColourM', color_code[v]),
       },
       /*LANG*/
       'Animate': {

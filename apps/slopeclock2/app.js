@@ -17,7 +17,8 @@
   let drawTimeout;
   const storage = require('Storage');
   let localSettings = {
-    'Colour': 'C',
+    'ColourH': '#fff',
+    'ColourC': 'C',
     'Invert': false,
     'Animate': false,
     'hideWhenLocked': true
@@ -67,7 +68,7 @@
       //      print(fgColor,bgColor);
       rndm = (rndm + 1) % bgColors.length;
     } else {
-      fgColor = settings.Colour;
+      fgColor = settings.ColourM;
     }
 
 
@@ -82,7 +83,7 @@
     g.reset();
     g.clearRect(R); // clear whole background (w/o widgets)
     g.setFontAlign(-1, 0).setFont("PaytoneOne");
-    g.drawString(hourStr, fontBorder, y - offsy).setFont("4x6"); // draw and unload custom font
+    g.setColor(settings.ColourH).drawString(hourStr, fontBorder, y - offsy).setFont("4x6"); // draw and unload custom font
     // add slope in background color
     g.setColor("#444").fillPoly([0, y + slope - slopeBorderUpper, R.w, y - slope - slopeBorderUpper,
       R.w, y - slope, 0, y + slope

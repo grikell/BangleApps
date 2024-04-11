@@ -15,12 +15,16 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
 
   let localSettings = {
     'hideWhenLocked': false,
-    'timeCol':0,   
-    'dateCol':0
+    'timeCol': 'White', 
+    'dateCol':'White'
   };
-
+  
   let settings = require('Storage').readJSON('deko.json',1)|| localSettings;
 
+  let timeCol=col_code[color_options.indexOf(settings.timeCol)];
+  let dateCol=col_code[color_options.indexOf(settings.dateCol)];
+
+  
   // timeout used to update every minute
   let drawTimeout;
 

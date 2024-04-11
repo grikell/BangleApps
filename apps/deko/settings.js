@@ -4,9 +4,13 @@
   let color_options = ['White', 'Green','Orange','Cyan','Purple','Red','Blue','Black'];
   let nc=color_options.length-1;
 
-  let settings = require('Storage').readJSON('deko.json',1)||{};
-  if (typeof settings.timeCol !== "string") settings.timeCol=color_options[0];   
-  if (typeof settings.dateCol !== "string") settings.dateCol=color_options[0];
+  let localSettings = {
+    'hideWhenLocked': false,
+    'timeCol'=color_options[0],   
+    'dateCol'=color_options[0]
+  };
+
+  let settings = require('Storage').readJSON('deko.json',1)|| localSettings;{};
 
 
   function save(key, value) {
@@ -34,6 +38,11 @@
           settings.dateCol = color_options[v];
           save();
         }
+    },
+    'Hide Locked': {
+	value: !!settings.hideWhenLocked,
+	format: () => (settings.hideWhenLocked ? 'Yes' : 'No'),
+	onchange: x => save('hideWhenLocked', x),
     }
   };
   E.showMenu(appMenu);

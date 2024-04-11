@@ -1,7 +1,7 @@
 {
   "id": "deko",
   "name": "Deko Clock",
-  "version": "0.05",
+  "version": "0.06",
   "description": "Clock with Art Deko font",
   "readme": "README.md",
   "icon": "app.png",

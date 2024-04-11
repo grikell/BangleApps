@@ -13,27 +13,28 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
   let color_options = ['White', 'Green','Orange','Cyan','Purple','Red','Blue','Black'];
   let col_code = ['#fff', '#0f0','#ff0','#0ff','#f0f','#f00','#00f','#000'];
 
-  let timeCol='#00f';
-  let dateCol='#00f';
+  let localSettings = {
+    'hideWhenLocked': false,
+    'timeCol'=0,   
+    'dateCol'=0
+  };
 
-  let settings = require('Storage').readJSON('deko.json',1)||{};
-  if (typeof settings.timeCol == "string") timeCol=col_code[color_options.indexOf(settings.timeCol)];   
-  if (typeof settings.dateCol == "string") dateCol=col_code[color_options.indexOf(settings.dateCol)];   
+  let settings = require('Storage').readJSON('deko.json',1)|| localSettings;{};
 
   // timeout used to update every minute
   let drawTimeout;
 
   // schedule a draw for the next minute
-  let queueDraw = function() {
+  let queueDraw = function(c) {
     if (drawTimeout) clearTimeout(drawTimeout);
     drawTimeout = setTimeout(function() {
       drawTimeout = undefined;
-      draw();
+      draw(c);
     }, 60000 - (Date.now() % 60000));
   };
 
 
-  let draw=function() {
+  let draw=function(c) {
     var x = g.getWidth()/2;
     var y = g.getHeight()/2;
     g.reset();
@@ -48,17 +49,31 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
     g.drawString(timeStr,x,y);
     // draw date
     y += 60;
-    g.setFontAlign(0,0).setFont("Vector20");
     g.clearRect(0,y-10,g.getWidth(),y+10); // clear the background
-    g.setColor(dateCol);
-    g.drawString(dateStr.toUpperCase(),x,y);
+    if (c) {
+	g.setColor(dateCol);
+	g.setFontAlign(0,0).setFont("Vector20");
+	g.drawString(dateStr.toUpperCase(),x,y);
+    }
     // queue draw in one minute
-    queueDraw();
+    queueDraw(c);
   };
 
   let updateState=function() {
     if (Bangle.isLCDOn()) {
-      draw(); // draw immediately, queue redraw
+	if (settings.hideWhenLocked) {
+	    if (Bangle.isLocked()) {
+		require("widget_utils").hide();
+		draw(false);
+	    }
+	    else {
+		require("widget_utils").show();
+		draw(true);
+	    }
+	}
+	else {
+	    draw(true);
+	}
     } else { // stop draw timer
       if (drawTimeout) clearTimeout(drawTimeout);
       drawTimeout = undefined;
@@ -69,7 +84,6 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
   g.clear();
 
   // draw immediately at first, queue update
-  draw();
 
   // Stop updates when LCD is off, restart when on
   Bangle.on('lcdPower', updateState);
@@ -89,4 +103,5 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
   // Load widgets
   Bangle.loadWidgets();
   Bangle.drawWidgets();
+  draw(!settings.hideWhenLocked);
 }

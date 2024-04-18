@@ -82,7 +82,7 @@
       drawTimeout = undefined;
       draw();
     }, 60000 - (Date.now() % 60000));
-    let date = new Date();
+//    let date = new Date();
     g.reset();
     if (extrasShown) drawExtras();
     else hideExtras();

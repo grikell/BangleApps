@@ -415,12 +415,8 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
   let main = function() {
     log_debug("starting..");
 
-    Bangle.loadWidgets();
-    require("widget_utils").swipeOn();
     loadSettings();
     loadLocation();
-
-
 
     if (settings.autoCycle || settings.sideTap == 0) {
       Bangle.setUI({
@@ -438,6 +434,9 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
         remove: deleteAll
       });
     }
+
+    Bangle.loadWidgets();
+    require("widget_utils").swipeOn();
 
     Bangle.on('charging', chargingListener);
     Bangle.on('lock', lockListener);

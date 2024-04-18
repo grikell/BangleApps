@@ -16,6 +16,7 @@
     {"name":"rebbleclock.settings.js","url":"rebble.settings.js"},
     {"name":"rebbleclock.img","url":"rebble.icon.js","evaluate":true},
     {"name":"suncalc","url":"suncalc.js"}
-  ]
+  ],
+  "data": [{"name":"rebble.json"}]
 }
 

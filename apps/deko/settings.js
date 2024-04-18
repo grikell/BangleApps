@@ -41,7 +41,7 @@
     },
     'Hide Locked': {
     value: !!settings.hideWhenLocked,
-    format: () => (settings.hideWhenLocked ? 'Yes' : 'No'),
+//    format: () => (settings.hideWhenLocked ? 'Yes' : 'No'),
     onchange: x => save('hideWhenLocked', x),
     }
   };

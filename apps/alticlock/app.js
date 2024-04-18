@@ -308,11 +308,9 @@ E.on('kill', function() {
 });
 
 setWatch(function() {
-  zero = value;
+  zero = 0;
 }, (process.env.HWVERSION==2) ? BTN1 : BTN2, {repeat:true});
 
-//Load widgets
-//Bangle.loadWidgets();
 
 Bangle.setUI("clockupdown", btn=> {
 //  console.log(zero);
@@ -321,5 +319,8 @@ Bangle.setUI("clockupdown", btn=> {
   drawalt(true);
 });
 
+//Load widgets
+//Bangle.loadWidgets();
+//
 var mInterval = setInterval(draw, INTERVAL);
 draw();

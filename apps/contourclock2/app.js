@@ -2,8 +2,8 @@
   let drawTimeout;
   let extrasTimeout;
   let onLock;
-  let onTap;
-  let onTwist;
+//  let onTap;
+//  let onTwist;
 
   let libs=require('contourclock2');
 

@@ -292,8 +292,6 @@
   };
   
   g.clear();
-  Bangle.loadWidgets();
-  require("widget_utils").hide();
   Bangle.on('lock', lockListenerBw);
 
   Bangle.setUI({
@@ -307,5 +305,7 @@
     }
   });
   
+  Bangle.loadWidgets();
+  require("widget_utils").hide();
   draw();
 }

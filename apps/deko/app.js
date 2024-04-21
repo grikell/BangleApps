@@ -40,7 +40,7 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
 
   let draw=function(c) {
     var x = g.getWidth()/2;
-    var y = g.getHeight()/2;
+    var y = g.getHeight()/2+15;
     g.reset();
     var date = new Date();
     var timeStr = require("locale").time(date,1);

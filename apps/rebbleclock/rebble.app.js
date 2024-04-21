@@ -130,13 +130,6 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
     return (Math.round(E.sum(avr) / avr.length));
   };
   
-  let meanBattery = function() {
-    const sortedArr = avr.toSorted((a, b) => a - b);
-    const trimCount = Math.floor(0.2*sortedArr.length);
-    const trimmedValues = sortedArr.slice(trimCount, sortedArr.length - trimCount);
-    if (!trimmedValues.length) return 0;
-    return (Math.round(E.sum(trimmedValues)/trimmedValues.length));
-  }
 
   let getBattery = function() {
     let value = E.getBattery();
@@ -222,8 +215,7 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
     setTextColor();
     g.setFont('Vector', 20);
     g.setFontAlign(0, -1);
-    // g.drawString(avgBattery() + '%', w3, (h / 10) + 17 + 7);
-    g.drawString(meanBattery() + '%', w3, (h / 10) + 17 + 7);
+    g.drawString(avgBattery() + '%', w3, (h / 10) + 17 + 7);
 
     drawDateAndCalendar(w3, h / 2, dy, dd, mm);
     drawBluetooth(w3, by1);

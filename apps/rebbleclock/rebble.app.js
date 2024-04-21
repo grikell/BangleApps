@@ -123,7 +123,7 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
     ws = w - w2; // sidebar width
   };
 
-  let MEDIANLENGTH = 9;
+  let MEDIANLENGTH = 20;
   let avr = [];
 
   let avgBattery = function() {
@@ -131,15 +131,12 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
   };
   
   let meanBattery = function() {
-    const mid = Math.floor(avr.length / 2);
-    const sortedArr = avr.sort((a, b) => a - b);
- 
-   if (avr.length % 2 === 0) {
-      return Math.round(sortedArr[mid - 1] + sortedArr[mid] / 2);
-   } else {
-      return Math.round(sortedArr[mid]);
-   }
-}
+    const sortedArr = avr.toSorted((a, b) => a - b);
+    const trimCount = Math.floor(0.2*sortedArr.length);
+    const trimmedValues = sortedArr.slice(trimCount, sortedArr.length - trimCount);
+    if (!trimmedValues.length) return 0;
+    return (Math.round(E.sum(trimmedValues)/trimmedValues.length));
+  }
 
   let getBattery = function() {
     let value = E.getBattery();

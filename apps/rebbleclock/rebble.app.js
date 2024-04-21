@@ -303,8 +303,7 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
     g.clearRect(x + 2, y + 2 + 2, x + wi - 4 - 2, y + 2 + hi - 2); // centre
     g.setColor(g.theme.fg);
     g.fillRect(x + wi - 3, y + 2 + (((hi - 1) / 2) - 1), x + wi - 2, y + 2 + (((hi - 1) / 2) - 1) + 4); // contact
-//    g.fillRect(x + 3, y + 5, x + 4 + avgBattery() * (wi - 12) / 100, y + hi - 1); // the level
-    g.fillRect(x + 3, y + 5, x + 4 + meanBattery() * (wi - 12) / 100, y + hi - 1); // the level
+    g.fillRect(x + 3, y + 5, x + 4 + avgBattery() * (wi - 12) / 100, y + hi - 1); // the level
 
     if (Bangle.isCharging()) {
       g.setBgColor(settings.bg);

@@ -135,7 +135,7 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
     const sortedArr = avr.sort((a, b) => a - b);
  
    if (avr.length % 2 === 0) {
-      return (sortedArr[mid - 1] + sortedArr[mid]) / 2;
+      return (Math.round(sortedArr[mid - 1] + sortedArr[mid]) / 2);
    } else {
       return sortedArr[mid];
    }

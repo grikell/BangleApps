@@ -40,7 +40,6 @@
       /*LANG*/
       'Animate': {
         value: !!settings.Animate,
-//        format: () => (settings.Animate ? 'Yes' : 'No'),
         onchange: x => save('Animate', x),
       },
       /*LANG*/

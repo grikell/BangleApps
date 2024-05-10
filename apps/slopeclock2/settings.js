@@ -50,7 +50,6 @@
       /*LANG*/
       'Invert': {
         value: !!settings.Invert,
-        format: () => (settings.Invert ? 'Yes' : 'No'),
         onchange: x => save('Invert', x),
       }
     };

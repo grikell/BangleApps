@@ -218,8 +218,11 @@
   R = Bangle.appRect;
   x = R.w / 2;
   y = R.y + R.h / 2 - 9 ; // room for date
+  Bangle.drawWidgets();
   
-  setTimeout(Bangle.drawWidgets, 0);
+  if (!settings.hideWhenLocked) require("widget_utils").hide();
+  else require("widget_utils").show();
+  
   draw();
 //  if (Bangle.isLocked() && settings.hideWhenLocked) hideExtras(); 
 }

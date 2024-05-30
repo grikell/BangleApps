@@ -107,5 +107,6 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
   // Load widgets
   Bangle.loadWidgets();
   Bangle.drawWidgets();
+  if (settings.hideWhenLocked) require("widget_utils").hide();
   draw(!settings.hideWhenLocked);
 }

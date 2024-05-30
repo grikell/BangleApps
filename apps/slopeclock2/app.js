@@ -214,15 +214,12 @@
   });
   // Load widgets
   Bangle.loadWidgets();
+  Bangle.drawWidgets();
   
   R = Bangle.appRect;
   x = R.w / 2;
   y = R.y + R.h / 2 - 9 ; // room for date
-  Bangle.drawWidgets();
   
-  if (settings.hideWhenLocked) require("widget_utils").hide();
-  else require("widget_utils").show();
-  
+  if (Bangle.isLocked() && settings.hideWhenLocked) require("widget_utils").hide();   
   draw();
-//  if (Bangle.isLocked() && settings.hideWhenLocked) hideExtras(); 
 }

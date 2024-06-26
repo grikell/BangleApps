@@ -188,7 +188,7 @@
 
 
   if (settings.hideWhenLocked) {
-    onLock = locked => {
+    let onLock = locked => {
       if (!locked) {
 //        console.log("drawing");
         drawExtras();

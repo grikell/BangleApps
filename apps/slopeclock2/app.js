@@ -50,6 +50,7 @@
   let rndm = 0;
 
   let bgColor = fgColors[0];
+  let fgColor = bgColors[0];
 
   let anim = settings.Animate;
   // Draw the hour, and the minute into an offscreen buffer

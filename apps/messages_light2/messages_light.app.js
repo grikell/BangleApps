@@ -46,7 +46,7 @@ if (!dark) {
 let EventQueue=[];    //in posizione 0, c'ý quello attualmente visualizzato
 let callInProgress=false;
 
-//let justOpened=true;
+var justOpened=true;
 
 //TODO: RICORDARSI DI FARE IL DELETE
 var manageEvent = function(event) {

@@ -85,20 +85,23 @@
   function fontMenu() {
     Bangle.setUI("");
     let savedIndex=settings.fontIndex;
-    var saveListener = setWatch(function() {          //save changes and return to settings menu
+//    saveListener = setWatch(function() {          //save changes and return to settings menu
+    setWatch(function() {          //save changes and return to settings menu
       require('Storage').writeJSON('contourclock2.json', settings);
       Bangle.removeAllListeners('swipe');
       Bangle.removeAllListeners('lock');
       mainMenu();
     }, BTN, { repeat:false, edge:'falling' });
-    var lockListener = Bangle.on('lock', function () { //discard changes and return to clock
+//    lockListener = Bangle.on('lock', function () { //discard changes and return to clock
+    Bangle.on('lock', function () { //discard changes and return to clock
       settings.fontIndex=savedIndex;
       require('Storage').writeJSON('contourclock2.json', settings);
       Bangle.removeAllListeners('swipe');
       Bangle.removeAllListeners('lock');
       mainMenu();
     });
-    var swipeListener = Bangle.on('swipe', function (direction) {
+//    swipeListener = Bangle.on('swipe', function (direction) {
+    Bangle.on('swipe', function (direction) {
       let D = require('contourclock2').getDigits(settings.fontIndex+direction);
       let fontName=D.fname;
       let digits1=D.digits;

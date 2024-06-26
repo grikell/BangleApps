@@ -233,14 +233,14 @@ function setRestTime(){
   ]});
   menuLayout.render();
 
-  incrementRestTime = () => {
+  let incrementRestTime = () => {
       restTime += 5;
       menuLayout.clear(menuLayout.restTime);
       menuLayout.value.label = restTime;
       menuLayout.render();
   };
 
-  decrementRestTime = () => {
+  let decrementRestTime = () => {
       if(restTime === 0){
         return; 
       }
@@ -271,14 +271,14 @@ function setActiveTime(){
   ]});
   menuLayout.render();
 
-  incrementActiveTime = () => {
+  let incrementActiveTime = () => {
       activeTime += 5;
       menuLayout.clear(menuLayout.activeTime);
       menuLayout.value.label = activeTime;
       menuLayout.render();
   };
 
-  decrementActiveTime = () => {
+  let decrementActiveTime = () => {
       if(activeTime === 0){
         return; 
       }

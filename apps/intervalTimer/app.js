@@ -192,14 +192,14 @@ function setNumSets(){
   ]});
   menuLayout.render();
 
-  incrementNumSets = () => {
+  let incrementNumSets = () => {
       ++numSets;
       menuLayout.clear(menuLayout.numSets);
       menuLayout.value.label = numSets;
       menuLayout.render();
   };
 
-  decrementNumSets = () => {
+  let decrementNumSets = () => {
       if(numSets === 1){
         return; 
       }

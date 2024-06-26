@@ -8,7 +8,7 @@ function getHours(d) {
 
 exports.getDigits = function(fontIndex) {
   var digits = [];
-  fontFile=require("Storage").read("contourclock-"+Math.abs(parseInt(fontIndex+0.5))+".json");
+  let fontFile=require("Storage").read("contourclock-"+Math.abs(parseInt(fontIndex+0.5))+".json");
   if (fontFile==undefined) return(false); //exit if font file not found
   var font = JSON.parse(fontFile);
   for (var n in font.characters) {

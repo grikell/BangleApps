@@ -209,7 +209,7 @@ let showCall = function(msg)
   //se ý una chiamata ( o una nuova chiamata, diversa dalla precedente )
   //la visualizzo
   
-  let title="Call", titleFont = settings.fontLarge; , lines;
+  let title="Call", titleFont = settings.fontLarge;
  
   let Layout = require("Layout");
   layout = new Layout({ type:"v", c: [

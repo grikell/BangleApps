@@ -146,7 +146,7 @@ let showMessage = function(msg){
     if (g.setFont(titleFont).stringWidth(title) > w)
       titleFont = settings.fontMedium;
     if (g.setFont(titleFont).stringWidth(title) > w) {
-      lines = g.wrapString(title, w);
+      let lines = g.wrapString(title, w);
       title = (lines.length>2) ? lines.slice(0,2).join("\n")+"..." : lines.join("\n");
     }
   }
@@ -212,7 +212,7 @@ let showCall = function(msg)
   let title="Call", titleFont = settings.fontLarge;
  
   let Layout = require("Layout");
-  layout = new Layout({ type:"v", c: [
+  let layout = new Layout({ type:"v", c: [
     {type:"h", fillx:1, bgCol:settings.colHeadBg, col:settings.colFg,  c: [
       { type:"btn", src:require("messageicons").getImage(msg), col:require("messageicons").getColor(msg), pad: 3},
       { type:"v", fillx:1, c: [
@@ -462,9 +462,9 @@ let main = function(){
   else
   {
     LOG("file event not found! -> ?? open debug text");
-    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification \nmessage contents  demo demo demo demo"});},0);
-    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification 2"});},3000);
-    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification 3"});},6000);
+//    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification \nmessage contents  demo demo demo demo"});},0);
+//    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification 2"});},3000);
+//    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification 3"});},6000);
   }
   justOpened=false;
 

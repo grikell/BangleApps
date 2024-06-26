@@ -83,7 +83,7 @@ function renderText(g) {
   const minutes = d02(now.getMinutes());
   const day = d02(now.getDate());
 //  const month = d02(now.getMonth() + 1);
-  const year = now.getFullYear();
+//  const year = now.getFullYear();
 
   const month2 = locale.month(now, 3);
   const day2 = locale.dow(now, 3);

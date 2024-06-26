@@ -106,9 +106,9 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
 
   const h = g.getHeight();
   const w = g.getWidth();
-  const ha = 2 * h / 5 - 8;
+//  const ha = 2 * h / 5 - 8;
   const h2 = 3 * h / 5 - 10;
-  const h3 = 7 * h / 8;
+//  const h3 = 7 * h / 8;
   const wb = 40; // battery width
   const w2i = 9 * w / 14;
 
@@ -307,7 +307,7 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
 
     if (Bangle.isCharging()) {
       g.setBgColor(settings.bg);
-      image = () => {
+      let image = () => {
         return require("heatshrink").decompress(atob("j8OwMB/4AD94DC44DCwP//n/gH//EOgE/+AdBh/gAYMH4EAvkDAYP/+/AFAX+FgfzGAnAA=="));
       };
       g.drawImage(image(), x + 3, y + 4);

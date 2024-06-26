@@ -13,9 +13,9 @@
 var PI   = Math.PI,
     sin  = Math.sin,
     cos  = Math.cos,
-    tan  = Math.tan,
+//    tan  = Math.tan,
     asin = Math.asin,
-    atan = Math.atan2,
+//    atan = Math.atan2,
     acos = Math.acos,
     rad  = PI / 180;
 

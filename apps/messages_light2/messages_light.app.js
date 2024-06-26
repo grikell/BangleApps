@@ -46,7 +46,7 @@ if (!dark) {
 let EventQueue=[];    //in posizione 0, c'ý quello attualmente visualizzato
 let callInProgress=false;
 
-let justOpened=true;
+//let justOpened=true;
 
 //TODO: RICORDARSI DI FARE IL DELETE
 var manageEvent = function(event) {
@@ -140,7 +140,7 @@ let showMessage = function(msg){
 
 
   // Normal text message display
-  let title=msg.title, titleFont = settings.fontLarge, lines;
+  let title=msg.title, titleFont = settings.fontLarge;
   if (title) {
     let w = g.getWidth()-48;
     if (g.setFont(titleFont).stringWidth(title) > w)
@@ -152,7 +152,7 @@ let showMessage = function(msg){
   }
 
   let Layout = require("Layout");
-  layout = new Layout({ type:"v", c: [
+  let layout = new Layout({ type:"v", c: [
     {type:"h", fillx:1, bgCol:settings.colHeadBg,  c: [
       { type:"btn", src:require("messageicons").getImage(msg), col:require("messageicons").getColor(msg), pad: 3},
       { type:"v", fillx:1, c: [
@@ -209,7 +209,7 @@ let showCall = function(msg)
   //se ý una chiamata ( o una nuova chiamata, diversa dalla precedente )
   //la visualizzo
   
-  let title="Call", titleFont = settings.fontLarge, lines;
+  let title="Call", titleFont = settings.fontLarge; , lines;
  
   let Layout = require("Layout");
   layout = new Layout({ type:"v", c: [
@@ -290,7 +290,7 @@ let DrawTriangleDown=function()
 
 let ScrollUp=function()
 {
-  msg= EventQueue[0];
+  let msg= EventQueue[0];
 
   if(typeof msg.FirstLine==="undefined")
     msg.FirstLine=0;
@@ -305,7 +305,7 @@ let ScrollUp=function()
 };
 let ScrollDown=function()
 {
-  msg= EventQueue[0];
+  let msg= EventQueue[0];
   if(typeof msg.FirstLine==="undefined")
     msg.FirstLine=0;
   if(typeof msg.CanScrollDown==="undefined")

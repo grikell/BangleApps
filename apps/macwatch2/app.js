@@ -50,7 +50,7 @@ function draw() {
   g.drawString(':', 93,65);
   const dd = ("0"+(new Date()).getDate()).substr(-2);
   const mo = ("0"+((new Date()).getMonth()+1)).substr(-2);
-  const yy = ("0"+((new Date()).getFullYear())).substr(-2);
+//  const yy = ("0"+((new Date()).getFullYear())).substr(-2);
   g.setFontCustom(font, 48, 8, 521);
   if (Bangle.isLocked()) {
     g.setColor(0,0,0);

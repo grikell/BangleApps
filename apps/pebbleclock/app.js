@@ -3,6 +3,7 @@ const storage = require('Storage');
 
 const is12Hour = (storage.readJSON("setting.json", 1) || {})["12hour"];
 
+let color;
 var c = storage.readJSON("pebbleclock.json", 1);
 if (c == undefined) {
   color=g.theme.fg;
@@ -81,7 +82,7 @@ function renderText(g) {
   const hour = d02(now.getHours() - (is12Hour && now.getHours() > 12 ? 12 : 0));
   const minutes = d02(now.getMinutes());
   const day = d02(now.getDate());
-  const month = d02(now.getMonth() + 1);
+//  const month = d02(now.getMonth() + 1);
   const year = now.getFullYear();
 
   const month2 = locale.month(now, 3);

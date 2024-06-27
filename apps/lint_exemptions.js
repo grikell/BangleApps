@@ -1327,14 +1327,14 @@ module.exports = {
       "no-cond-assign"
     ]
   },
-  "messages_light2/messages_light.app.js": {
+  "apps/messages_light2/messages_light.app.js": {
     "hash": "1ff7b6f653d657493c93bf6874f1bc9be3e5f2b674e6b6c750b13ff5f4fa88ed",
     "rules": [
       "no-unused-vars",
       "no-undef"
     ]
   },
-  "rebbleclock/suncalc.js": {
+  "apps/rebbleclock/suncalc.js": {
     "hash": "415821354331a5e142a5071337f07db8f6519e402e4b41ff2139f1010b5096e7",
     "rules": [
       "no-undef"

@@ -1339,5 +1339,11 @@ module.exports = {
     "rules": [
       "no-undef"
     ]
+  },
+  "apps/messages_light2/messages_light.listener.js": {
+    "hash": "c34793a767068c01734e570a7bccaa9902c22f63bd211b26c43f70fd45e040e1",
+    "rules": [
+      "no-undef"
+    ]
   }
 };

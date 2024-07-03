@@ -272,9 +272,9 @@
 
     if (initialSettings.showLock && Bangle.isLocked()) {
       if (NRF.getSecurityStatus().connected) {
-        g.setColor(initialSettings.handColor);
-      } else {
         g.setColor(g.theme.fg);
+      } else {
+        g.setColor("#555");
       }
       g.drawImage(imgLock(), gWidth - 16, 2);
     }

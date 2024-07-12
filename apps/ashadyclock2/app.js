@@ -3,7 +3,7 @@
     // default values
     showWidgets: false,
     alternativeColor: true,
-  }, require('Storage').readJSON("ashadyclock.json", true) || {});
+  }, require('Storage').readJSON("ashadyclock2.json", true) || {});
 
   let drawTimeout;
   // schedule a draw for the next minute
@@ -92,7 +92,7 @@
       height: 100,
       bpp: 3,
       transparent: 4,
-      buffer: require("Storage").read("ashadyclock." + number + ".bin")
+      buffer: require("Storage").read("ashadyclock2." + number + ".bin")
     };
     image.palette = palette;
     g.drawImage(image, x, y, options);

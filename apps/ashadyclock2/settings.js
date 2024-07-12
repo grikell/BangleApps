@@ -1,5 +1,5 @@
 (function(back) {
-  var FILE = "ashadyclock.json";
+  var FILE = "ashadyclock2.json";
   // Load settings
   var settings = Object.assign({
     showWidgets: false,
@@ -12,7 +12,7 @@
 
   // Show the menu
   E.showMenu({
-    "" : { "title" : "Shady Clck" },
+    "" : { "title" : "Shady Clck2" },
     "< Back" : () => back(),
     'Show Widgets': {
       value: !!settings.showWidgets,  // !! converts undefined to false
@@ -21,7 +21,7 @@
         writeSettings();
       }
     },
-    'Blue Color': {
+    'Alternative Color': {
       value: !!settings.alternativeColor,  // !! converts undefined to false
       onchange: v => {
         settings.alternativeColor = v;

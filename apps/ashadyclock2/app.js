@@ -111,7 +111,7 @@
       g.clearRect(0, 0, g.getWidth(),24);
       Bangle.drawWidgets();
 
-      // require("widget_utils").show();
+      require("widget_utils").show();
     }
     else require("widget_utils").hide();
     draw();

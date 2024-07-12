@@ -1,0 +1,27 @@
+{ "id": "ashadiclock22",
+  "name": "A Dfferent Shady Clock",
+  "shortName":"Shady Clk2",
+  "icon": "app.png",
+  "version":"0.01",
+  "description": "A fork of shadyclock",
+  "type": "clock",
+  "tags": "clock",
+  "screenshots": [{"url":"screenshot-1.png"},{"url":"screenshot.png"}],  
+  "supports": ["BANGLEJS","BANGLEJS2"],
+    "storage": [
+      {"name":"ashadiclock2.app.js","url":"app.js"},
+      {"name":"ashadiclock2.img","url":"app-icon.js","evaluate":true},
+      {"name":"ashadiclock2.0.bin","url":"0.bin"},
+      {"name":"ashadiclock2.1.bin","url":"1.bin"},
+      {"name":"ashadiclock2.2.bin","url":"2.bin"},
+      {"name":"ashadiclock2.3.bin","url":"3.bin"},
+      {"name":"ashadiclock2.4.bin","url":"4.bin"},
+      {"name":"ashadiclock2.5.bin","url":"5.bin"},
+      {"name":"ashadiclock2.6.bin","url":"6.bin"},
+      {"name":"ashadiclock2.7.bin","url":"7.bin"},
+      {"name":"ashadiclock2.8.bin","url":"8.bin"},
+      {"name":"ashadiclock2.9.bin","url":"9.bin"},
+      {"name":"ashadiclock2.settings.js","url":"settings.js"}
+    ],
+  "data": [{"name":"ashadiclock2.json"}]
+}

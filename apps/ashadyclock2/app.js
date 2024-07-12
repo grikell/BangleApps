@@ -55,11 +55,9 @@
   let xOffset = (g.getWidth() - 176) / 2;
   let yOffset = (g.getHeight() - 176) / 2;
 
-  let drawThem = false;
-
 
   let drawTop = function(d0, d1) {
-    if (drawThem && g.getHeight() <= 176) {
+    if ((settings.showWidgets && !Bangle.isLocked()) && g.getHeight() <= 176) {
       drawNumber(d1, 82 + xOffset, 24 + yOffset, palTop, {
         scale: 0.825
       });
@@ -73,7 +71,7 @@
   };
 
   let drawBottom = function(d0, d1) {
-    if (drawThem && g.getHeight() <= 176) {
+    if ((settings.showWidgets && !Bangle.isLocked()) && g.getHeight() <= 176) {
       drawNumber(d1, 82 + xOffset, 92 + yOffset, palBottom, {
         scale: 0.825
       });
@@ -100,17 +98,16 @@
 
   let draw = function() {
     let d = new Date();
-    g.clearRect(0, drawThem ? 24 : 0, g.getWidth(),g.getHeight());
+    g.clearRect(0, (settings.showWidgets && !Bangle.isLocked()) ? 24 : 0, g.getWidth(),g.getHeight());
     drawBottom(Math.floor(d.getMinutes() / 10), d.getMinutes() % 10);
     drawTop(Math.floor(d.getHours() / 10), d.getHours() % 10);
 
-//  if (drawThem) require("widget_utils").show();
+//  if ((settings.showWidgets && !Bangle.isLocked())) require("widget_utils").show();
     queueDraw();
   };
 
   let lockListener = function(l) {
-    drawThem = settings.showWidgets && !Bangle.isLocked();
-    if (drawThem) {
+    if ((settings.showWidgets && !Bangle.isLocked())) {
       g.clearRect(0, 0, g.getWidth(),24);
       require("widget_utils").show();
     }

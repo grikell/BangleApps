@@ -102,13 +102,14 @@
     drawBottom(Math.floor(d.getMinutes() / 10), d.getMinutes() % 10);
     drawTop(Math.floor(d.getHours() / 10), d.getHours() % 10);
 
-//  if ((settings.showWidgets && !Bangle.isLocked())) require("widget_utils").show();
+//    if ((settings.showWidgets && !Bangle.isLocked())) require("widget_utils").show();
     queueDraw();
   };
 
   let lockListener = function(l) {
     if ((settings.showWidgets && !Bangle.isLocked())) {
       g.clearRect(0, 0, g.getWidth(),24);
+      print("showL");
       require("widget_utils").show();
     }
     else require("widget_utils").hide();

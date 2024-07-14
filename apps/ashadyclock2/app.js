@@ -1,4 +1,5 @@
 {
+  let dx = [];
   let settings = Object.assign({
     // default values
     showWidgets: false,
@@ -8,7 +9,7 @@
   let drawTimeout;
   // schedule a draw for the next minute
   let queueDraw = function() {
-    let delta=5000;
+    let delta = 5000;
     if (drawTimeout) clearTimeout(drawTimeout);
     drawTimeout = setTimeout(function() {
       drawTimeout = undefined;
@@ -90,7 +91,7 @@
       height: 100,
       bpp: 3,
       transparent: 4,
-      buffer: require("Storage").read("ashadyclock2." + number + ".bin")
+      buffer: dx[number]
     };
     image.palette = palette;
     g.drawImage(image, x, y, options);
@@ -98,27 +99,29 @@
 
   let draw = function() {
     let d = new Date();
-    g.clearRect(0, (settings.showWidgets && !Bangle.isLocked()) ? 24 : 0, g.getWidth(),g.getHeight());
+    g.clearRect(0, (settings.showWidgets && !Bangle.isLocked()) ? 24 : 0, g.getWidth(), g.getHeight());
     drawBottom(Math.floor(d.getMinutes() / 10), d.getMinutes() % 10);
     drawTop(Math.floor(d.getHours() / 10), d.getHours() % 10);
 
-//    if ((settings.showWidgets && !Bangle.isLocked())) require("widget_utils").show();
+    //    if ((settings.showWidgets && !Bangle.isLocked())) require("widget_utils").show();
     queueDraw();
   };
 
   let lockListener = function(l) {
     if ((settings.showWidgets && !Bangle.isLocked())) {
-      g.clearRect(0, 0, g.getWidth(),24);
+      g.clearRect(0, 0, g.getWidth(), 24);
       Bangle.drawWidgets();
 
       require("widget_utils").show();
-    }
-    else require("widget_utils").hide();
+    } else require("widget_utils").hide();
     draw();
   };
 
   Bangle.on('lock', lockListener);
 
+  for (let num = 0; num < 10; num++) {
+    dx[num] = require("Storage").read("ashadyclock2." + num + ".bin");
+  }
 
   // Show launcher when middle button pressed
   Bangle.setUI({
@@ -130,7 +133,7 @@
       require("widget_utils").show();
     }
   });
-  
+
   g.reset();
   g.clear();
   Bangle.loadWidgets();

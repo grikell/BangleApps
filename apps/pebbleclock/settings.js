@@ -47,4 +47,4 @@
       selected: Object.keys(colors).indexOf(settings.color)
     }
   );
-});
+})

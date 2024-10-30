@@ -28,5 +28,4 @@
       },
     };
     E.showMenu(mainmenu);
-  });
-  
+  })

@@ -66,12 +66,17 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
   let onLock = function(l) {
     if (settings.hideWhenLocked) {
       if (l) {
-        require("widget_utils").hide();
-        draw(false);
+        if (shown) {
+//          console.log("Hide");
+          shown = false;
+          require("widget_utils").hide();
+        }
       } else {
+//        console.log("Show");
+        shown = true;
         require("widget_utils").show();
-        draw(true);
       }
+    draw(shown);
     } else {
       draw(true);
     }
@@ -88,6 +93,10 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
 
   // Clear the screen once, at startup
   g.clear();
+  // Load widgets
+  Bangle.loadWidgets();
+  Bangle.drawWidgets();
+  let shown = true;
 
   // draw immediately at first, queue update
 
@@ -107,9 +116,7 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
       delete Graphics.prototype.setFontBuildingTypeface;
     }
   });
-  // Load widgets
-  Bangle.loadWidgets();
-  Bangle.drawWidgets();
-  if (settings.hideWhenLocked) require("widget_utils").hide();
-  draw(!settings.hideWhenLocked);
+
+
+  draw(shown);
 }

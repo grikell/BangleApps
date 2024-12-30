@@ -93,10 +93,6 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
 
   // Clear the screen once, at startup
   g.clear();
-  // Load widgets
-  Bangle.loadWidgets();
-  Bangle.drawWidgets();
-  let shown = true;
 
   // draw immediately at first, queue update
 
@@ -116,7 +112,9 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
       delete Graphics.prototype.setFontBuildingTypeface;
     }
   });
-
-
+  // Load widgets
+  Bangle.loadWidgets();
+  Bangle.drawWidgets();
+  let shown = true;
   draw(shown);
 }

@@ -116,5 +116,5 @@ Graphics.prototype.setFontBuildingTypeface = function(scale) {
   Bangle.loadWidgets();
   Bangle.drawWidgets();
   let shown = true;
-  draw(shown);
+  onLock(Bangle.isLocked());
 }

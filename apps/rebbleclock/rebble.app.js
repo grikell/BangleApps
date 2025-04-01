@@ -93,28 +93,29 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
   let setSmallFont = function() {
     g.setFont('Vector', 20);
   };
-  let contrastingColor = function(color)
-  {
+  let contrastingColor = function(color) {
     return (luma(color) >= 165) ? '#000' : '#fff';
   };
-  
+
   let luma = function(color) // color is '#XXX' 
   {
-    let rgb=[];
-    for (let i = 0; i <= 2; i++) rgb[i] = parseInt(color.substr(i+1, 1), 16);
-    return (0.2126 * rgb[0]) + (0.7152 * rgb[1]) + (0.0722 * rgb[2]); // SMPTE C, Rec. 709 weightings
+    let rgb = [];
+    for (let i = 0; i <= 2; i++) rgb[i] = parseInt(color.substr(i + 1, 1), 16);
+    let tmp = (0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2])*16; // SMPTE C, Rec. 709 weightings
+    // print(tmp);
+    return(tmp);
   };
-  
+
   // set the text color of the sidebar elements that dont change with the Theme
   let setTextColor = function() {
-    g.setColor(contrastingColor(settings.bg));  
+    g.setColor(contrastingColor(settings.bg));
   };
 
   const h = g.getHeight();
   const w = g.getWidth();
-//  const ha = 2 * h / 5 - 8;
-//  const h2 = 3 * h / 5 - 10;
-//  const h3 = 7 * h / 8;
+  //  const ha = 2 * h / 5 - 8;
+  //  const h2 = 3 * h / 5 - 10;
+  //  const h3 = 7 * h / 8;
   const wb = 40; // battery width
   const w2i = 9 * w / 14;
 
@@ -135,14 +136,14 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
   let avgBattery = function() {
     return (Math.round(E.sum(avr) / avr.length));
   };
-  
+
 
   let getBattery = function() {
     let value = E.getBattery();
     while (avr.length > MEDIANLENGTH) avr.pop();
     avr.unshift(value);
   };
-  
+
   let draw = function() {
     log_debug("draw()");
     let date = new Date();
@@ -361,18 +362,18 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
       draw();
     }, 60000 - (Date.now() % 60000));
   };
-  
+
   let batInterval;
   getBattery();
-  batInterval=setInterval(getBattery,10000);
+  batInterval = setInterval(getBattery, 10000);
 
   let deleteAll = function() {
     // Called to unload all of the clock app
     if (drawTimeout) clearTimeout(drawTimeout);
     if (batInterval) clearInterval(batInterval);
     drawTimeout = undefined;
-    batInterval=undefined;
-    
+    batInterval = undefined;
+
     delete Graphics.prototype.setFontKdamThmor;
     Bangle.removeListener('charging', chargingListener);
     Bangle.removeListener('lock', lockListener);

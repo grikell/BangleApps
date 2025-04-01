@@ -93,15 +93,21 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
   let setSmallFont = function() {
     g.setFont('Vector', 20);
   };
-
+  let contrastingColor = function(color)
+  {
+    return (luma(color) >= 165) ? '#000' : '#fff';
+  };
+  
+  let luma = function(color) // color is '#XXX' 
+  {
+    let rgb=[];
+    for (let i = 0; i <= 2; i++) rgb[i] = parseInt(color.substr(i+1, 1), 16);
+    return (0.2126 * rgb[0]) + (0.7152 * rgb[1]) + (0.0722 * rgb[2]); // SMPTE C, Rec. 709 weightings
+  };
+  
   // set the text color of the sidebar elements that dont change with the Theme
   let setTextColor = function() {
-    // day and steps
-    if (settings.color == 'Blue' || settings.color == 'Purple' || settings.color == 'Black') {
-      g.setColor('#fff'); // white 
-    } else {
-      g.setColor('#000'); // otherwise black 
-    }
+    g.setColor(constrastingColor(settings.bg));  
   };
 
   const h = g.getHeight();

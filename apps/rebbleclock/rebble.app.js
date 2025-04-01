@@ -107,7 +107,7 @@ Graphics.prototype.setFontKdamThmor = function(scale) {
   
   // set the text color of the sidebar elements that dont change with the Theme
   let setTextColor = function() {
-    g.setColor(constrastingColor(settings.bg));  
+    g.setColor(contrastingColor(settings.bg));  
   };
 
   const h = g.getHeight();

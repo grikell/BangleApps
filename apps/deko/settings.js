@@ -1,48 +1,32 @@
-
-(function(back) {
-
-  let color_options = ['White', 'Green','Orange','Cyan','Purple','Red','Blue','Black'];
-  let nc=color_options.length-1;
-
-  let localSettings = {
-    'hideWhenLocked': false,
-    'timeCol':color_options[0],
-    'dateCol':color_options[0]
+(function (back) {
+  const storage = require('Storage');
+  const settingsFile = 'deko.settings.json';
+  const defaultSettings = {
+    loadWidgets: 1,
   };
+  const settings = Object.assign(
+    defaultSettings,
+    storage.readJSON(settingsFile, 1) || {},
+  );
+  const loadWidgetsChoices = ['No', 'Yes', 'Unlocked'];
 
-  let settings = require('Storage').readJSON('deko.json',1)|| localSettings;
-
-
-  function save(key, value) {
-    settings[key] = value;
-    require('Storage').write('deko.json', settings);
-  }
+  const save = () => storage.write(settingsFile, settings);
 
   const appMenu = {
-    '': {'title': 'App Settings'},
+    '': { title: 'Deko Clock' },
     '< Back': back,
-    'Time Colour': {
-        value: 0 | color_options.indexOf(settings.timeCol),
-        min: 0, max: nc,
-        format: v => color_options[v],
-        onchange: v => {
-          settings.timeCol = color_options[v];
-          save();
-        }
+    'Load widgets?': {
+      value: settings.loadWidgets,
+      min: 0,
+      max: 2,
+      step: 1,
+      format: (v) => loadWidgetsChoices[v],
+      onchange: (v) => {
+        settings.loadWidgets = v;
+        save();
+      },
     },
-    'Date Colour': {
-        value: 0 | color_options.indexOf(settings.dateCol),
-        min: 0, max: nc,
-        format: v => color_options[v],
-        onchange: v => {
-          settings.dateCol = color_options[v];
-          save();
-        }
-    },
-    'Hide Locked': {
-    value: !!settings.hideWhenLocked,
-    onchange: x => save('hideWhenLocked', x),
-    }
   };
+
   E.showMenu(appMenu);
 })

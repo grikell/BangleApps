@@ -17,7 +17,7 @@ let LOG=function(){
 let setngs = require('Storage').readJSON("messages_light2.settings.json", true) || {};
 
 let settings= {
-  NewEventFileName:"messages_light2.NewEvent.json",
+  NewEventFileName:"messages_light2.NewEv.json",
   fontSmall : "6x8",
   fontMedium : "Vector:16",
   fontBig : "Vector:20",
@@ -43,7 +43,7 @@ if (!dark) {
   settings.colLock = "#ff0000";
 }
 
-let EventQueue=[];    //in posizione 0, c'ý quello attualmente visualizzato
+let EventQueue=[];    //in posizione 0, c'Ã½ quello attualmente visualizzato
 let callInProgress=false;
 
 var justOpened=true;
@@ -89,13 +89,13 @@ var manageEvent = function(event) {
           showMessage(event);
     }
     else if(event.t=="remove"){       
-        //se non c'ý niente nella queue e non c'ý una chiamata in corso
+        //se non c'Ã½ niente nella queue e non c'Ã½ una chiamata in corso
         if( EventQueue.length==0 && !callInProgress)
           next();
   
-        //se l'id ý uguale a quello attualmente visualizzato  ( e non siamo in chiamata ) 
+        //se l'id Ã½ uguale a quello attualmente visualizzato  ( e non siamo in chiamata ) 
         if(!callInProgress &&  EventQueue[0] !== undefined && EventQueue[0].id == event.id)
-          next();   //passo al messaggio successivo ( per la rimozione ci penserý la next ) 
+          next();   //passo al messaggio successivo ( per la rimozione ci penserÃ½ la next ) 
   
         else{
           //altrimenti rimuovo tutti gli elementi con quell'id( creando un nuovo array )
@@ -194,7 +194,7 @@ let showCall = function(msg)
   LOG("showCall");
   LOG(msg);
   // se anche prima era una call    PrevMessage==msg.id 
-  //non so perchý prima era cosi
+  //non so perchÃ½ prima era cosi
   if( msg.t=="remove")
   {
     LOG("hide call screen");
@@ -206,7 +206,7 @@ let showCall = function(msg)
   updateTimeout();
 
 
-  //se ý una chiamata ( o una nuova chiamata, diversa dalla precedente )
+  //se Ã½ una chiamata ( o una nuova chiamata, diversa dalla precedente )
   //la visualizzo
   
   let title="Call", titleFont = settings.fontLarge;
@@ -247,7 +247,7 @@ let showCall = function(msg)
 let next=function(){
   LOG("next");
   StopBuzzCall();
-  //se c'ý una chiamata, non shifto
+  //se c'Ã½ una chiamata, non shifto
   if(!callInProgress)
     EventQueue.shift();    //passa al messaggio successivo, se presente - tolgo il primo
   callInProgress=false; 
@@ -427,7 +427,7 @@ let timeout;
 const updateTimeout = function(){
 if (settings.timeOut!="Off"){
     removeTimeout();
-    if( callInProgress) return; //c'ý una chiamata in corso -> no timeout
+    if( callInProgress) return; //c'Ã½ una chiamata in corso -> no timeout
     //if( typeof music !== 'undefined'  && EventQueue.length==0 ) return; //ho aperto l'interfaccia della musica e non ho messaggi davanti -> no timeout
 
 
@@ -447,14 +447,14 @@ let main = function(){
 
   Bangle.on('lock', DrawLock);
 
-  //se c'ý una chiamata in corso NON devo togliere niente dal next ( in q)
+  //se c'Ã½ una chiamata in corso NON devo togliere niente dal next ( in q)
   setWatch(_=> next(), BTN1,{repeat: true});
 
-  //il tap ý il tocco con l'accellerometro!
+  //il tap Ã½ il tocco con l'accellerometro!
   Bangle.on('tap', doubleTapUnlock);
   Bangle.on('touch', toushScroll);
 
-  //quando apro quest'app, do per scontato che c'ý un messaggio da leggere posto in un file particolare ( messages_light2.NewEvent.json )
+  //quando apro quest'app, do per scontato che c'Ã½ un messaggio da leggere posto in un file particolare ( messages_light2.NewEvent.json )
   let eventToShow = require('Storage').readJSON(settings.NewEventFileName, true);
   require("Storage").erase(settings.NewEventFileName);
   if( eventToShow!==undefined)

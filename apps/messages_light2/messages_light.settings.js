@@ -1,5 +1,5 @@
 (function(back) {
-    const SETTINGS_FILE_NAME="messages_light2.settings.json";
+    const SETTINGS_FILE_NAME="messages_light2.sett.json";
     var settings = require('Storage').readJSON(SETTINGS_FILE_NAME, true) || {};
     function updateSetting(setting, value) {
       let settings = require('Storage').readJSON(SETTINGS_FILE_NAME, true) || {};

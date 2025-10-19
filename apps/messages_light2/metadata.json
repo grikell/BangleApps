@@ -11,11 +11,11 @@
   "readme": "README.md",
   "storage": [
     {"name":"messages_light2.app.js","url":"messages_light.app.js"},
-    {"name":"messages_light2.settings.js","url":"messages_light.settings.js"},
+    {"name":"messages_light2.sett.js","url":"messages_light.settings.js"},
     {"name":"messages_light2.img","url":"app-icon.js","evaluate":true},
     {"name":"boot_messages_light2.boot.js","url":"messages_light.boot.js"},
     {"name":"messages_light2.listener.js","url":"messages_light.listener.js"}
   ],
-  "data": [{"name":"messages_light2.settings.json"},{"name":"messages_light2.NewEvent.json"}],
+  "data": [{"name":"messages_light2.sett.json"},{"name":"messages_light2.NewEv.json"}],
   "screenshots": [{"url":"screenshot-notify.png"} ,{"url":"screenshot-long-text1.png"},{"url":"screenshot-long-text2.png"}, {"url":"screenshot-call.png"} ]
 }

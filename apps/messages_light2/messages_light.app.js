@@ -46,7 +46,7 @@ if (!dark) {
 let EventQueue=[];    //in posizione 0, c'ý quello attualmente visualizzato
 let callInProgress=false;
 
-var justOpened=true;
+// var justOpened=true;
 
 //TODO: RICORDARSI DI FARE IL DELETE
 var manageEvent = function(event) {
@@ -466,7 +466,7 @@ let main = function(){
 //    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification 2"});},3000);
 //    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification 3"});},6000);
   }
-  justOpened=false;
+//  justOpened=false;
 
 };
 

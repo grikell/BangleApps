@@ -14,7 +14,7 @@ let LOG=function(){
 //  print.apply(null, arguments);
 };
 
-let setngs = require('Storage').readJSON("messages_light2.settings.json", true) || {};
+let setngs = require('Storage').readJSON("messages_light2.sett.json", true) || {};
 
 let settings= {
   NewEventFileName:"messages_light2.NewEv.json",

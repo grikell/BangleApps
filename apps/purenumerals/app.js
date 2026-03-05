@@ -17,11 +17,11 @@
   const COLOR = {
     background: "#000000",
     foreground: "#FFFFFF",
-    month: "#00FFFF",
-    day: "#FFFF00",
-    hour: "#FF00FF",
-    minute: "#00FF00",
-    second: "#FF0000",
+    month: "#FFFF00",
+    day: "00FFFF",
+    hour: "#808080",
+    minute: "#FFFFFF",
+    second: "#00FF00",
     steps: "#FF8800",
     heart: "#fc4e4e"
   };
@@ -585,9 +585,9 @@
     function onSwipe(lr, td) {
       // console.log("onSwipe() lr: " + lr + " td: " + td);
       if (currentKey > MAX_CAROUSEL_KEY) { return; }    // only when carousel view
-      if (lr === 1) {  // left to right
+      if (td === 1) {  // left to right
         showPreviousView();
-      } else if (lr === -1) { // right to left
+      } else if (td === -1) { // right to left
         showNextView();
       }
     }
@@ -755,6 +755,7 @@
       app.shutdown();
     }
   });
+
 
 
 }

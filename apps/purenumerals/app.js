@@ -18,7 +18,7 @@
     background: "#000000",
     foreground: "#FFFFFF",
     month: "#FFFF00",
-    day: "00FFFF",
+    day: "#00FFFF",
     hour: "#808080",
     minute: "#FFFFFF",
     second: "#00FF00",
@@ -759,3 +759,4 @@
 
 
 }
+

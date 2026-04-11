@@ -142,9 +142,9 @@
       let w2 = getDigitWidth(d2, fontSize);
       let x2 = (DISPLAY_SIZE / 2 + w0) - w2;  // right aligned
       let x1 = x2 - w1;
-      if (d1 == 1) x1 - x2 - DIGIT_WIDTH;
-      drawDigit(d1, x1, 0, fontSize, color);
-      drawDigit(d2, x2, 0, fontSize, color);
+      let off =   Math.floor(w0-(w1+w2)/2);
+      drawDigit(d1, x1-off, 0, fontSize, color);
+      drawDigit(d2, x2-off, 0, fontSize, color);
     }
 
     // Draws lower 2-digit number using full screen.
@@ -158,10 +158,10 @@
       let w2 = getDigitWidth(d2, fontSize);
       let x2 = (DISPLAY_SIZE / 2 + w0) - w2;  // right aligned
       let x1 = x2 - w1;
-      if (d1 == 1) x1 - x2 - DIGIT_WIDTH;
+      let off =   Math.floor(w0-(w1+w2)/2);
       let y = (DISPLAY_SIZE / 2) - 2;
-      drawDigit(d1, x1, y, fontSize, color);
-      drawDigit(d2, x2, y, fontSize, color);
+      drawDigit(d1, x1-off, y, fontSize, color);
+      drawDigit(d2, x2-off, y, fontSize, color);
     }
 
     // calculate width for given number (must be String),

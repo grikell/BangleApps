@@ -139,7 +139,7 @@
       let d2 = +number.charAt(1);
       let w0 = getDigitWidth(0, fontSize);    // width digit 0
       let w1 = getDigitWidth(d1, fontSize);
-      let w2 = getDigitWidth(d2, fontSize);   
+      // let w2 = getDigitWidth(d2, fontSize);   
 
       // let x2 = DISPLAY_SIZE / 2 + w0 - w2 ;  // right aligned
 
@@ -163,7 +163,7 @@
       let d2 = +number.charAt(1);
       let w0 = getDigitWidth(0, fontSize);    // width digit 0
       let w1 = getDigitWidth(d1, fontSize);
-      let w2 = getDigitWidth(d2, fontSize);
+      // let w2 = getDigitWidth(d2, fontSize);
 
       let x2 = DISPLAY_SIZE - w0;
       let x1 = DISPLAY_SIZE /2 - w1;

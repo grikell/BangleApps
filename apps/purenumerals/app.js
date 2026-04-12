@@ -143,7 +143,7 @@
 
       // let x2 = DISPLAY_SIZE / 2 + w0 - w2 ;  // right aligned
 
-      let x2 = DISPLAY_SIZE - w0;
+      let x2 = DISPLAY_SIZE / 2;
       let x1 = DISPLAY_SIZE /2 - w1;
       drawDigit(d1, x1, 0, fontSize, color);
       drawDigit(d2, x2, 0, fontSize, color);
@@ -165,7 +165,7 @@
       let w1 = getDigitWidth(d1, fontSize);
       // let w2 = getDigitWidth(d2, fontSize);
 
-      let x2 = DISPLAY_SIZE - w0;
+      let x2 = DISPLAY_SIZE / 2;
       let x1 = DISPLAY_SIZE /2 - w1;
       
       // let x2 = (DISPLAY_SIZE / 2 + w0) - w2;  // right aligned

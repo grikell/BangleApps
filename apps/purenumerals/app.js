@@ -137,7 +137,7 @@
       let fontSize = DISPLAY_SIZE / 2;
       let d1 = +number.charAt(0);
       let d2 = +number.charAt(1);
-      let w0 = getDigitWidth(0, fontSize);    // width digit 0
+      // let w0 = getDigitWidth(0, fontSize);    // width digit 0
       let w1 = getDigitWidth(d1, fontSize);
       // let w2 = getDigitWidth(d2, fontSize);   
 
@@ -161,7 +161,7 @@
       let fontSize = DISPLAY_SIZE / 2;
       let d1 = +number.charAt(0);
       let d2 = +number.charAt(1);
-      let w0 = getDigitWidth(0, fontSize);    // width digit 0
+      // let w0 = getDigitWidth(0, fontSize);    // width digit 0
       let w1 = getDigitWidth(d1, fontSize);
       // let w2 = getDigitWidth(d2, fontSize);
 

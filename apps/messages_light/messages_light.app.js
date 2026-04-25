@@ -377,7 +377,7 @@ let PrintMessageStrings=function(msg)
     msg.lines = MyWrapString(msg.body,g.getWidth()-(Padding*2))
     if ( msg.lines.length<=2)
     {
-      bodyFont=  g.getFonts().includes("Vector")?"Vector:30":"6x8:3";
+      bodyFont=  g.getFonts().includes("Vector")?"Vector:50":"6x8:5";
       g.setFont(bodyFont);
       msg.lines = MyWrapString(msg.body,g.getWidth()-(Padding*2))
       msg.bodyFont = bodyFont;

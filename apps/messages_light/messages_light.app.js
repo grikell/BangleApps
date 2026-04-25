@@ -341,7 +341,7 @@ let ScrollUp=function()
 }
 let ScrollDown=function()
 {
-  msg= EventQueue[0];
+  let msg= EventQueue[0];
   if(typeof msg.FirstLine==="undefined")
     msg.FirstLine=0;
   if(typeof msg.CanScrollDown==="undefined")
@@ -504,7 +504,7 @@ let main = function(){
   else
   {
     LOG("file event not found! -> ?? open debug text");
-    setTimeout(_=>{      GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification \nmessage contents  demo demo demo demo"})    },0);
+    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification \nmessage contents  demo demo demo demo"})    },0);
   }
   //justOpened=false;
 

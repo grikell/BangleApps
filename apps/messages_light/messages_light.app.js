@@ -369,7 +369,7 @@ let PrintMessageStrings=function(msg)
 
   if(typeof msg.FirstLine==="undefined")  msg.FirstLine=0;
 
-  let bodyFont = typeof msg.bodyFont==="undefined"? settings.fontMedium : msg.bodyFont;
+  let bodyFont = typeof msg.bodyFont==="undefined"? settings.fontLarge : msg.bodyFont;
   let Padding=2;
   if(typeof msg.lines==="undefined")
   {
@@ -377,7 +377,7 @@ let PrintMessageStrings=function(msg)
     msg.lines = MyWrapString(msg.body,g.getWidth()-(Padding*2))
     if ( msg.lines.length<=2)
     {
-      bodyFont=  g.getFonts().includes("Vector")?"Vector:20":"6x8:3";
+      bodyFont=  g.getFonts().includes("Vector")?"Vector:30":"6x8:3";
       g.setFont(bodyFont);
       msg.lines = MyWrapString(msg.body,g.getWidth()-(Padding*2))
       msg.bodyFont = bodyFont;
@@ -387,7 +387,7 @@ let PrintMessageStrings=function(msg)
   
 
   //prendo le linee da stampare
-  let NumLines=8;
+  let NumLines=4;
   let linesToPrint = (msg.lines.length>NumLines) ? msg.lines.slice(msg.FirstLine,msg.FirstLine+NumLines):msg.lines;
   
     

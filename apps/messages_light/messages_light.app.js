@@ -241,7 +241,7 @@ let showCall = function(msg)
     }
   }
   let Layout = require("Layout");
-  layout = new Layout({ type:"v", c: [
+  let layout = new Layout({ type:"v", c: [
     {type:"h", fillx:1, bgCol:settings.colHeadBg,  c: [
       { type:"btn", src:require("messageicons").getImage(msg), col:require("messageicons").getColor(msg), pad: 3},
       { type:"v", fillx:1, c: [
@@ -326,7 +326,7 @@ let DrawTriangleDown=function()
 
 let ScrollUp=function()
 {
-  msg= EventQueue[0];
+  let msg= EventQueue[0];
 
   if(typeof msg.FirstLine==="undefined")
     msg.FirstLine=0;

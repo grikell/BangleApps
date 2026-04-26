@@ -1,3 +1,5 @@
+/* global GB */
+
 /* MESSAGES is a list of:
   {id:int,
     src,
@@ -504,7 +506,7 @@ let main = function(){
   else
   {
     LOG("file event not found! -> ?? open debug text");
-    // setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification \nmessage contents  demo demo demo demo"})    },0);
+    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification \nmessage contents  demo demo demo demo"})    },0);
   }
   //justOpened=false;
 

@@ -155,7 +155,7 @@ let showMessage = function(msg){
     if (g.setFont(titleFont).stringWidth(title) > w)
       titleFont = settings.fontMedium;
     if (g.setFont(titleFont).stringWidth(title) > w) {
-      lines = g.wrapString(title, w);
+      lines = g.wrapString(title.toUpperCase, w);
       title = (lines.length>2) ? lines.slice(0,2).join("\n")+"..." : lines.join("\n");
     }
   }
@@ -507,6 +507,8 @@ let main = function(){
   {
     LOG("file event not found! -> ?? open debug text");
     setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Hangouts","title":"A Name","body":"Debug notification \nmessage contents  demo demo demo demo"})    },0);
+    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Gmail","title":"Voila","body":"Message contents demo demo demo demo"})    },0);
+    setTimeout(_=>{GB({"t":"notify","id":15754117198411,"src":"Calendar","title":"Short","body":"10:30-11:00"})    },0);
   }
   //justOpened=false;
 

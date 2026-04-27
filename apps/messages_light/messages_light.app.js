@@ -155,7 +155,7 @@ let showMessage = function(msg){
     if (g.setFont(titleFont).stringWidth(title) > w)
       titleFont = settings.fontMedium;
     if (g.setFont(titleFont).stringWidth(title) > w) {
-      lines = g.wrapString(title.toUpperCase, w);
+      lines = g.wrapString(title, w);
       title = (lines.length>2) ? lines.slice(0,2).join("\n")+"..." : lines.join("\n");
     }
   }

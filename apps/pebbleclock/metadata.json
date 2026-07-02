@@ -2,6 +2,7 @@
   "id": "pebbleclock",
   "name": "PebbleClock",
   "version": "0.03",
+  "author": "Giorgio",
   "description": "A new clock based on nifty clock (series B)",
   "icon": "app.png",
   "screenshots": [{"url":"screenshot.png"}],

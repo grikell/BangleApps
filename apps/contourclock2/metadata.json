@@ -2,6 +2,7 @@
   "name": "Contour Clock 2",
   "shortName" : "ConClock 2",
   "version":"0.06",
+  "author": "Giorgio",
   "icon": "app.png",
   "readme": "README.md",
   "description": "A fork of Contour Clock",

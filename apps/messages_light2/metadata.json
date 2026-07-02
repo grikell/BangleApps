@@ -2,6 +2,7 @@
   "id": "messages_light2",
   "name": "Messages Light2",
   "version": "0.5",
+  "author": "Giorgio",
   "description": "A fork of message light",
   "icon": "app.png",
   "type": "app",

@@ -1,6 +1,7 @@
 { "id": "slopeclock2",
   "name": "Slope Clock2",
   "version":"0.14",
+  "author": "Giorgio",
   "description": "A fork of slopeclock",
   "icon": "app.png",
   "screenshots": [{"url":"screenshot.png"}],

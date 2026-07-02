@@ -2,6 +2,7 @@
   "name": "Line Clock2",
   "shortName":"Line Clock2",
   "version":"0.2",
+  "author": "Giorgio",
   "description": "a fork of line clock",
   "icon": "app-icon.png",
   "type": "clock",

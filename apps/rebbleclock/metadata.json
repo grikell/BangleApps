@@ -3,6 +3,7 @@
   "name": "RblClock",
   "shortName": "RblClk",
   "version": "0.60",
+  "author": "Giorgio",
   "description": "Another  Pebble style clock",
   "readme": "README.md",
   "icon": "rebble.png",

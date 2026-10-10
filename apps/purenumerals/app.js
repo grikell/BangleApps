@@ -23,8 +23,8 @@
         foreground: "#FFFFFF",
         month: "#00FFFF",
         day: "#FFFF00",
-        hour: "#FF00FF",
-        minute: "#00FF00",
+        hour: "#8F8F8F",
+        minute: "#FFFFFF",
         second: "#FF0000",
         steps: "#FF8800",
         heart: "#fc4e4e"
@@ -680,9 +680,9 @@
         function onSwipe(lr, td) {
             // console.log("onSwipe() lr: " + lr + " td: " + td);
             if (currentKey > MAX_CAROUSEL_KEY) { return; }    // only when carousel view
-            if (lr === 1) {  // left to right
+            if (td === 1) {  // top down (lr = left to right)
                 showPreviousView();
-            } else if (lr === -1) { // right to left
+            } else if (td === -1) { // bottom up (lr = right to left)
                 showNextView();
             }
         }
